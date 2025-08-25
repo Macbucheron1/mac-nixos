@@ -41,6 +41,8 @@
         "workbench.iconTheme"  = "material-icon-theme";
         "files.autoSave" = "afterDelay";
         "github.copilot.enable.*" = true;
+        "git.enableSmartCommit" =  true;
+
       };
     };
   };
