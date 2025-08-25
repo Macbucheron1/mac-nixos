@@ -43,6 +43,7 @@
         "github.copilot.enable.*" = true;
         "git.enableSmartCommit" =  true;
         "git.autofetch" = true;
+        "git.confirmSync" = false;
       };
     };
   };
