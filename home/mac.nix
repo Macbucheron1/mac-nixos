@@ -42,7 +42,7 @@
         "files.autoSave" = "afterDelay";
         "github.copilot.enable.*" = true;
         "git.enableSmartCommit" =  true;
-        "git.autofetch" = true
+        "git.autofetch" = true;
       };
     };
   };
