@@ -32,6 +32,7 @@
     tree
     python3
     pipx 
+    discord
   ];
 
   virtualisation.docker.enable = true;
