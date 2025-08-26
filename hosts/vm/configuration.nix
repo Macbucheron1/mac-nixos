@@ -3,7 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
-    ../../modules/nixos/desktop/gnome.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

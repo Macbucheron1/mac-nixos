@@ -27,7 +27,7 @@
         disks = [ "/dev/sda" ];
         extraModules = [ 
           disko.nixosModules.disko
-          ./../hosts/${hostName}/disko.nix
+          ./../hosts/vm/disko.nix
         ];
       };
 

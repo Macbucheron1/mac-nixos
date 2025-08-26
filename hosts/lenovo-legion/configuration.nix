@@ -3,7 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common.nix
-    ../../modules/nixos/desktop/gnome.nix
   ];
 
   boot.loader.grub = {
@@ -15,7 +14,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "lenovo-legion";
-  time.timeZone = "Europe/Paris";
 
   users.users.${userName} = {
     isNormalUser = true;

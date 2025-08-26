@@ -1,8 +1,17 @@
 { config, lib, pkgs, ... }:
 {
+  imports = [ 
+    ./desktop/gnome.nix
+    ./users/mac.nix
+  ];
+
+
   i18n.defaultLocale = "fr_FR.UTF-8";
   console.keyMap = "fr";
   services.xserver.xkb.layout = "fr";
+
+  time.timeZone = "Europe/Paris";
+
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
