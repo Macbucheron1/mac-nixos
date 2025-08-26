@@ -44,6 +44,7 @@
         "git.enableSmartCommit" =  true;
         "git.autofetch" = true;
         "git.confirmSync" = false;
+        "explorer.confirmDragAndDrop" = false;
       };
     };
   };
