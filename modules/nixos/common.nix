@@ -6,7 +6,7 @@
   ];
 
 
-  i18n.defaultLocale = "fr_FR.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "fr";
   services.xserver.xkb.layout = "fr";
 
@@ -33,7 +33,13 @@
     python3
     pipx 
     discord
+    nautilus
   ];
 
   virtualisation.docker.enable = true;
+
+  xdg.mime.enable = true;
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "org.gnome.Nautilus.desktop";
+  };
 }

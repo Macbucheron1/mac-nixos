@@ -4,24 +4,50 @@
   home.username = "mac";
   home.homeDirectory = "/home/mac";
   home.stateVersion = "25.11";
+  home.file."Pictures/wallpapers/nix-dark.png".source = ./wallpapers/nix-dark.png;
+  home.file."Pictures/wallpapers/nix-bright.png".source = ./wallpapers/nix-bright.png;
   programs.home-manager.enable = true;
 
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";     
+    };
+
     "org/gnome/desktop/input-sources" = {
-      sources = [
-        (lib.hm.gvariant.mkTuple [ "xkb" "fr" ])
-      ];
+      sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "fr" ]) ];
       xkb-options = [ ];
     };
+
+    "org/gnome/desktop/background" = {
+      # IMPORTANT GNOME 42+ : light vs dark
+      picture-uri = "file://${config.home.homeDirectory}/Pictures/wallpapers/nix-bright.png";
+      picture-uri-dark = "file://${config.home.homeDirectory}/Pictures/wallpapers/nix-dark.png";
+      picture-options = "zoom";  # alternatives: centered|scaled|stretched|spanned|wallpaper
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file://${config.home.homeDirectory}/Pictures/wallpapers/nix-dark.png";
+      picture-options = "zoom";
+    };
+
     "org/gnome/system/locale" = {
-      region = "fr_FR.UTF-8";
+      region = "en_US.UTF-8";
     };
   };
 
-  home.sessionVariables = {
-    LANG = "fr_FR.UTF-8";
-    LC_ALL = "fr_FR.UTF-8";
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    desktop     = "$HOME/Desktop";
+    download    = "$HOME/Downloads";  
+    documents   = "$HOME/Documents";
+    music       = "$HOME/Music";
+    pictures    = "$HOME/Pictures";
+    videos      = "$HOME/Videos";
+    publicShare = "$HOME/Public";
+    templates   = "$HOME/Templates";
   };
+
 
 
   programs.vscode = {
