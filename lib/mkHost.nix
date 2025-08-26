@@ -4,7 +4,7 @@
 let
   lib = nixpkgs.lib;
 in
-{ system, hostName, userName ? "mac", disks, extraModules ? [ ] }:
+{ system, hostName, userName ? "mac", disks ? [ ], extraModules ? [ ] }:
   lib.nixosSystem {
     inherit system;
     specialArgs = { inherit nixpkgs home-manager disko disks userName; };
@@ -16,7 +16,5 @@ in
         home-manager.useUserPackages = true;
         home-manager.users.${userName} = import ./../home/users/${userName};
       }
-      disko.nixosModules.disko
-      ./../hosts/${hostName}/disko.nix
     ] ++ extraModules;
   }

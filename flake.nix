@@ -25,7 +25,16 @@
         system = "x86_64-linux";
         hostName = "vm";
         disks = [ "/dev/sda" ];
-        extraModules = [ ];
+        extraModules = [ 
+          disko.nixosModules.disko
+          ./../hosts/${hostName}/disko.nix
+        ];
+      };
+
+      # Physical machine
+      lenovo-legion = mkHost {
+        system = "x86_64-linux";
+        hostName = "lenovo-legion";
       };
     };
   };
