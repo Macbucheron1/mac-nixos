@@ -6,6 +6,9 @@
     ../../modules/nixos/desktop/gnome.nix
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "vm";
   time.timeZone = "Europe/Paris";
 
