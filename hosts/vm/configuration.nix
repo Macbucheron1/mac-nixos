@@ -14,7 +14,7 @@
 
   users.users.${userName} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel docker" ];
   };
 
   system.stateVersion = "25.05";

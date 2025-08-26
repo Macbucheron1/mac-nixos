@@ -21,5 +21,9 @@
     firefox
     vscode
     tree
+    python3
+    pipx 
   ];
+
+  virtualisation.docker.enable = true;
 }
