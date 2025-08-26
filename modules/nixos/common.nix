@@ -1,9 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-
   i18n.defaultLocale = "fr_FR.UTF-8";
   console.keyMap = "fr";
   services.xserver.xkb.layout = "fr";
