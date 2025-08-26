@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, user, ... }:
+{ inputs, lib, pkgs, userName, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -9,7 +9,7 @@
   networking.hostName = "vm";
   time.timeZone = "Europe/Paris";
 
-  users.users.${user} = {
+  users.users.${userName} = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
