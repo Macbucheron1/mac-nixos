@@ -34,6 +34,7 @@
     pipx 
     discord
     nautilus
+    exegol
   ];
 
   virtualisation.docker.enable = true;

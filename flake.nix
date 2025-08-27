@@ -16,8 +16,13 @@
   };
   outputs = inputs@{ self, nixpkgs, disko, home-manager, ... }:
   let 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko self; };
   in {
+
+    overlays.default = final: prev: {
+      exegol = prev.callPackage ./pkgs/exegol { };
+    };
+
     nixosConfigurations = {
 
       # VM virtualBox

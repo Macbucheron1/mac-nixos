@@ -1,5 +1,5 @@
 # lib/mkHost.nix
-{ nixpkgs, home-manager, disko }:
+{ nixpkgs, home-manager, disko, self }:
 
 let
   lib = nixpkgs.lib;
@@ -12,6 +12,7 @@ in
       ./../hosts/${hostName}/configuration.nix
       home-manager.nixosModules.home-manager
       {
+        nixpkgs.overlays = [ self.overlays.default ]; 
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit userName; }; # Pass userName to home-manager
