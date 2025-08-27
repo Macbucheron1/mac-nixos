@@ -1,3 +1,3 @@
 # Home
 
-Ici on stock les profils Home-Managers par users
+Ici c'est les personnalisation des applications fais par le user (dotfiles)
