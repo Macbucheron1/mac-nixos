@@ -25,6 +25,7 @@
         system = "x86_64-linux";
         hostName = "vm";
         disks = [ "/dev/sda" ];
+        userName = "mac";
         extraModules = [ 
           disko.nixosModules.disko
           ./hosts/vm/disko.nix
@@ -35,6 +36,7 @@
       lenovo-legion = mkHost {
         system = "x86_64-linux";
         hostName = "lenovo-legion";
+        userName = "mac";
       };
     };
   };

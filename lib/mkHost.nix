@@ -14,7 +14,8 @@ in
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.${userName} = import ./../home/users/${userName};
+        home-manager.extraSpecialArgs = { inherit userName; }; # Pass userName to home-manager
+        home-manager.users.${userName} = import ./../home;
       }
     ] ++ extraModules;
   }

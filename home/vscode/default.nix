@@ -35,10 +35,10 @@ in {
         "git.autofetch" = true;
         "git.confirmSync" = false;
         "explorer.confirmDragAndDrop" = false;
+        "chat.mcp.discovery.enabled" = true;
       };
     };
   };
 
   xdg.configFile."Code/User/mcp.json".text = builtins.toJSON mcpCfg;
-  programs.vscode.userSettings."chat.mcp.discovery.enabled" = true;
 }
