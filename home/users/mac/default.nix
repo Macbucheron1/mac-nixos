@@ -33,6 +33,15 @@
     "org/gnome/system/locale" = {
       region = "en_US.UTF-8";
     };
+
+    "org/gnome/shell" = {
+      # Ordre = gauche → droite dans le dock
+      favorite-apps = [
+        "firefox.desktop"
+        "code.desktop"        # VS Code (VSCodium = "codium.desktop")
+        "discord.desktop"
+      ];
+    };
   };
 
   xdg.userDirs = {
@@ -86,6 +95,8 @@
     };
   };
 
-
+  imports = [
+    ./../../vscode/default.nix
+  ];
 }
 
