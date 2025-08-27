@@ -4,8 +4,8 @@
   home.username = "mac";
   home.homeDirectory = "/home/mac";
   home.stateVersion = "25.11";
-  home.file."Pictures/wallpapers/nix-dark.png".source = ./wallpapers/nix-dark.png;
-  home.file."Pictures/wallpapers/nix-bright.png".source = ./wallpapers/nix-bright.png;
+  home.file."Pictures/wallpapers/nix-dark.png".source = ./../../../wallpapers/nix-dark.png;
+  home.file."Pictures/wallpapers/nix-bright.png".source = ./../../../wallpapers/nix-bright.png;
   programs.home-manager.enable = true;
 
   dconf.settings = {
@@ -59,30 +59,6 @@
 
 
 
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
-        bbenoist.nix
-        pkief.material-icon-theme
-        esbenp.prettier-vscode
-        github.copilot
-        github.copilot-chat
-      ];
-      userSettings = {
-        "workbench.colorTheme" = "Catppuccin Mocha";
-        "workbench.iconTheme"  = "material-icon-theme";
-        "files.autoSave" = "afterDelay";
-        "github.copilot.enable.*" = true;
-        "git.enableSmartCommit" =  true;
-        "git.autofetch" = true;
-        "git.confirmSync" = false;
-        "explorer.confirmDragAndDrop" = false;
-      };
-    };
-  };
 
   programs.git = {
     enable = true;

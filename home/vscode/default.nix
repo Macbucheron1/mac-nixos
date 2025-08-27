@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
 let
+
+  # Définition du serveur mcp nix pour VS Code
+  # https://github.com/utensils/mcp-nixos
   mcpCfg = {
     servers = {
       nixos = {
@@ -11,9 +14,31 @@ let
     };
   };
 in {
-  # VS Code (User scope) – Linux
-  xdg.configFile."Code/User/mcp.json".text = builtins.toJSON mcpCfg;
+    programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        catppuccin.catppuccin-vsc
+        bbenoist.nix
+        pkief.material-icon-theme
+        esbenp.prettier-vscode
+        github.copilot
+        github.copilot-chat
+      ];
+      userSettings = {
+        "workbench.colorTheme" = "Catppuccin Mocha";
+        "workbench.iconTheme"  = "material-icon-theme";
+        "files.autoSave" = "afterDelay";
+        "github.copilot.enable.*" = true;
+        "git.enableSmartCommit" =  true;
+        "git.autofetch" = true;
+        "git.confirmSync" = false;
+        "explorer.confirmDragAndDrop" = false;
+      };
+    };
+  };
 
-  # (Recommandé) Active l’auto-découverte des MCP déjà déclarés ailleurs
+  xdg.configFile."Code/User/mcp.json".text = builtins.toJSON mcpCfg;
   programs.vscode.userSettings."chat.mcp.discovery.enabled" = true;
 }
