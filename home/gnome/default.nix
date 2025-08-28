@@ -32,7 +32,7 @@
     "org/gnome/shell" = {
       # Ordre = gauche → droite dans le dock
       favorite-apps = [
-        "vscode.desktop"
+        "code.desktop"
         "firefox.desktop"
         "discord.desktop"
       ];
