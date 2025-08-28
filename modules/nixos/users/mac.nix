@@ -2,6 +2,6 @@
 {
   users.users.mac = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];   # base commune
+    extraGroups = [ "wheel" "docker" ];
   };
 }
