@@ -24,6 +24,8 @@
     ./vscode
     ./gnome
     ./git
+    ./obsidian
+    ./firefox
   ];
 }
 

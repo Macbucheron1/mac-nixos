@@ -35,6 +35,7 @@
         "code.desktop"
         "firefox.desktop"
         "discord.desktop"
+        "obsidian.desktop"
       ];
     };
   };

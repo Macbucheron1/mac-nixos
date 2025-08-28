@@ -27,8 +27,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    firefox
-    vscode
     tree
     python3
     pipx 
