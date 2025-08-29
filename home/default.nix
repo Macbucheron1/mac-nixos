@@ -25,6 +25,7 @@
     ./gnome
     ./git
     ./firefox
+    ./alacritty
   ];
 }
 

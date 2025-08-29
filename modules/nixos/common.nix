@@ -12,6 +12,8 @@
 
   time.timeZone = "Europe/Paris";
 
+  networking.networkmanager.enable = true;
+  services.usbmuxd.enable = true; # usb multiplexing daemon for ios devices
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
@@ -34,6 +36,9 @@
     nautilus
     exegol
     obsidian #https://discordapp.com/channels/568306982717751326/1283818433049530380/1383786696038027264
+
+    # USB thethering IOS
+    libimobiledevice 
   ];
 
   virtualisation.docker.enable = true;
