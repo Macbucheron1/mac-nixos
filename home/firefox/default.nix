@@ -27,6 +27,10 @@
                 name = "Packages Search";
                 url = "https://search.nixos.org/packages";
               }
+              {
+                name = "Youtube";
+                url = "https://www.youtube.com";
+              }
             ];
           }
         ];

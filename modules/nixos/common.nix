@@ -18,8 +18,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  services.openssh.enable = true;
-
   programs.ssh = {
     startAgent = true;
     knownHosts.github = {
@@ -36,9 +34,12 @@
     nautilus
     exegol
     obsidian #https://discordapp.com/channels/568306982717751326/1283818433049530380/1383786696038027264
-
+    
     # USB thethering IOS
     libimobiledevice 
+
+    # Eduroam pour se connnecter au wifi de l'école
+    geteduroam-cli
   ];
 
   virtualisation.docker.enable = true;
