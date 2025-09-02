@@ -1,4 +1,4 @@
-{ userName, config, pkgs, lib, ... }:
+{ userName, catppuccin, config, pkgs, lib, ... }:
 
 {
   home.username = "${userName}";
@@ -26,6 +26,9 @@
     ./git
     ./firefox
     ./alacritty
+    catppuccin.homeModules.catppuccin
   ];
+
+  catppuccin.enable = true;
 }
 

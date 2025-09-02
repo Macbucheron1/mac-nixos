@@ -35,6 +35,7 @@
           }
         ];
       };
+      extensions.force = true;
     };
 
     policies = {

@@ -19,7 +19,6 @@ in {
     package = pkgs.vscode;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
         bbenoist.nix
         pkief.material-icon-theme
         esbenp.prettier-vscode
@@ -27,8 +26,7 @@ in {
         github.copilot-chat
       ];
       userSettings = {
-        "workbench.colorTheme" = "Catppuccin Mocha";
-        "workbench.iconTheme"  = "material-icon-theme";
+        "workbench.iconTheme"  = lib.mkForce "material-icon-theme";
         "files.autoSave" = "afterDelay";
         "github.copilot.enable.*" = true;
         "git.enableSmartCommit" =  true;
