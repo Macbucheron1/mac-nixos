@@ -9,3 +9,4 @@ My nixos configuration for daily drive
 - Réparer le demarrage sur VM
 - Configuration hardware
 - Lecteur de media
+- Verifier la config catppucin nix (pas appliqué sur gnome GTK)
