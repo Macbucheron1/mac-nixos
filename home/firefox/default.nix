@@ -4,6 +4,9 @@
     enable = true;
     profiles.mac = {
       isDefault = true;
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      };
 
       bookmarks = {
         force = true;

@@ -15,28 +15,29 @@ let
   };
 in {
     programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        pkief.material-icon-theme
-        esbenp.prettier-vscode
-        github.copilot
-        github.copilot-chat
-      ];
-      userSettings = {
-        "workbench.iconTheme"  = lib.mkForce "material-icon-theme";
-        "files.autoSave" = "afterDelay";
-        "github.copilot.enable.*" = true;
-        "git.enableSmartCommit" =  true;
-        "git.autofetch" = true;
-        "git.confirmSync" = false;
-        "explorer.confirmDragAndDrop" = false;
-        "chat.mcp.discovery.enabled" = true;
+      enable = true;
+      package = pkgs.vscode;
+      mutableExtensionsDir = false;
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          bbenoist.nix
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          github.copilot
+          github.copilot-chat
+        ];
+        userSettings = {
+          "workbench.iconTheme"  = lib.mkForce "material-icon-theme";
+          "files.autoSave" = "afterDelay";
+          "github.copilot.enable.*" = true;
+          "git.enableSmartCommit" =  true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "explorer.confirmDragAndDrop" = false;
+          "chat.mcp.discovery.enabled" = true;
+        };
       };
     };
-  };
 
   xdg.configFile."Code/User/mcp.json".text = builtins.toJSON mcpCfg;
 }
