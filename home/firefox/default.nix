@@ -15,10 +15,6 @@
             toolbar = true;  # ce dossier spécial représente la barre
             bookmarks = [
               {
-                name = "Home Manager Search";
-                url  = "https://home-manager-options.extranix.com/?query=&release=master";
-              }
-              {
                 name = "ChatGPT";
                 url = "https://chatgpt.com/?model=gpt-5-instant";
               }
@@ -27,12 +23,34 @@
                 url = "https://github.com/Macbucheron1";
               }
               {
-                name = "Packages Search";
-                url = "https://search.nixos.org/packages";
-              }
-              {
                 name = "Youtube";
                 url = "https://www.youtube.com";
+              }
+              {
+                name = "Outlook";
+                url = "https://outlook.office365.com/mail/";
+              }
+              {
+                name = "CentraleSupélec";
+                bookmarks = [
+                  {
+                    name = "Edunao";
+                    url = "https://centralesupelec.edunao.com/";
+                  }
+                ];
+              }
+              {
+                name = "Nix";
+                bookmarks = [
+                  {
+                    name = "Home Manager Search";
+                    url  = "https://home-manager-options.extranix.com/?query=&release=master";
+                  }
+                  {
+                    name = "Packages Search";
+                    url = "https://search.nixos.org/packages";
+                  }
+                ];
               }
             ];
           }
