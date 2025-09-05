@@ -3,7 +3,6 @@
 {
   home.file."Pictures/wallpapers/nix-dark.png".source = ./../../wallpapers/nix-dark.png;
   home.file."Pictures/wallpapers/nix-bright.png".source = ./../../wallpapers/nix-bright.png;
-
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";     

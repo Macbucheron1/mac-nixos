@@ -2,6 +2,6 @@
 {
   users.users.mac = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "networkmanager" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "libvirtd" "kvm" ];
   };
 }

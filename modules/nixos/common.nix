@@ -3,6 +3,7 @@
   imports = [ 
     ./desktop/gnome.nix
     ./users/mac.nix
+    ./virtualisation
   ];
 
 
@@ -43,9 +44,9 @@
   ];
 
   virtualisation.docker.enable = true;
-
   xdg.mime.enable = true;
   xdg.mime.defaultApplications = {
     "inode/directory" = "org.gnome.Nautilus.desktop";
   };
 }
+
