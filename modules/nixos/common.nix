@@ -33,7 +33,7 @@
     pipx 
     discord
     nautilus
-    exegol
+    bind
     obsidian #https://discordapp.com/channels/568306982717751326/1283818433049530380/1383786696038027264
     
     # USB thethering IOS
@@ -44,9 +44,6 @@
   ];
 
   virtualisation.docker.enable = true;
-  xdg.mime.enable = true;
-  xdg.mime.defaultApplications = {
-    "inode/directory" = "org.gnome.Nautilus.desktop";
-  };
+
 }
 
