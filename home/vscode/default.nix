@@ -25,6 +25,10 @@ in {
           esbenp.prettier-vscode
           github.copilot
           github.copilot-chat
+
+          # C & C++ tools
+          twxs.cmake
+          ms-vscode.cpptools
         ];
         userSettings = {
           "workbench.iconTheme"  = lib.mkForce "material-icon-theme";
