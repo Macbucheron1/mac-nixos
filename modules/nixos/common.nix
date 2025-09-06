@@ -28,6 +28,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    pciutils # Fournit lspci 
+
     tree
     python3
     pipx 
