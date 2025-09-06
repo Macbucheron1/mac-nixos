@@ -29,6 +29,7 @@
 
   environment.systemPackages = with pkgs; [
     pciutils # Fournit lspci 
+    nvidia-container-toolkit
 
     tree
     python3
@@ -46,6 +47,6 @@
   ];
 
   virtualisation.docker.enable = true;
-
+  hardware.nvidia-container-toolkit.enable = true;
 }
 
