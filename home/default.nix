@@ -46,6 +46,7 @@
     ./git
     ./firefox
     ./alacritty
+    ./fastfetch
     catppuccin.homeModules.catppuccin
   ];
 
