@@ -12,6 +12,11 @@
     rhythmbox   # audio
     celluloid   # vidéo (GTK4/libadwaita)
     exegol
+
+    discord
+    nautilus # Explorateur de fichiers GNOME
+    obsidian #https://discordapp.com/channels/568306982717751326/1283818433049530380/1383786696038027264
+
   ];
 
   xdg = {

@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
   imports = [ 
-    ./desktop/gnome.nix
-    ./users/mac.nix
+    ./desktop/gnome
+    ./users/mac
     ./virtualisation
   ];
 
@@ -32,12 +32,7 @@
     nvidia-container-toolkit
 
     tree
-    python3
-    pipx 
-    discord
-    nautilus
-    bind
-    obsidian #https://discordapp.com/channels/568306982717751326/1283818433049530380/1383786696038027264
+    bind # Fournit dig, nslookup, ...
     
     # USB thethering IOS
     libimobiledevice 

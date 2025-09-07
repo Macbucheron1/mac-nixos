@@ -15,11 +15,6 @@
 
   networking.hostName = "lenovo-legion";
 
-  users.users.${userName} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
-
   hardware = {
     graphics = {
       enable = true;
