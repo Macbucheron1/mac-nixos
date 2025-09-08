@@ -3,6 +3,7 @@
   imports = [ 
     ./users/mac
     ./virtualisation
+    ./ssh
   ];
 
 
@@ -17,14 +18,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-
-  programs.ssh = {
-    startAgent = true;
-    knownHosts.github = {
-      hostNames = [ "github.com" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-    };
-  };
 
   environment.systemPackages = with pkgs; [
     pciutils # Fournit lspci 
