@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "Mac's nixos config";
 
