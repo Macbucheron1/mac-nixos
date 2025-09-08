@@ -1,8 +1,8 @@
 
 { config, lib, ... }:
 {
-  home.file."Pictures/wallpapers/nix-dark.png".source = ./../../wallpapers/nix-dark.png;
-  home.file."Pictures/wallpapers/nix-bright.png".source = ./../../wallpapers/nix-bright.png;
+  home.file."Pictures/wallpapers/nix-dark.png".source = ./../../../wallpapers/nix-dark.png;
+  home.file."Pictures/wallpapers/nix-bright.png".source = ./../../../wallpapers/nix-bright.png;
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";     
@@ -37,5 +37,17 @@
         "obsidian.desktop"
       ];
     };
+  };
+
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "org.gnome.Nautilus.desktop";
+      "application/x-directory" = "org.gnome.Nautilus.desktop";
+      "image/*" = "org.gnome.Shotwell.desktop";
+      "video/*" = "io.github.celluloid_player.desktop";
+      "audio/*" = "org.gnome.Rhythmbox3.desktop";
+    }; 
   };
 }
