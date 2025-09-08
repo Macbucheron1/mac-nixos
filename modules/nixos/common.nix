@@ -1,9 +1,11 @@
+# modules/nixos/common.nix
 { config, lib, pkgs, ... }:
 {
   imports = [ 
     ./users/mac
     ./virtualisation
     ./ssh
+    ./stylix
   ];
 
 

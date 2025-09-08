@@ -14,10 +14,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, disko, home-manager, stylix, ... }:
   let 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko self; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko self stylix; };
   in {
 
     overlays.default = final: prev: {

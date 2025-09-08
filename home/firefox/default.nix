@@ -81,4 +81,5 @@
       };
     };
   };
+  stylix.targets.firefox.profileNames = [ "${userName}" ];
 }
