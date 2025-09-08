@@ -48,6 +48,7 @@
         system = "x86_64-linux";
         hostName = "lenovo-legion";
         userName = "mac";
+        desktopType = "gnome";
       };
     };
   };
