@@ -17,8 +17,10 @@
       favorite-apps = [
         "code.desktop"
         "firefox.desktop"
-        "discord.desktop"
         "obsidian.desktop"
+        "vesktop.desktop"
+        "org.gnome.Nautilus.desktop"
+        "Alacritty.desktop"
       ];
     };
   };
