@@ -33,9 +33,16 @@
         reverseSync.enable = false;
       };
     };
+
+    nvidia-container-toolkit.enable = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+
+  environment.systemPackages = with pkgs; [
+    nvidia-container-toolkit
+  ];
 
   system.stateVersion = "25.05";
 }

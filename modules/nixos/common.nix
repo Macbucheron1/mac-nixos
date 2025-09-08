@@ -21,7 +21,6 @@
 
   environment.systemPackages = with pkgs; [
     pciutils # Fournit lspci 
-    nvidia-container-toolkit
 
     tree
     bind # Fournit dig, nslookup, ...
@@ -34,6 +33,5 @@
   ];
 
   virtualisation.docker.enable = true;
-  hardware.nvidia-container-toolkit.enable = true;
 }
 
