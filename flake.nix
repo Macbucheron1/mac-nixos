@@ -14,15 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, catppuccin, ... }:
+  outputs = inputs@{ self, nixpkgs, disko, home-manager, ... }:
   let 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko catppuccin self; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko self; };
   in {
 
     overlays.default = final: prev: {

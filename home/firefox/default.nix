@@ -1,8 +1,8 @@
-{ ... }:
+{ userName, ... }:
 {
   programs.firefox = {
     enable = true;
-    profiles.mac = {
+    profiles.${userName} = {
       isDefault = true;
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;

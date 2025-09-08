@@ -1,4 +1,4 @@
-{ userName, catppuccin, config, pkgs, lib, ... }:
+{ userName, config, pkgs, lib, ... }:
 
 {
   home.username = "${userName}";
@@ -39,9 +39,7 @@
     ./firefox
     ./alacritty
     ./fastfetch
-    catppuccin.homeModules.catppuccin
   ];
 
-  catppuccin.enable = true;
 }
 
