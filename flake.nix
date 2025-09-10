@@ -31,6 +31,7 @@
         system = "x86_64-linux";
         hostName = "vm";
         userName = "mac";
+        desktopType = "gnome";
         extraModules = [ 
 
         ];

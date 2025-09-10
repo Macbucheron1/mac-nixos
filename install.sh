@@ -3,6 +3,7 @@ set -euo pipefail
 
 DISK=/dev/vda
 HOST=vm   # change this if your flake uses another nixosConfigurations.<host>
+USER=mac
 
 echo "==> Partitioning $DISK (GPT + EFI + swap + root)..."
 parted --script "$DISK" mklabel gpt
@@ -17,6 +18,8 @@ mkswap ${DISK}2
 swapon ${DISK}2
 mkfs.ext4 -L nixos ${DISK}3
 
+sleep 1  # wait a moment for the kernel to recognize the new partitions
+
 echo "==> Mounting filesystems..."
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
@@ -24,15 +27,23 @@ mount ${DISK}1 /mnt/boot
 
 echo "==> Generating hardware-configuration.nix..."
 nixos-generate-config --root /mnt
-mv /mnt/etc/nixos/hardware-configuration.nix
+mv /mnt/etc/nixos/hardware-configuration.nix /tmp
 
 echo "==> Cloning your NixOS config from GitHub..."
 rm -rf /mnt/etc/nixos
 git clone https://github.com/Macbucheron1/mac-nixos /mnt/etc/nixos
-mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/${HOST}/hardware-configuration.nix
+mv /tmp/hardware-configuration.nix /mnt/etc/nixos/hosts/${HOST}/hardware-configuration.nix
 
 echo "==> Installing NixOS using flake output: #$HOST"
 nixos-install --root /mnt --flake /mnt/etc/nixos#$HOST
+
+echo "==> Setting password for user: $USER"
+# Run inside chroot to set user password
+nixos-enter --root /mnt
+echo "Enter password for user $USER:"
+passwd $USER
+exit
+
 
 echo "==> Installation complete!"
 echo "Reboot now with:  reboot"
