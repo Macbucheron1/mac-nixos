@@ -1,16 +1,25 @@
+# hosts/lenovo-legion/configuration.nix
 { inputs, lib, pkgs, userName, ... }:
 {
   imports = [
     ./hardware-configuration.nix
  ];
 
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";      
-    useOSProber = true;      
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";      
+      useOSProber = true; 
+    };
+    efi = {
+      efiSysMountPoint = "/boot";
+      canTouchEfiVariables = true;
+    };
   };
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  fileSystems."/boot".neededForBoot = true;
+
 
   networking.hostName = "lenovo-legion";
 

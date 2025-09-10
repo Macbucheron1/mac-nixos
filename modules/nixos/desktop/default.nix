@@ -3,5 +3,6 @@
 {
   imports =
     [ ]
-    ++ lib.optionals (desktopType == "gnome")  [ ./gnome ];
+    ++ lib.optionals (desktopType == "gnome")  [ ./gnome ]
+    ++ lib.optionals (desktopType == "none") [ ./none ];
 }
