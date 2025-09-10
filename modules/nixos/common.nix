@@ -16,6 +16,8 @@
   time.timeZone = "Europe/Paris";
 
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
+
   services.usbmuxd.enable = true; # usb multiplexing daemon for ios devices
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
