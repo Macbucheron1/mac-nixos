@@ -32,5 +32,4 @@ reboot
 
 ## To-DO
 
-- Personnalisation alacritty & shell
-- Personnaliser fastfetch et le mettre au lancement
+- Personnaliser starship

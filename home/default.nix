@@ -39,6 +39,8 @@
     ./alacritty
     ./fastfetch
     ./vesktop
+    ./bash
+    ./starship
   ];
 
 }
