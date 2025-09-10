@@ -37,13 +37,8 @@ mv /tmp/hardware-configuration.nix /mnt/etc/nixos/hosts/${HOST}/hardware-configu
 echo "==> Installing NixOS using flake output: #$HOST"
 nixos-install --root /mnt --flake /mnt/etc/nixos#$HOST
 
-echo "==> Setting password for user: $USER"
-# Run inside chroot to set user password
-nixos-enter --root /mnt
-echo "Enter password for user $USER:"
-passwd $USER
-exit
-
-
 echo "==> Installation complete!"
-echo "Reboot now with:  reboot"
+echo "Please set a password for the user '$USER' with: "
+echo "nixos-enter --root /mnt"
+echo "passwd $USER"
+echo "Then exit and reboot."
