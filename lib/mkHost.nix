@@ -1,13 +1,13 @@
 # lib/mkHost.nix
-{ nixpkgs, home-manager, disko, stylix, self }:
+{ nixpkgs, home-manager, stylix, self }:
 
 let
   lib = nixpkgs.lib;
 in
-{ system, hostName, userName ? "mac", disks ? [ ], desktopType ? "none", extraModules ? [ ] }:
+{ system, hostName, userName ? "mac", desktopType ? "none", extraModules ? [ ] }:
   lib.nixosSystem {
     inherit system;
-    specialArgs = { inherit nixpkgs home-manager disko disks userName desktopType stylix; }; # Argument disponible pour modules/nixos
+    specialArgs = { inherit nixpkgs home-manager userName desktopType stylix; }; # Argument disponible pour modules/nixos
     modules = [
       ./../hosts/${hostName}/configuration.nix
       ./../modules/nixos/desktop

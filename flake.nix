@@ -5,11 +5,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,9 +15,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, stylix, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, stylix, ... }:
   let 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager disko self stylix; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager self stylix; };
   in {
 
     overlays.default = final: prev: {
@@ -35,11 +30,9 @@
       vm = mkHost {
         system = "x86_64-linux";
         hostName = "vm";
-        disks = [ "/dev/sda" ];
         userName = "mac";
         extraModules = [ 
-          disko.nixosModules.disko
-          ./hosts/vm/disko.nix
+
         ];
       };
 
