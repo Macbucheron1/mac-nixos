@@ -52,4 +52,18 @@
       "audio/*" = "org.gnome.Rhythmbox3.desktop";
     }; 
   };
+  
+  systemd.user.services.alacritty-autostart = {
+    Unit = {
+      Description = "Launch Alacritty after GNOME session settles";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
+      ExecStart = "${pkgs.alacritty}/bin/alacritty";
+      Restart = "on-failure";
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
 }
