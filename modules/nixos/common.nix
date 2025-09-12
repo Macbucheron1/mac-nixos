@@ -6,6 +6,7 @@
     ./virtualisation
     ./ssh
     ./stylix
+    ./nix
   ];
 
 
