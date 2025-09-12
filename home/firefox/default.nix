@@ -52,6 +52,10 @@
                   }
                 ];
               }
+              {
+                name = "HackTheBox";
+                url = "https://app.hackthebox.com/home";
+              }
             ];
           }
         ];
