@@ -21,5 +21,15 @@ in
         home-manager.extraSpecialArgs = { inherit userName desktopType stylix; }; # Argument disponible pour home
         home-manager.users.${userName} = import ./../home;
       }
-    ] ++ extraModules;
+    ]
+    ++ lib.optional (desktopType == "gnome") {
+      # Allow numlock to be enabled on GDM login screen
+      programs.dconf.enable = true;
+      programs.dconf.profiles.gdm.databases = [{
+        settings."org/gnome/desktop/peripherals/keyboard" = {
+          numlock-state = true;
+        };
+      }];
+    }
+    ++ extraModules;
   }

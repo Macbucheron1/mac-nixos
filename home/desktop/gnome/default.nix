@@ -30,6 +30,11 @@
         cursor-theme = "Adwaita";  
         icon-theme   = "Adwaita";
       };
+
+      "org/gnome/desktop/peripherals/keyboard" = {
+        numlock-state = true;
+        remember-numlock-state = true;
+      };
     };
   };
 
@@ -40,7 +45,6 @@
       package = pkgs.adwaita-icon-theme;
     };
   };
-
 
   xdg.mimeApps = {
     enable = true;
