@@ -11,6 +11,11 @@ My nixos configuration for daily drive
 ## Install on a VM
 
 To try this config on a VM using nixos iso (minimal or graphical), launch a vm with enough ram and disk space.
+
+> [!WARNING] 
+> Please read the script before executing it as it modify the partitionning.
+> Do not use the script on you machine as you will erase your disk
+
 ```bash
 git clone https://github.com/macbucheron1/mac-nixos
 cd mac-nixos
