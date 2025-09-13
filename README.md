@@ -4,9 +4,9 @@ My nixos configuration for daily drive
 
 ## Images
 
-[screen1](./img/screen1.png)
-[screen2](./img/screen2.png)
-[screen3](./img/screen3.png)
+![screen1](./img/screen1.png)
+![screen2](./img/screen2.png)
+![screen3](./img/screen3.png)
 
 ## Install on a VM
 
