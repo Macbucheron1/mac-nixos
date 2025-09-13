@@ -2,6 +2,12 @@
 
 My nixos configuration for daily drive
 
+## Images
+
+[screen1](./img/screen1.png)
+[screen2](./img/screen2.png)
+[screen3](./img/screen3.png)
+
 ## Install on a VM
 
 To try this config on a VM using nixos iso (minimal or graphical), launch a vm with enough ram and disk space.
