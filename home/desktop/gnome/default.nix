@@ -1,6 +1,12 @@
 
 { config, lib, pkgs, ... }:
 {
+
+  home.packages = with pkgs.gnomeExtensions; [
+    logo-menu
+    blur-my-shell
+  ];
+
   dconf = {
     enable = true;
     settings = {
@@ -24,7 +30,13 @@
           "org.gnome.Nautilus.desktop"
           "Alacritty.desktop"
         ];
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          logo-menu.extensionUuid
+          blur-my-shell.extensionUuid
+        ];
       };
+
 
       "org/gnome/desktop/interface" = {
         cursor-theme = "Adwaita";  
@@ -34,6 +46,60 @@
       "org/gnome/desktop/peripherals/keyboard" = {
         numlock-state = true;
         remember-numlock-state = true;
+      };
+
+      "org/gnome/shell/extensions/Logo-menu" = {
+        menu-button-icon-image = 23;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell" = {
+        settings-version = 2;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
+        blur = false;
+        brightness = 0.0;
+        sigma = 30;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab" = {
+        settings-version = 2;
+        pipeline = "pipeline_default";
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+        blur=false;
+        brightness=0.59999999999999998;
+        pipeline="pipeline_default_rounded";
+        sigma=30;
+        static-blur=true;
+        style-dash-to-dock=0;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/lockscreen" = {
+        pipeline="pipeline_default";
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/overview" = {
+        blur=true;
+        pipeline="pipeline_default";
+        style-components=0;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/panel" = {
+        blur=false;
+        brightness=0.59999999999999998;
+        pipeline="pipeline_default";
+        sigma=30;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell/screenshot" = {
+        pipeline="pipeline_default";
+      };
+      
+      "org/gnome/shell/extensions/blur-my-shell/screenshot" = {
+        brightness=0.59999999999999998;
+        sigma=30;
       };
     };
   };
