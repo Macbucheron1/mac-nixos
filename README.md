@@ -41,6 +41,7 @@ exit
 reboot
 ```
 
-## To-DO
+## To-Do
 
 - Personnaliser starship
+- 
