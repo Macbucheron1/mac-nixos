@@ -56,6 +56,14 @@
                 name = "HackTheBox";
                 url = "https://app.hackthebox.com/home";
               }
+              {
+                name = "Teams";
+                url = "https://teams.microsoft.com/v2/";
+              }
+              {
+                name = "Calendar";
+                url = "https://calendar.google.com/calendar/u/0/r";
+              }
             ];
           }
         ];
