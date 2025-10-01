@@ -29,6 +29,12 @@ in {
           # C & C++ tools
           twxs.cmake
           ms-vscode.cpptools
+
+
+          # Python tools
+          ms-python.python
+          ms-toolsai.jupyter
+          ms-python.vscode-pylance
         ];
         userSettings = {
           "workbench.iconTheme"  = lib.mkForce "material-icon-theme";
@@ -39,6 +45,7 @@ in {
           "git.confirmSync" = false;
           "explorer.confirmDragAndDrop" = false;
           "chat.mcp.discovery.enabled" = true;
+          "python.languageServer" = "Pylance";
         };
       };
     };

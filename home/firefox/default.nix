@@ -53,8 +53,21 @@
                 ];
               }
               {
-                name = "HackTheBox";
-                url = "https://app.hackthebox.com/home";
+                name = "Cyber";
+                bookmarks = [
+                  {
+                    name = "HackTheBox";
+                    url = "https://app.hackthebox.com/home";
+                  }
+                  {
+                    name = "Root-Me";
+                    url = "https://www.root-me.org/Mac-812606?lang=fr#d88e573684dce5992c29f1a7c407c483";
+                  }
+                  {
+                    name = "PortSwigger";
+                    url = "https://portswigger.net/web-security";
+                  }
+                ];
               }
               {
                 name = "Teams";
