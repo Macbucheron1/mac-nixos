@@ -42,6 +42,7 @@
     ./vesktop
     ./bash
     ./starship
+    ./tmux
   ];
 
 }

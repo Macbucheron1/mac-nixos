@@ -44,7 +44,12 @@ in {
           "git.autofetch" = true;
           "git.confirmSync" = false;
           "explorer.confirmDragAndDrop" = false;
-          "chat.mcp.discovery.enabled" = true;
+          "chat.mcp.discovery.enabled" = {
+            "claude-desktop" = true;
+            "windsurf" = true;
+            "cursor-global" = true;
+            "cursor-workspace" = true;
+          };
           "python.languageServer" = "Pylance";
         };
       };
