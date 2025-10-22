@@ -51,6 +51,8 @@ in {
             "cursor-workspace" = true;
           };
           "python.languageServer" = "Pylance";
+          "terminal.integrated.profiles.linux.nixos-bash.path" = "/run/current-system/sw/bin/bash";
+          "terminal.integrated.defaultProfile.linux" = "nixos-bash";
         };
       };
     };
