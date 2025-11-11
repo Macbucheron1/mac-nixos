@@ -35,7 +35,16 @@
 
     # Eduroam pour se connnecter au wifi de l'école
     geteduroam-cli
+
+    # Pour monter des systèmes de fichiers virtiofs
+    virtiofsd
+
+    # Bat
+    bat
+    bat-extras.batman
   ];
+
+  programs.steam.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
