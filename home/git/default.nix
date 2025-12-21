@@ -4,10 +4,11 @@
     enable = true;
     package = pkgs.gitFull;
 
-    userName  = "macbucheron1";
-    userEmail = "nathandeprat@hotmail.fr";
-
-    extraConfig = {
+    settings = { 
+      user = {
+        name  = "macbucheron1";
+        email = "nathandeprat@hotmail.fr";
+      };
       init.defaultBranch = "main";
       pull.rebase = true;
 
@@ -16,5 +17,6 @@
       gpg.format = "ssh";
       user.signingkey = "~/.ssh/id_ed25519";
     };
+
   };
 }

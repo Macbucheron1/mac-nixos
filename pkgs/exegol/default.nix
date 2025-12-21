@@ -1,59 +1,74 @@
 { lib, fetchFromGitHub, python3Packages, xorg, stdenv }:
 let
-  supabase-auth = python3Packages.buildPythonPackage rec {
-    pname = "supabase-auth";
-    version = "2.23.0";
-    pyproject = true;
+supabase-auth = python3Packages.buildPythonPackage rec {
+  pname = "supabase-auth";
+  version = "2.23.0";
+  pyproject = true;
 
-    src = python3Packages.fetchPypi {
-      pname = "supabase_auth";
-      inherit version;
-      hash = "sha256-4AiXzJE8ehv04ni+5U4g5a5Vh7XV1hhEhNTTdLYTOwQ=";
-    };
-
-    build-system = [ python3Packages."uv-build" ];
-
-    dependencies = with python3Packages; [
-      pydantic httpx anyio typing-extensions pyjwt
-    ];
-
-    pythonRelaxDeps = [ "pydantic" ];
-
-    doCheck = false;
-    pythonImportsCheck = [ "supabase_auth" ];
+  src = python3Packages.fetchPypi {
+    pname = "supabase_auth";
+    inherit version;
+    hash = "sha256-4AiXzJE8ehv04ni+5U4g5a5Vh7XV1hhEhNTTdLYTOwQ=";
   };
 
-  supabase-functions = python3Packages.buildPythonPackage rec {
-    pname = "supabase-functions";
-    version = "2.23.0";
-    pyproject = true;
-    src = python3Packages.fetchPypi {
-      pname = "supabase_functions";
-      inherit version;
-      hash = "sha256-ehcLTvWOsqPuPqSO6SyXI3yvs7QdPB1c2m7j+kqFVCw=";
-    };
-    build-system = [ python3Packages."uv-build" ];
+  # uv_build est pin <0.9.0 upstream, mais nixpkgs peut fournir 0.9.x
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3'
+  '';
 
-    # HTTP client + event loop; pydantic au cas où (selon versions)
-    dependencies = with python3Packages; [
-      httpx anyio typing-extensions pydantic strenum yarl
-    ];
+  build-system = [ python3Packages."uv-build" ];
+  nativeBuildInputs = [ python3Packages."uv-build" ];
 
-    pythonRelaxDeps = [ "pydantic" ];
-    doCheck = false;
-    pythonImportsCheck = [ "supabase_functions" ];
+  dependencies = with python3Packages; [
+    pydantic httpx anyio typing-extensions pyjwt
+  ];
+
+  pythonRelaxDeps = [ "pydantic" "uv_build" ];
+
+  doCheck = false;
+  pythonImportsCheck = [ "supabase_auth" ];
+};
+
+supabase-functions = python3Packages.buildPythonPackage rec {
+  pname = "supabase-functions";
+  version = "2.23.0";
+  pyproject = true;
+
+  src = python3Packages.fetchPypi {
+    pname = "supabase_functions";
+    inherit version;
+    hash = "sha256-ehcLTvWOsqPuPqSO6SyXI3yvs7QdPB1c2m7j+kqFVCw=";
   };
+
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3'
+  '';
+
+  build-system = [ python3Packages."uv-build" ];
+  nativeBuildInputs = [ python3Packages."uv-build" ];
+
+  dependencies = with python3Packages; [
+    httpx anyio typing-extensions pydantic strenum yarl
+  ];
+
+  pythonRelaxDeps = [ "pydantic" "uv_build" ];
+
+  doCheck = false;
+  pythonImportsCheck = [ "supabase_functions" ];
+};
 in
 python3Packages.buildPythonApplication rec {
   pname = "exegol";
-  version = "5.1.5";
+  version = "5.1.7";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "ThePorgs";
     repo = "Exegol";
     tag = version;
-    hash = "sha256-AyzaorR6Rv9kCh4i14LetMZBdB2eWPi8Msi/qQphTnQ=";
+    hash = "sha256-t3nZcr7Gp/HBuXPe4KN+QPSPgsQfwkt3wkKAQ9ZDihc=";
   };
 
   build-system = with python3Packages; [ pdm-backend ];

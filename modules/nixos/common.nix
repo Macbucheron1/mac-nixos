@@ -42,6 +42,13 @@
     # Bat
     bat
     bat-extras.batman
+
+    # Coreutils
+    file
+
+    python312
+
+    brightnessctl
   ];
 
   programs.steam.enable = true;
