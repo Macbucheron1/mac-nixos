@@ -1,19 +1,50 @@
-{ nixpkgs }:{ username, hostname, system, gui}:
+{
+  description = "Nathan's minimal NixOS + Home Manager flake";
 
-let
-  lib = nixpkgs.lib;
-in
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-lib.nixosSystem {
-  inherit system;
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-  specialArgs = {
-    inherit username hostname gui;
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  modules = [
-    ../nixos/default.nix
-    ../nixos/hosts/${hostname}
-    ../nixos/gui/${gui}
-  ];
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  let
+    system = "x86_64-linux";
+
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs; };
+    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager; };
+
+    username = "mac";
+  in
+  {
+    nixosConfigurations = {      
+      pc1 = mkHost {
+        inherit system username;
+        hostname = "pc1";
+        gui = "sway";
+      };
+
+      vm = mkHost {
+        inherit system username;
+        hostname = "vm";
+        gui = "sway";      
+      };
+    };
+
+    homeConfigurations = {
+      "${username}" = mkUser {
+        inherit system username;
+        stateVersion = "24.05";
+        gui = "sway";
+      };
+    };
+  };
 }
