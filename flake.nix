@@ -25,17 +25,17 @@
     username = "mac";
   in
   {
-    nixosConfigurations = {      
-      pc1 = mkHost {
+    nixosConfigurations = {
+      "lenovo-legion" = mkHost {
         inherit system username;
-        hostname = "pc1";
-        gui = "sway";
+        hostname = "lenovo-legion";
+        gui = "tty";
       };
 
       vm = mkHost {
         inherit system username;
         hostname = "vm";
-        gui = "sway";      
+        gui = "tty";
       };
     };
 
@@ -43,7 +43,7 @@
       "${username}" = mkUser {
         inherit system username;
         stateVersion = "24.05";
-        gui = "sway";
+        gui = "tty";
       };
     };
   };
