@@ -9,6 +9,6 @@
   programs.bash.enable = true;
 
   home.packages = with pkgs; [
-    git
+    vim
   ];
 }
