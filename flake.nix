@@ -1,50 +1,19 @@
-# flake.nix
-{
-  description = "Mac's nixos config";
+{ nixpkgs }:{ username, hostname, system, gui}:
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+let
+  lib = nixpkgs.lib;
+in
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+lib.nixosSystem {
+  inherit system;
 
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  specialArgs = {
+    inherit username hostname gui;
   };
-  outputs = inputs@{ self, nixpkgs, home-manager, stylix, ... }:
-  let 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager self stylix; };
-  in {
 
-    overlays.default = final: prev: {
-      exegol = prev.callPackage ./pkgs/exegol { };
-    };
-
-    nixosConfigurations = {
-
-      # VM virtualBox
-      vm = mkHost {
-        system = "x86_64-linux";
-        hostName = "vm";
-        userName = "mac";
-        desktopType = "gnome";
-        extraModules = [ 
-
-        ];
-      };
-
-      # Physical machine
-      lenovo-legion = mkHost {
-        system = "x86_64-linux";
-        hostName = "lenovo-legion";
-        userName = "mac";
-        desktopType = "gnome";
-      };
-    };
-  };
+  modules = [
+    ../nixos/default.nix
+    ../nixos/hosts/${hostname}
+    ../nixos/gui/${gui}
+  ];
 }
-

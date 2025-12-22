@@ -1,35 +1,19 @@
-# lib/mkHost.nix
-{ nixpkgs, home-manager, stylix, self }:
+{ nixpkgs }:{ username, hostname, system, gui}:
 
 let
   lib = nixpkgs.lib;
 in
-{ system, hostName, userName ? "mac", desktopType ? "none", extraModules ? [ ] }:
-  lib.nixosSystem {
-    inherit system;
-    specialArgs = { inherit nixpkgs home-manager userName desktopType stylix; }; # Argument disponible pour modules/nixos
-    modules = [
-      ./../hosts/${hostName}/configuration.nix
-      ./../modules/nixos/desktop
-      ./../modules/nixos/common.nix
-      stylix.nixosModules.stylix
-      home-manager.nixosModules.home-manager
-      {
-        nixpkgs.overlays = [ self.overlays.default ]; 
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit userName desktopType stylix; }; # Argument disponible pour home
-        home-manager.users.${userName} = import ./../home;
-      }
-    ]
-    ++ lib.optional (desktopType == "gnome") {
-      # Allow numlock to be enabled on GDM login screen
-      programs.dconf.enable = true;
-      programs.dconf.profiles.gdm.databases = [{
-        settings."org/gnome/desktop/peripherals/keyboard" = {
-          numlock-state = true;
-        };
-      }];
-    }
-    ++ extraModules;
-  }
+
+lib.nixosSystem {
+  inherit system;
+
+  specialArgs = {
+    inherit username hostname gui;
+  };
+
+  modules = [
+    ../nixos
+    ../hosts/${hostname}
+    ../nixos/gui/${gui}
+  ];
+}
