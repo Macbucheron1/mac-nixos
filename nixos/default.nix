@@ -8,7 +8,7 @@
 
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
-  console.keyMap = "fr";
+  console.keyMap = "us";
 
   users.users.${username} = {
     isNormalUser = true;
@@ -16,12 +16,12 @@
     initialPassword = "changeme";
   };
 
-  security.sudo.enable = true;
-
   environment.systemPackages = with pkgs; [
     git
     vim
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
+  system.nixos.label = "lenovo-legion-tryout";
+  
 }
