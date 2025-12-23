@@ -14,6 +14,5 @@
 
   imports = [
     ./zellij
-    ./foot
   ];
 }
