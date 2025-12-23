@@ -10,6 +10,5 @@
 
   home.packages = with pkgs; [
     vim
-    sway
   ];
 }
