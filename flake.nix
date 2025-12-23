@@ -35,7 +35,7 @@
       vm = mkHost {
         inherit system username;
         hostname = "vm";
-        gui = "tty";
+        gui = "sway";
       };
     };
 
@@ -43,7 +43,7 @@
       "${username}" = mkUser {
         inherit system username;
         stateVersion = "24.05";
-        gui = "tty";
+        gui = "sway";
       };
     };
   };

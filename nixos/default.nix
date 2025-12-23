@@ -18,9 +18,9 @@
 
   environment.systemPackages = with pkgs; [
     git
+    foot
   ];
 
   system.stateVersion = "25.05";
   system.nixos.label = "lenovo-legion-tryout";
-  
 }
