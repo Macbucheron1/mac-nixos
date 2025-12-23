@@ -11,4 +11,9 @@
   home.packages = with pkgs; [
     vim
   ];
+
+  imports = [
+    ./zellij
+    ./foot
+  ];
 }
