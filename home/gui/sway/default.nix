@@ -5,11 +5,9 @@ wayland.windowManager.sway = {
     wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
     config = rec {
       modifier = "Mod4";
-      # Use kitty as default terminal
       terminal = "foot"; 
       startup = [
-        # Launch Firefox on start
-        foot
+        { command = "foot"; }
       ];
     };
   };
