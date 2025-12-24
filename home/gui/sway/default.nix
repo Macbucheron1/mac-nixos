@@ -10,6 +10,11 @@
         { command = "foot"; }
       ];
     };
+    extraConfig = ''
+      # No titlebar, keep a 1px border
+      default_border pixel 1
+      default_floating_border pixel 1
+    '';
   };
 
   # https://wiki.nixos.org/wiki/Sway
