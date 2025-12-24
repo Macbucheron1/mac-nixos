@@ -31,7 +31,7 @@ lib.nixosSystem {
 
       home-manager.users.${username} = {
         imports = [
-          ../home/default.nix
+          ../home
           ../home/gui/${gui}
         ];
 

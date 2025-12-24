@@ -14,6 +14,8 @@
 
   imports = [
     ./zellij
+    ./nvim
+    ./bash
     ./foot
     ./git
     ./vscode
