@@ -1,11 +1,11 @@
 { ... }:
 {
-wayland.windowManager.sway = {
+  wayland.windowManager.sway = {
     enable = true;
-    wrapperFeatures.gtk = true; 
+    wrapperFeatures.gtk = true;
     config = rec {
       modifier = "Mod4";
-      terminal = "foot"; 
+      terminal = "foot";
       startup = [
         { command = "foot"; }
       ];

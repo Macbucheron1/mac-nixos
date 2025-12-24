@@ -14,5 +14,7 @@
 
   imports = [
     ./zellij
+    ./foot
+    ./git
   ];
 }
