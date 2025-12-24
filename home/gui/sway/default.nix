@@ -11,4 +11,8 @@
       ];
     };
   };
+
+  # https://wiki.nixos.org/wiki/Sway
+  # It's recommended to enable a Secret Service provider, like GNOME Keyring
+  services.gnome-keyring.enable = true;
 }

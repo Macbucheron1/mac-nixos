@@ -1,4 +1,5 @@
-{ nixpkgs, home-manager }:{ username, system, homeManagerStateVersion, gui}:
+{ nixpkgs, home-manager, stylix }:
+{ username, system, homeManagerStateVersion, gui }:
 let
   pkgs = nixpkgs.legacyPackages.${system};
 in
@@ -10,6 +11,8 @@ home-manager.lib.homeManagerConfiguration {
   };
 
   modules = [
+    stylix.homeManagerModules.stylix
+    ../lib/theme.nix
     ../home/default.nix
     ../home/gui/${gui}
   ];

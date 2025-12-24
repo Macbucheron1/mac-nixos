@@ -16,5 +16,7 @@
     ./zellij
     ./foot
     ./git
+    ./vscode
+    ./firefox
   ];
 }

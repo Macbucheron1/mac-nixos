@@ -18,5 +18,7 @@
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
-  }
+  };
+
+  hardware.bluetooth.enable = true;
 }

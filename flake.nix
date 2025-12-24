@@ -15,12 +15,12 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, stylix, ... }:
   let
     system = "x86_64-linux";
 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager; };
-    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager stylix; };
+    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager stylix; };
 
     username = "mac";
     homeManagerStateVersion = "26.05";

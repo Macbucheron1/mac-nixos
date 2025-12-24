@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager }:
+{ nixpkgs, home-manager, stylix }:
 { username, hostname, system, gui, homeManagerStateVersion }:
 
 let
@@ -15,6 +15,9 @@ lib.nixosSystem {
     ../nixos
     ../hosts/${hostname}
     ../nixos/gui/${gui}
+
+    stylix.nixosModules.stylix
+    ../lib/theme.nix
 
     home-manager.nixosModules.home-manager
 

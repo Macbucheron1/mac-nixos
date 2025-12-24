@@ -2,6 +2,8 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+
 
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
