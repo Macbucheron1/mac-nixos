@@ -19,21 +19,22 @@
   let
     system = "x86_64-linux";
 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager; };
     mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager; };
 
     username = "mac";
+    homeManagerStateVersion = "26.05";
   in
   {
     nixosConfigurations = {
       "lenovo-legion" = mkHost {
-        inherit system username;
+        inherit system username homeManagerStateVersion;
         hostname = "lenovo-legion";
         gui = "tty";
       };
 
       vm = mkHost {
-        inherit system username;
+        inherit system username homeManagerStateVersion;
         hostname = "vm";
         gui = "sway";
       };
@@ -41,8 +42,7 @@
 
     homeConfigurations = {
       "${username}" = mkUser {
-        inherit system username;
-        stateVersion = "24.05";
+        inherit system username homeManagerStateVersion;
         gui = "sway";
       };
     };

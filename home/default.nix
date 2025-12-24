@@ -1,9 +1,9 @@
-{ config, pkgs, username, stateVersion, ... }:
+{ config, pkgs, username, homeManagerStateVersion, ... }:
 
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = stateVersion;
+  home.stateVersion = homeManagerStateVersion;
 
   programs.home-manager.enable = true;
   programs.bash.enable = true;

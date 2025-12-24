@@ -19,7 +19,6 @@
   environment.systemPackages = with pkgs; [
     git
     home-manager
-    foot
   ];
 
   system.stateVersion = "25.05";
