@@ -11,7 +11,7 @@ home-manager.lib.homeManagerConfiguration {
   };
 
   modules = [
-    stylix.homeManagerModules.stylix
+    stylix.homeModules.stylix
     ../lib/theme.nix
     ../home/default.nix
     ../home/gui/${gui}

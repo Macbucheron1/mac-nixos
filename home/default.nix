@@ -6,10 +6,10 @@
   home.stateVersion = homeManagerStateVersion;
 
   programs.home-manager.enable = true;
-  programs.bash.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    vim
+    tree
   ];
 
   imports = [
@@ -20,5 +20,7 @@
     ./git
     ./vscode
     ./firefox
+    ./bat
+    ./nh
   ];
 }

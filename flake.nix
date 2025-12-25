@@ -30,7 +30,7 @@
       "lenovo-legion" = mkHost {
         inherit system username homeManagerStateVersion;
         hostname = "lenovo-legion";
-        gui = "tty";
+        gui = "sway";
       };
 
       vm = mkHost {
