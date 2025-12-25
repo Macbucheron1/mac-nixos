@@ -9,6 +9,7 @@
       startup = [
         { command = "foot"; }
       ];
+      input."*".xkb_layout = "fr";
     };
     extraConfig = ''
       # No titlebar, keep a 1px border

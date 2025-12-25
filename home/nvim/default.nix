@@ -1,5 +1,4 @@
 { ... }:
-
 {
   programs.neovim = {
     enable = true;
@@ -7,6 +6,6 @@
     waylandSupport = true;
     extraLuaConfig = ''
     	vim.opt.clipboard = "unnamedplus"
-    ''
+    '';
   };
 }
