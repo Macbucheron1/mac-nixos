@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 let 
   volumeScript = ./script/volume-notify.sh;
+  brightScript = ./script/brightness-notify.sh;
 in
 {
   wayland.windowManager.sway = {
@@ -19,6 +20,8 @@ in
         "XF86AudioMute" = "exec bash ${volumeScript} mute";
         "XF86AudioRaiseVolume" = "exec bash ${volumeScript} up";
         "XF86AudioLowerVolume" = "exec bash ${volumeScript} down";
+        "XF86MonBrightnessDown" = "exec bash ${brightScript} down";
+        "XF86MonBrightnessUp" = "exec bash ${brightScript} up";
       };
       bars = [
         {

@@ -14,6 +14,8 @@
     nitch
     wl-clipboard
     libnotify
+    brightnessctl
+    ripgrep
     
     # Photo capture & Video capture
     grim
