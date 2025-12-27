@@ -24,9 +24,8 @@
     ];
   };
 
+  # TO DO: create a specialisation to run with/without dGPU
   hardware = {
-    bluetooth.enable = true;
-
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -34,17 +33,17 @@
 
     nvidia = {
     	package = config.boot.kernelPackages.nvidiaPackages.stable;
-	modesetting.enable = true;
-	powerManagement.enable = true;
-	open = false;
-	nvidiaSettings = true;
+	    modesetting.enable = true;
+    	powerManagement.enable = true;
+    	open = false;
+	    nvidiaSettings = true;
 
-	prime = {
-	  offload.enable = true;
-	  offload.enableOffloadCmd = true;
-	  nvidiaBusId = "PCI:1:0:0";
-	  amdgpuBusId = "PCI:5:0:0";
-	};
+	    prime = {
+	      offload.enable = true;
+	      offload.enableOffloadCmd = true;
+	      nvidiaBusId = "PCI:1:0:0";
+	      amdgpuBusId = "PCI:5:0:0";
+  	  };
     };
   };
   services.xserver.videoDrivers = ["nvidia"];

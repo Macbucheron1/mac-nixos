@@ -1,4 +1,7 @@
-{ ... }:
+{ pkgs, lib, ... }:
+let 
+  volumeScript = ./script/volume-notify.sh;
+in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -10,6 +13,28 @@
         { command = "foot"; }
       ];
       input."*".xkb_layout = "fr";
+      keybindings = lib.mkOptionDefault {
+        "${modifier}+p" = "exec rofi -show drun"; 
+        "Print" = "exec grim -g \"$(slurp)\" - | wl-copy";
+        "XF86AudioMute" = "exec bash ${volumeScript} mute";
+        "XF86AudioRaiseVolume" = "exec bash ${volumeScript} up";
+        "XF86AudioLowerVolume" = "exec bash ${volumeScript} down";
+      };
+      bars = [
+        {
+          fonts = {
+            names = [ "DejaVu Sans Mono" ];
+            size = 14.0;
+          };
+
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+
+          position = "bottom";
+          workspaceButtons = true;
+          workspaceNumbers = true;
+          trayOutput = "primary";
+        }
+      ];
     };
     extraConfig = ''
       # No titlebar, keep a 1px border
