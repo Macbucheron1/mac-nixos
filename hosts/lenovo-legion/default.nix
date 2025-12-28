@@ -16,7 +16,7 @@
         canTouchEfiVariables = true;
       };
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = ["nouveau"];
     kernelParams = [
       "modprobe.blacklist=nouveau"
@@ -47,4 +47,14 @@
     };
   };
   services.xserver.videoDrivers = ["nvidia"];
+
+  powerManagement.powerDownCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce || true
+  '';
+
+  powerManagement.resumeCommands = ''
+    ${pkgs.kmod}/bin/modprobe rtw89_8852ce || true
+    ${pkgs.util-linux}/bin/rfkill unblock wlan || true
+    systemctl restart NetworkManager.service || true
+  '';
 }

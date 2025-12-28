@@ -16,6 +16,7 @@
     libnotify
     brightnessctl
     ripgrep
+    pciutils
     
     # Photo capture & Video capture
     grim
