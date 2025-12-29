@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, stylix }:
+{ nixpkgs, home-manager, stylix, firefox-addons }:
 { username, system, homeManagerStateVersion, gui }:
 let
   pkgs = nixpkgs.legacyPackages.${system};
@@ -7,7 +7,7 @@ home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
 
   extraSpecialArgs = {
-    inherit username homeManagerStateVersion gui;
+    inherit username homeManagerStateVersion gui firefox-addons;
   };
 
   modules = [

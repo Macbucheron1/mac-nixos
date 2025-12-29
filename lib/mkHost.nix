@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, stylix }:
+{ nixpkgs, home-manager, stylix, firefox-addons }:
 { username, hostname, system, gui, homeManagerStateVersion }:
 
 let
@@ -26,7 +26,7 @@ lib.nixosSystem {
       home-manager.useUserPackages = true;
 
       home-manager.extraSpecialArgs = {
-        inherit username gui homeManagerStateVersion;
+        inherit username gui homeManagerStateVersion firefox-addons;
       };
 
       home-manager.users.${username} = {

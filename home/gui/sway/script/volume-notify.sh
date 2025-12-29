@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -eu
 
-SINK_ID="51"
+SINK="@DEFAULT_AUDIO_SINK@"
 STEP="5%"
 
 case "${1:-}" in
-  up)   wpctl set-volume "$SINK_ID" "${STEP}+" ;;
-  down) wpctl set-volume "$SINK_ID" "${STEP}-" ;;
-  mute) wpctl set-mute   "$SINK_ID" toggle ;;
+  up)   wpctl set-volume "$SINK" "${STEP}+" ;;
+  down) wpctl set-volume "$SINK" "${STEP}-" ;;
+  mute) wpctl set-mute   "$SINK" toggle ;;
   *) exit 0 ;;
 esac
 
-info="$(wpctl get-volume "$SINK_ID")"
+info="$(wpctl get-volume "$SINK")"
 vol="$(echo "$info" | awk '{print $2}' | sed 's/[^0-9.].*//')"
 pct="$(awk "BEGIN { printf \"%d\", ($vol * 100) }")"
 

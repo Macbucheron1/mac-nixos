@@ -13,14 +13,19 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, stylix, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, stylix, firefox-addons, ... }:
   let
     system = "x86_64-linux";
 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager stylix; };
-    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager stylix; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager stylix firefox-addons; };
+    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager stylix firefox-addons; };
 
     username = "mac";
     homeManagerStateVersion = "26.05";
