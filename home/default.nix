@@ -1,8 +1,9 @@
-{ config, pkgs, username, homeManagerStateVersion, ... }:
+{ config, pkgs, username, homeManagerStateVersion, nixpkgs, ... }:
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = homeManagerStateVersion;
+  nixpkgs.config.allowUnfree = true;
 
   programs.home-manager.enable = true;
 
