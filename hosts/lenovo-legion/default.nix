@@ -48,10 +48,14 @@
   };
   services.xserver.videoDrivers = ["nvidia"];
 
+  powerManagement.enable = true;  # recommandé sur laptop
+  services.upower.enable = true;  # batterie/AC state
+  services.power-profiles-daemon.enable = true;
+
+  # Fix for the wifi card going to deep sleep and never waking up
   powerManagement.powerDownCommands = ''
     ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce || true
   '';
-
   powerManagement.resumeCommands = ''
     ${pkgs.kmod}/bin/modprobe rtw89_8852ce || true
     ${pkgs.util-linux}/bin/rfkill unblock wlan || true

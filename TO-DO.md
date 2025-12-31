@@ -1,6 +1,12 @@
 # Things i need to add
 
-- Bar: waybar / swaybar
-- Screen recording / screen sharing
-- Gestion énergie / laptop
 - Écran / moniteurs
+
+# Things i need to rice
+
+- neovim
+- shell prompt
+- lock wallpaper
+- zellij
+- swaybar
+
