@@ -2,6 +2,7 @@
 let 
   volumeScript = ./script/volume-notify.sh;
   brightScript = ./script/brightness-notify.sh;
+  micScript = ./script/mic-toggle.sh;
 in
 {
   wayland.windowManager.sway = {
@@ -13,6 +14,7 @@ in
       startup = [
         { command = "foot"; }
       ];
+      defaultWorkspace = "workspace number 1";
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
         # Launcher
@@ -29,6 +31,9 @@ in
         # Brightness settings
         "XF86MonBrightnessDown" = "exec bash ${brightScript} down";
         "XF86MonBrightnessUp" = "exec bash ${brightScript} up";
+
+        # Mic Settings 
+        "XF86AudioMicMute" = "exec bash ${micScript}";
 
         # Lock
         "${modifier}+Shift+l" = "exec swaylock";

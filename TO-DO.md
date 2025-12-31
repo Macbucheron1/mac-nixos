@@ -4,4 +4,3 @@
 - Screen recording / screen sharing
 - Gestion énergie / laptop
 - Écran / moniteurs
-- mic on/off on F4 
