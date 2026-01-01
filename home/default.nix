@@ -35,7 +35,7 @@
 
   imports = [
     ./zellij
-    ./nvim
+    ./nixvim
     ./bash
     ./foot
     ./git

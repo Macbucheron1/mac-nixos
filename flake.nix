@@ -18,14 +18,20 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, stylix, firefox-addons, ... }:
+
+  outputs = inputs@{ self, nixpkgs, home-manager, stylix, firefox-addons, nixvim, ... }:
   let
     system = "x86_64-linux";
 
-    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager stylix firefox-addons; };
-    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager stylix firefox-addons; };
+    mkHost = import ./lib/mkHost.nix { inherit nixpkgs home-manager stylix firefox-addons nixvim; };
+    mkUser = import ./lib/mkUser.nix { inherit nixpkgs home-manager stylix firefox-addons nixvim; };
 
     username = "mac";
     homeManagerStateVersion = "26.05";

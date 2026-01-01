@@ -10,20 +10,20 @@
 
     timeouts = [
       {
-        timeout = 55;
+        timeout = 115;
         command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
       }
       {
-        timeout = 60;
+        timeout = 120;
         command = lock;
       }
       {
-        timeout = 90;
+        timeout = 150;
         command = display "off";
         resumeCommand = display "on";
       }
       {
-        timeout = 150;
+        timeout = 210;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];

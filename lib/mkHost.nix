@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, stylix, firefox-addons }:
+{ nixpkgs, home-manager, stylix, firefox-addons, nixvim }:
 { username, hostname, system, gui, homeManagerStateVersion }:
 
 let
@@ -33,6 +33,8 @@ lib.nixosSystem {
         imports = [
           ../home
           ../home/gui/${gui}
+
+          nixvim.homeModules.nixvim
         ];
 
         home.stateVersion = homeManagerStateVersion;

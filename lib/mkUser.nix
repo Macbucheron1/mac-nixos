@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, stylix, firefox-addons }:
+{ nixpkgs, home-manager, stylix, firefox-addons, nixvim }:
 { username, system, homeManagerStateVersion, gui }:
 let
   pkgs = nixpkgs.legacyPackages.${system};
@@ -15,5 +15,6 @@ home-manager.lib.homeManagerConfiguration {
     ../lib/theme.nix
     ../home/default.nix
     ../home/gui/${gui}
+    nixvim.homeModules.nixvim
   ];
 }
