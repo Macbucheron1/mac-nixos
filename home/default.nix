@@ -23,6 +23,8 @@
     slurp
   ];
 
+  stylix.targets.nvf.enable = false;
+
   # Adds an entry to roff drun
   xdg.desktopEntries.nmtui = {
     name = "nmtui";
@@ -35,7 +37,7 @@
 
   imports = [
     ./zellij
-    ./nixvim
+    ./nvf
     ./bash
     ./foot
     ./git
