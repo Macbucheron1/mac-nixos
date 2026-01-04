@@ -1,4 +1,4 @@
-{ config, pkgs, username, homeManagerStateVersion, nixpkgs, ... }:
+{ pkgs, username, homeManagerStateVersion, ... }:
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";

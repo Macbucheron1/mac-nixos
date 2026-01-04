@@ -15,11 +15,4 @@
     virtualisation.cores = 2;      
   };
 
-  environment.etc."home.sh" = {
-    source = ../../home.sh;
-    mode = "0755";
-  };
-  systemd.tmpfiles.rules = [
-    "L+ /home/mac/home.sh - - - - /etc/home.sh"
-  ];
 }
