@@ -29,7 +29,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     initialPassword = "changeme";
   };
 
@@ -38,6 +38,9 @@
     bluetui
   ];
 
+  imports = [
+    ./docker
+  ];
+
   system.stateVersion = "25.05";
-  system.nixos.label = "lenovo-legion-tryout";
 }

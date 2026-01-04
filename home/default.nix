@@ -21,6 +21,8 @@
     # Photo capture & Video capture
     grim
     slurp
+
+    obsidian
   ];
 
   stylix.targets.nvf.enable = false;
