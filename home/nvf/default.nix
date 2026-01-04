@@ -49,6 +49,10 @@ in
           enable = true;
           lsp.servers = [ "nixd" ];
         };
+        markdown = {
+          enable = true;
+          extensions.render-markdown-nvim.enable = true;
+        };
       };
 
       lsp = {

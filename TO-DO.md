@@ -1,6 +1,7 @@
 # Things i need to add
 
-- Écran / moniteurs
+- Docker
+- Exegol
 
 # Things i need to rice
 
