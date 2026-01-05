@@ -1,4 +1,4 @@
-{ config, pkgs, username, hostname, ... }:
+{ pkgs, username, hostname, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -29,7 +29,7 @@
 
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" "libvirtd" ];
     initialPassword = "changeme";
   };
 
@@ -40,6 +40,8 @@
 
   imports = [
     ./docker
+    ./virtualbox
+    ./virtmanager
   ];
 
   system.stateVersion = "25.05";

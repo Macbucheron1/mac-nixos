@@ -50,5 +50,6 @@
     ./rofi
     ./vesktop
     ./mako
+    ./virtmanager
   ];
 }
