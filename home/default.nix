@@ -23,6 +23,7 @@
     slurp
 
     obsidian
+    exegol
   ];
 
   stylix.targets.nvf.enable = false;

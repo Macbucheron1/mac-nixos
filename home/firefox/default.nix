@@ -19,6 +19,68 @@
         ];
       };
 
+      search = {
+        force = true;
+        default = "google";
+        engines = {
+          ddg.metaData.hidden = true;
+          bing.metaData.hidden = true;
+          qwant.metaData.hidden = true;
+          wikipedia.metaData.hidden = true;
+          perplexity.metaData.hidden = true;
+
+
+          nix-packages = {
+            name = "Nix Packages";
+            urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                    { name = "type"; value = "packages"; }
+                    { name = "channel"; value = "unstable"; }
+                    { name = "query"; value = "{searchTerms}"; }
+                ];
+            }];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@np" ];
+          };
+
+          nixos-options = {
+            name = "Nixos Options";
+            urls = [{
+                template = "https://search.nixos.org/options";
+                params = [
+                    { name = "type"; value = "options"; }
+                    { name = "channel"; value = "unstable"; }
+                    { name = "query"; value = "{searchTerms}"; }
+                ];
+            }];
+            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = [ "@no" ];
+          };
+
+          youtube = {
+              name = "YouTube";
+              urls = [{ template = "https://www.youtube.com/results?search_query={searchTerms}"; }];
+              icon = "https://www.youtube.com/favicon.ico";
+              definedAliases = [ "@yt" ];
+          };
+
+          home-manager-options = {
+              name = "Home Manager Options";
+              urls = [{ 
+                  template = "https://home-manager-options.extranix.com/"; 
+                  params = [
+                      { name = "release"; value = "master"; }
+                      { name = "query"; value = "{searchTerms}"; }
+                  ];
+              }];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@hm" ];
+          };
+
+        };
+      };
+
       bookmarks = {
         force = true;
         settings = [
@@ -93,28 +155,6 @@
         ];
       };
     };
-
-    #policies = {
-    #  ExtensionSettings = {
-    #    # Dark Reader
-    #    "addon@darkreader.org" = {
-    #      installation_mode = "force_installed";
-    #      install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-    #    };
-
-        # uBlock Origin
-    #    "uBlock0@raymondhill.net" = {
-    #      installation_mode = "force_installed";
-    #      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-    #    };
-
-        # Bitwarden
-    #    "446900e4-71c2-419f-a6a7-df9c091e268b" = {
-    #      installation_mode = "force_installed";
-    #      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-    #    };
-    #  };
-    #};
   };
   stylix.targets.firefox.profileNames = [ username ];
 }

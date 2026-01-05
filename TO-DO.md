@@ -1,6 +1,9 @@
 # Things i need to add
 
-- Exegol
+- firefox shortcut comme tom
+- Remove ubuntu completely
+- clean up space
+- direnv
 
 # Things i need to rice
 
