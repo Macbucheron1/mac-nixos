@@ -96,6 +96,7 @@ in
         setupOpts.options = {
           numbers = "none";
           indicator.style = "none";
+          sort_by =  "insert_at_end";
         };
       };
 

@@ -10,10 +10,11 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
+        efiInstallAsRemovable = true;
       };
       efi = {
         efiSysMountPoint = "/boot";
-        canTouchEfiVariables = true;
+        canTouchEfiVariables = false;
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
