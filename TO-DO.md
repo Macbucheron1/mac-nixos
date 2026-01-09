@@ -7,3 +7,6 @@
 - zellij
 - swaybar
 
+# Things i need to fix
+
+- lsp for home manager 
