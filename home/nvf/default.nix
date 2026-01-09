@@ -1,9 +1,5 @@
-{ config, osConfig, lib, ... }:
+{ osConfig, ... }:
 let
-  # Path where the flake of the configuration is located
-  flakePath = "${config.home.homeDirectory}/Documents/mac-nixos";
-  flakeExpr = ''(builtins.getFlake "${flakePath}")'';
-
   # Is a nixosConfigurations or just home-manager
   hasOsConfig = osConfig != null;
 
@@ -12,10 +8,6 @@ let
     if hasOsConfig
     then osConfig.networking.hostName
     else "lenovo-legion"; # Change to the hostname if not on nixos
-
-  username = config.home.username;
-
-  nixosOpts = "${flakeExpr}.nixosConfigurations.${host}.options";
 in
 {
   programs.nvf = {
@@ -105,14 +97,15 @@ in
           enable = true;
 
           settings = {
+            # !! This might not work on standalone home manager as host will not exist
             nixd = {
               options = {
                 nixos = {
-                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.lenovo-legion.options";
+                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.${host}.options";
                 };
 
                 home_manager = {
-                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.lenovo-legion.options.home-manager.users.type.getSubOptions []";
+                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.${host}.options.home-manager.users.type.getSubOptions []";
                 };
               };
             };
