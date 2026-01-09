@@ -5,6 +5,8 @@
     profiles.${username} = {
       isDefault = true;
       settings = {
+        "browser.startup.page" = 1;
+        "browser.startup.homepage" = "https://www.google.com/";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
       
@@ -143,8 +145,18 @@
                 ];
               }
               {
-                name = "Teams";
-                url = "https://teams.microsoft.com/v2/";
+                name = "Social";
+                bookmarks = [
+                  {
+                    name = "Teams";
+                    url = "https://teams.microsoft.com/v2/";
+                  }
+                  {
+                    name = "Telegram";
+                    url  = "https://web.telegram.org/a/";
+                  }
+
+                ];
               }
               {
                 name = "Calendar";
