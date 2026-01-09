@@ -7,7 +7,7 @@ let
   host =
     if hasOsConfig
     then osConfig.networking.hostName
-    else "lenovo-legion"; # adapte si besoin
+    else "lenovo-legion"; # change me
 
   flakePrefix = "(builtins.getFlake (toString ./.)).";
 

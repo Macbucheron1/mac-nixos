@@ -62,21 +62,12 @@ in
         "${modifier}+Shift+ccedilla"   = "move container to workspace number 9";
         "${modifier}+Shift+agrave"     = "move container to workspace number 10";
       };
-      bars = [
-        {
-          fonts = {
-            names = [ "DejaVu Sans Mono" ];
-            size = 14.0;
-          };
-
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-
-          position = "bottom";
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          trayOutput = "primary";
-        }
-      ];
+      # bars = [
+      #   {
+      #     command = "${pkgs.waybar}/bin/waybar";
+      #     position = "bottom";
+      #   }
+      # ];
     };
     extraConfig = ''
       # No titlebar, keep a 1px border
