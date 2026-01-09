@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let 
   volumeScript = ./script/volume-notify.sh;
   brightScript = ./script/brightness-notify.sh;
@@ -36,7 +36,7 @@ in
         "XF86AudioMicMute" = "exec bash ${micScript}";
 
         # Lock
-        "${modifier}+Shift+l" = "exec swaylock";
+        "${modifier}+Shift+l" = "exec ${config.home.profileDirectory}/bin/lockscreen";
 
         # Workspace
         "${modifier}+ampersand"  = "workspace number 1";
