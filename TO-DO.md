@@ -10,5 +10,4 @@
 
 # Things i need to fix
 
-- lsp for home manager 
 - mini.move in neovim

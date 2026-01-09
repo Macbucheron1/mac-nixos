@@ -1,13 +1,25 @@
-{ osConfig, ... }:
+{ osConfig ? null, config, ... }:
 let
-  # Is a nixosConfigurations or just home-manager
   hasOsConfig = osConfig != null;
 
-  # Hostname needed only if building a nixosConfigurations
+  user = config.home.username;
+
   host =
     if hasOsConfig
     then osConfig.networking.hostName
-    else "lenovo-legion"; # Change to the hostname if not on nixos
+    else "lenovo-legion"; # adapte si besoin
+
+  flakePrefix = "(builtins.getFlake (toString ./.)).";
+
+  nixosOptionsExpr = "${flakePrefix}nixosConfigurations.${host}.options";
+
+  # home manager option as a nixos module
+  hmOptionsFromNixosExpr =
+    "${nixosOptionsExpr}.home-manager.users.type.getSubOptions []";
+
+  # Standalone home manager expr
+  hmOptionsFromHomeCfgExpr =
+    "${flakePrefix}homeConfigurations.\"${user}@${host}\".options";
 in
 {
   programs.nvf = {
@@ -99,15 +111,13 @@ in
           settings = {
             # !! This might not work on standalone home manager as host will not exist
             nixd = {
-              options = {
-                nixos = {
-                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.${host}.options";
+              options =
+                if hasOsConfig then {
+                  nixos.expr = nixosOptionsExpr;
+                  home_manager.expr = hmOptionsFromNixosExpr;
+                } else {
+                  home_manager.expr = hmOptionsFromHomeCfgExpr;
                 };
-
-                home_manager = {
-                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.${host}.options.home-manager.users.type.getSubOptions []";
-                };
-              };
             };
           };        
         };
