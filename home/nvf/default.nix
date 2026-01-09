@@ -1,7 +1,7 @@
 { config, osConfig, lib, ... }:
 let
   # Path where the flake of the configuration is located
-  flakePath = "~/Documents/mac-nixos/"; 
+  flakePath = "${config.home.homeDirectory}/Documents/mac-nixos";
   flakeExpr = ''(builtins.getFlake "${flakePath}")'';
 
   # Is a nixosConfigurations or just home-manager
@@ -12,6 +12,8 @@ let
     if hasOsConfig
     then osConfig.networking.hostName
     else "lenovo-legion"; # Change to the hostname if not on nixos
+
+  username = config.home.username;
 
   nixosOpts = "${flakeExpr}.nixosConfigurations.${host}.options";
 in
@@ -102,24 +104,19 @@ in
         servers.nixd = {
           enable = true;
 
-          init_options = {
-            nixpkgs = {
-              expr = "import ${flakeExpr}.inputs.nixpkgs { }";
-            };
-
-            # nixosConfigurations or home-manager ?
-            options =
-              (lib.optionalAttrs hasOsConfig {
+          settings = {
+            nixd = {
+              options = {
                 nixos = {
-                  expr = nixosOpts;
+                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.lenovo-legion.options";
                 };
-              })
-              // {
-                "home-manager" = {
-                  expr = "${nixosOpts}.home-manager.users.type.getSubOptions []";
+
+                home_manager = {
+                  expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.lenovo-legion.options.home-manager.users.type.getSubOptions []";
                 };
               };
-          };
+            };
+          };        
         };
       };
 
@@ -128,7 +125,8 @@ in
       git.vim-fugitive.enable = true;             # https://github.com/tpope/vim-fugitive
       visuals.indent-blankline.enable = true;     # https://github.com/lukas-reineke/indent-blankline.nvim
       visuals.rainbow-delimiters.enable = true;   # https://github.com/HiPhish/rainbow-delimiters.nvim
-
+      mini.move.enable = true;
+      
       tabline.nvimBufferline = {                  # https://github.com/akinsho/bufferline.nvim
         enable = true;
         setupOpts.options = {
