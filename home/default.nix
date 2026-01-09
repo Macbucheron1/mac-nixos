@@ -52,5 +52,6 @@
     ./vesktop
     ./mako
     ./virtmanager
+    ./i3status-rust
   ];
 }

@@ -62,19 +62,67 @@ in
         "${modifier}+Shift+ccedilla"   = "move container to workspace number 9";
         "${modifier}+Shift+agrave"     = "move container to workspace number 10";
       };
+      # bars = [
+      #   {
+      #     fonts = {
+      #       names = [ "DejaVu Sans Mono" ];
+      #       size = 14.0;
+      #     };
+      #
+      #     statusCommand = "${pkgs.i3status}/bin/i3status";
+      #
+      #     position = "bottom";
+      #     workspaceButtons = true;
+      #     workspaceNumbers = true;
+      #     trayOutput = "primary";
+      #   }
+      # ];
+
       bars = [
         {
+          id = "bar-main";
+          command = "swaybar";
+
+          position = "bottom";
+          mode = "dock";
+
           fonts = {
-            names = [ "DejaVu Sans Mono" ];
+            names = [
+              "DejaVu Sans Mono"
+              # Recommandé pour les icônes (Nerd Font)
+              "JetBrainsMono Nerd Font"
+            ];
             size = 14.0;
           };
 
-          statusCommand = "${pkgs.i3status}/bin/i3status";
+          # i3status-rs (voir section 2)
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
 
-          position = "bottom";
           workspaceButtons = true;
           workspaceNumbers = true;
-          trayOutput = "primary";
+
+          trayOutput = "*";     # swaybar: none|<output>|* :contentReference[oaicite:3]{index=3}
+          trayPadding = 4;      # padding autour/entre icônes :contentReference[oaicite:4]{index=4}
+
+          extraConfig = ''
+            # Barre plus “épaisse” + un peu décollée du bord
+            height 32
+            gaps 8 10
+
+            # Status: respiration / alignements
+            status_padding 3
+            status_edge_padding 10
+
+            # Workspaces: rendu plus régulier + scroll circulaire
+            workspace_min_width 36
+            wrap_scroll yes
+
+            # Séparateurs plus stylés que "|"
+            separator_symbol "  "
+
+            # Support multi-écrans (optionnel : commente si inutile)
+            output *
+          '';
         }
       ];
     };
