@@ -13,8 +13,22 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    extraConfig.pipewire-pulse."10-switch-on-connect.conf" = {
+      "pulse.cmd" = [
+        { cmd = "load-module"; args = "module-switch-on-connect"; }
+      ];
+    };
   };
   security.rtkit.enable = true;
+  systemd.services.rfkill-unblock-bluetooth = {
+    description = "Unblock Bluetooth rfkill at boot";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-rfkill.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.util-linux}/bin/rfkill unblock bluetooth";
+    };
+  };
 
   hardware.bluetooth = {
     enable = true;
