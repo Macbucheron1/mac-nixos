@@ -22,6 +22,44 @@ in
 
     settings.vim = {
 
+      keymaps = [
+        # Allow to navigate between line if they overflow 
+        {
+          mode = [ "n" "x" ];
+          key = "j";
+          action = "v:count == 0 ? 'gj' : 'j'";
+          expr = true;
+          silent = true;
+          desc = "Down";
+        }
+        {
+          mode = [ "n" "x" ];
+          key = "<Down>";
+          action = "v:count == 0 ? 'gj' : 'j'";
+          expr = true;
+          silent = true;
+          desc = "Down";
+        }
+        {
+          mode = [ "n" "x" ];
+          key = "k";
+          action = "v:count == 0 ? 'gk' : 'k'";
+          expr = true;
+          silent = true;
+          desc = "Up";
+        }
+        {
+          mode = [ "n" "x" ];
+          key = "<Up>";
+          action = "v:count == 0 ? 'gk' : 'k'";
+          expr = true;
+          silent = true;
+          desc = "Up";
+        }
+
+
+      ];
+
       theme = {
         enable = true;
         name = "gruvbox";
