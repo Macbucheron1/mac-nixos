@@ -1,123 +1,25 @@
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   c = config.lib.stylix.colors;
-  node = pkgs.nodejs;
 
-  # Possible vpn interfaces
+  # VPN interfaces that will be detected
   vpnIfaces = [ "wg0" "tun0" "tailscale0" ];
-  vpnIfacesJs = builtins.toJSON vpnIfaces;
 
-  waybarVpnUp = pkgs.writeScriptBin "waybar-vpn-up" ''
-    #!${node}/bin/node
-    "use strict";
+  scripts = import ./scripts { inherit pkgs lib vpnIfaces; };
 
-    const { execSync } = require("child_process");
-    const VPN = ${vpnIfacesJs};
-
-    function cmdOk(cmd) {
-      try {
-        execSync(cmd, { stdio: "ignore" });
-        return true;
-      } catch (_) {
-        return false;
-      }
+  mkCustomJson = { exec, execIf ? null, interval ? 5 }:
+    {
+      inherit interval;
+      return-type = "json";
+      format = "{}";
+      hide-empty-text = true;
+      tooltip = false;
+      inherit exec;
     }
+    // (if execIf == null then {} else { "exec-if" = execIf; });
 
-    for (const dev of VPN) {
-      if (cmdOk("${pkgs.iproute2}/bin/ip link show " + dev)) {
-        process.exit(0); // VPN up => exec-if OK
-      }
-    }
-    process.exit(1); // VPN down => module caché
-  '';
-
-  waybarVpnIp = pkgs.writeScriptBin "waybar-vpn-ip" ''
-    #!${node}/bin/node
-    "use strict";
-
-    const { execSync } = require("child_process");
-    const VPN = ${vpnIfacesJs};
-
-    function sh(cmd) {
-      return execSync(cmd, { encoding: "utf8" }).trim();
-    }
-
-    function getIfaceIp(dev) {
-      try {
-        const out = sh("${pkgs.iproute2}/bin/ip -4 -o addr show dev " + dev + " scope global");
-        // Exemple: "5: wg0    inet 10.10.0.2/32 brd 10.10.0.2 scope global ..."
-        const m = out.match(/inet\s+(\d+\.\d+\.\d+\.\d+)\//);
-        return m ? m[1] : null;
-      } catch (_) {
-        return null;
-      }
-    }
-
-    for (const dev of VPN) {
-      // If interface exist, get the ip
-      try { execSync("${pkgs.iproute2}/bin/ip link show " + dev, { stdio: "ignore" }); } catch (_) { continue; }
-      const ip = getIfaceIp(dev);
-      if (ip) {
-        process.stdout.write(JSON.stringify({ text: ip }));
-        process.exit(0);
-      }
-      process.exit(0);
-    }
-
-    process.stdout.write(JSON.stringify({ text: "" }));
-  '';
-
-  waybarLanIp = pkgs.writeScriptBin "waybar-lan-ip" ''
-    #!${node}/bin/node
-    "use strict";
-
-    const { execSync } = require("child_process");
-
-    const excluded = new Set(["lo", ...${vpnIfacesJs}]);
-
-    function sh(cmd) {
-      return execSync(cmd, { encoding: "utf8" }).trim();
-    }
-
-    function isPrivateRFC1918(ip) {
-      if (ip.startsWith("10.")) return true;
-      if (ip.startsWith("192.168.")) return true;
-      if (ip.startsWith("172.")) {
-        const parts = ip.split(".");
-        const o2 = parseInt(parts[1], 10);
-        return o2 >= 16 && o2 <= 31;
-      }
-      return false;
-    }
-
-    let out = "";
-    try {
-      out = sh("${pkgs.iproute2}/bin/ip -4 -o addr show scope global");
-    } catch (_) {
-      process.exit(1);
-    }
-
-    const lines = out.split("\n").filter(Boolean);
-
-    for (const line of lines) {
-      // Format: "2: wlp2s0    inet 192.168.1.42/24 brd ..."
-      const m = line.match(/^\d+:\s+(\S+)\s+inet\s+(\d+\.\d+\.\d+\.\d+)\//);
-      if (!m) continue;
-
-      const dev = m[1];
-      const ip = m[2];
-
-      if (excluded.has(dev)) continue;
-      if (!isPrivateRFC1918(ip)) continue;
-
-      process.stdout.write(JSON.stringify({ text: ip }));
-      process.exit(0);
-    }
-
-    process.exit(1);
-  '';
 in
 {
   stylix.targets.waybar = {
@@ -148,23 +50,15 @@ in
           disable-scroll = true;
         };
 
-        "custom/lan" = {
-          exec = "${waybarLanIp}/bin/waybar-lan-ip";
-          return-type = "json";
+        "custom/lan" = mkCustomJson {
+          exec = "${scripts.lanIp}/bin/waybar-lan-ip";
           interval = 5;
-          format = "{}";
-          hide-empty-text = true;
-          tooltip = false;
         };
 
-        "custom/vpn" = {
-          exec-if = "${waybarVpnUp}/bin/waybar-vpn-up";
-          exec = "${waybarVpnIp}/bin/waybar-vpn-ip";
-          return-type = "json";
+        "custom/vpn" = mkCustomJson {
+          execIf = "${scripts.vpnUp}/bin/waybar-vpn-up";
+          exec = "${scripts.vpnIp}/bin/waybar-vpn-ip";
           interval = 5;
-          format = "{}";
-          hide-empty-text = true;
-          tooltip = false;
         };
 
         battery = {
@@ -181,40 +75,115 @@ in
       };
     };
 
+    
     style = ''
       * {
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         min-height: 0;
         font-size: 12px;
       }
 
       window#waybar {
-        background: #${c.base00};
+        background: rgba(0,0,0,0);
         color: #${c.base05};
       }
 
+      /* Conteneur principal */
+      
+      #waybar {
+        background: #${c.base00};
+        border: 1px solid #${c.base02};
+        border-radius: 0px;     /* rectangulaire */
+        margin: 0px;            /* optionnel: plus "barre" */
+        padding: 4px 8px;
+      }
+
+
+      /* Style commun aux "pills" (modules) */
       #custom-lan, #custom-vpn, #battery, #clock {
         background: #${c.base01};
-        padding: 0 10px;
-        margin: 4px 0;
+        padding: 0 12px;
+        margin: 4px 5px;
+        border-radius: 12px;
+        border: 1px solid #${c.base02};
+        color: #${c.base05};
+      }
+
+      /* Accents par module (plus coloré, mais propre) */
+      #custom-lan {
+        border-left: 4px solid #${c.base0D}; /* bleu */
+        background: #${c.base01};
+      }
+
+      #custom-vpn {
+        border-left: 4px solid #${c.base0B}; /* vert */
+        background: #${c.base01};
+      }
+
+      #battery {
+        border-left: 4px solid #${c.base0A}; /* jaune */
+        background: #${c.base01};
+      }
+
+      #clock {
+        border-left: 4px solid #${c.base0E}; /* violet */
+        background: #${c.base01};
+      }
+
+      /* Etats batterie (Waybar applique ces classes automatiquement) */
+      #battery.charging {
+        border-left-color: #${c.base0B};
+        color: #${c.base0B};
+      }
+
+      #battery.warning {
+        border-left-color: #${c.base0A};
+        color: #${c.base0A};
+      }
+
+      #battery.critical {
+        border-left-color: #${c.base08};
+        color: #${c.base08};
+        border-color: #${c.base08};
+      }
+
+      /* Workspaces */
+      #workspaces {
+        background: #${c.base01};
+        border: 1px solid #${c.base02};
+        border-radius: 14px;
+        margin: 4px 6px;
+        padding: 0 6px;
       }
 
       #workspaces button {
         background: transparent;
         color: #${c.base05};
-        padding: 0 8px;
-        margin: 4px 2px;
+        padding: 0 10px;
+        margin: 4px 3px;
         border-radius: 10px;
+        transition: all 120ms ease-in-out;
+      }
+
+      #workspaces button:hover {
+        background: #${c.base02};
+        color: #${c.base07};
       }
 
       #workspaces button.focused {
-        background: #${c.base02};
+        background: #${c.base0D};
+        color: #${c.base00};
       }
 
       #workspaces button.urgent {
         background: #${c.base08};
         color: #${c.base00};
+      }
+
+      /* Optionnel : petit “glow” discret quand un module est affiché */
+      #custom-lan, #custom-vpn, #battery, #clock {
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
       }
     '';
   };
