@@ -62,12 +62,12 @@ in
         "${modifier}+Shift+ccedilla"   = "move container to workspace number 9";
         "${modifier}+Shift+agrave"     = "move container to workspace number 10";
       };
-      # bars = [
-      #   {
-      #     command = "${pkgs.waybar}/bin/waybar";
-      #     position = "bottom";
-      #   }
-      # ];
+      bars = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+          position = "bottom";
+        }
+      ];
     };
     extraConfig = ''
       # No titlebar, keep a 1px border
