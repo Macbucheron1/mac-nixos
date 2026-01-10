@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  c = config.lib.stylix.colors;
+  colors = config.lib.stylix.colors.withHashtag;
 
   # VPN interfaces that will be detected
   vpnIfaces = [ "wg0" "tun0" "tailscale0" ];
@@ -19,6 +19,13 @@ let
       inherit exec;
     }
     // (if execIf == null then {} else { "exec-if" = execIf; });
+
+
+  styleFile = pkgs.replaceVars ./style.css {
+    inherit (colors)
+      base00 base01 base02 base05 base07
+      base08 base0A base0B base0D base0E;
+  };
 
 in
 {
@@ -76,116 +83,7 @@ in
     };
 
     
-    style = ''
-      * {
-        border: none;
-        border-radius: 12px;
-        min-height: 0;
-        font-size: 12px;
-      }
-
-      window#waybar {
-        background: rgba(0,0,0,0);
-        color: #${c.base05};
-      }
-
-      /* Conteneur principal */
-      
-      #waybar {
-        background: #${c.base00};
-        border: 1px solid #${c.base02};
-        border-radius: 0px;     /* rectangulaire */
-        margin: 0px;            /* optionnel: plus "barre" */
-        padding: 4px 8px;
-      }
-
-
-      /* Style commun aux "pills" (modules) */
-      #custom-lan, #custom-vpn, #battery, #clock {
-        background: #${c.base01};
-        padding: 0 12px;
-        margin: 4px 5px;
-        border-radius: 12px;
-        border: 1px solid #${c.base02};
-        color: #${c.base05};
-      }
-
-      /* Accents par module (plus coloré, mais propre) */
-      #custom-lan {
-        border-left: 4px solid #${c.base0D}; /* bleu */
-        background: #${c.base01};
-      }
-
-      #custom-vpn {
-        border-left: 4px solid #${c.base0B}; /* vert */
-        background: #${c.base01};
-      }
-
-      #battery {
-        border-left: 4px solid #${c.base0A}; /* jaune */
-        background: #${c.base01};
-      }
-
-      #clock {
-        border-left: 4px solid #${c.base0E}; /* violet */
-        background: #${c.base01};
-      }
-
-      /* Etats batterie (Waybar applique ces classes automatiquement) */
-      #battery.charging {
-        border-left-color: #${c.base0B};
-        color: #${c.base0B};
-      }
-
-      #battery.warning {
-        border-left-color: #${c.base0A};
-        color: #${c.base0A};
-      }
-
-      #battery.critical {
-        border-left-color: #${c.base08};
-        color: #${c.base08};
-        border-color: #${c.base08};
-      }
-
-      /* Workspaces */
-      #workspaces {
-        background: #${c.base01};
-        border: 1px solid #${c.base02};
-        border-radius: 14px;
-        margin: 4px 6px;
-        padding: 0 6px;
-      }
-
-      #workspaces button {
-        background: transparent;
-        color: #${c.base05};
-        padding: 0 10px;
-        margin: 4px 3px;
-        border-radius: 10px;
-        transition: all 120ms ease-in-out;
-      }
-
-      #workspaces button:hover {
-        background: #${c.base02};
-        color: #${c.base07};
-      }
-
-      #workspaces button.focused {
-        background: #${c.base0D};
-        color: #${c.base00};
-      }
-
-      #workspaces button.urgent {
-        background: #${c.base08};
-        color: #${c.base00};
-      }
-
-      /* Optionnel : petit “glow” discret quand un module est affiché */
-      #custom-lan, #custom-vpn, #battery, #clock {
-        box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
-      }
-    '';
+    style = builtins.readFile styleFile;
   };
 }
 

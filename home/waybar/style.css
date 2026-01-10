@@ -1,0 +1,76 @@
+* {
+  border: none;
+  border-radius: 12px;
+  min-height: 0;
+  font-size: 12px;
+}
+
+window#waybar {
+  background: rgba(0,0,0,0);
+  color: @base05@;
+  border-radius: 0px;
+}
+
+/* Barre rectangulaire */
+#waybar {
+  background: @base00@;
+  border: 1px solid @base02@;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 4px 8px;
+}
+
+/* Modules (arrondis) */
+#custom-lan, #custom-vpn, #battery, #clock {
+  background: @base01@;
+  padding: 0 12px;
+  margin: 4px 5px;
+  border-radius: 12px;
+  border: 1px solid @base02@;
+  color: @base05@;
+}
+
+#custom-lan { border-left: 4px solid @base0D@; }
+#custom-vpn { border-left: 4px solid @base0B@; }
+#battery    { border-left: 4px solid @base0A@; }
+#clock      { border-left: 4px solid @base0E@; }
+
+#battery.charging { border-left-color: @base0B@; color: @base0B@; }
+#battery.warning  { border-left-color: @base0A@; color: @base0A@; }
+#battery.critical {
+  border-left-color: @base08@;
+  color: @base08@;
+  border-color: @base08@;
+}
+
+#workspaces {
+  background: @base01@;
+  border: 1px solid @base02@;
+  border-radius: 14px;
+  margin: 4px 6px;
+  padding: 0 6px;
+}
+
+#workspaces button {
+  background: transparent;
+  color: @base05@;
+  padding: 0 10px;
+  margin: 4px 3px;
+  border-radius: 10px;
+}
+
+#workspaces button:hover {
+  background: @base02@;
+  color: @base07@;
+}
+
+#workspaces button.focused {
+  background: @base0D@;
+  color: @base00@;
+}
+
+#workspaces button.urgent {
+  background: @base08@;
+  color: @base00@;
+}
+
