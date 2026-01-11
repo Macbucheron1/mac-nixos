@@ -17,3 +17,4 @@
 # Things i need to fix
 
 - mini.move in neovim
+- animation on copy for ip in waybar
