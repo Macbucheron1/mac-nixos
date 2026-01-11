@@ -23,7 +23,7 @@ let
 
   styleFile = pkgs.replaceVars ./style.css {
     inherit (colors)
-      base00 base01 base02 base05 base07
+      base00 base01 base05 base07
       base08 base0A base0B base0D base0E ;
   };
 
