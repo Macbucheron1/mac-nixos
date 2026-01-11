@@ -17,6 +17,7 @@
     ripgrep
     pciutils
     eza
+    wget
     
     # Photo capture & Video capture
     grim

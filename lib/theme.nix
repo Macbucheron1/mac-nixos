@@ -6,7 +6,7 @@
 
     # Gruvbox theme
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-    image = ./../wallpapers/gruvbox_linux.png;
+    image = ./../wallpapers/gruvbox/skull.jpg;
 
     # Catppuccin theme
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
