@@ -24,7 +24,7 @@ let
   styleFile = pkgs.replaceVars ./style.css {
     inherit (colors)
       base00 base01 base02 base05 base07
-      base08 base0A base0B base0D base0E;
+      base08 base0A base0B base0D base0E ;
   };
 
 in
@@ -57,27 +57,79 @@ in
           disable-scroll = true;
         };
 
-        "custom/lan" = mkCustomJson {
-          exec = "${scripts.lanIp}/bin/waybar-lan-ip";
-          interval = 5;
-        };
 
-        "custom/vpn" = mkCustomJson {
-          execIf = "${scripts.vpnUp}/bin/waybar-vpn-up";
-          exec = "${scripts.vpnIp}/bin/waybar-vpn-ip";
-          interval = 5;
-        };
+      "custom/lan" = (mkCustomJson {
+        exec = "${scripts.lanIp}/bin/waybar-lan-ip";
+        interval = 5;
+      }) // {
+        signal = 8;
+        on-click = ''
+          sh -c '
+            json="$(${scripts.lanIp}/bin/waybar-lan-ip 2>/dev/null || true)"
+            ip="$(printf "%s" "$json" | ${pkgs.jq}/bin/jq -r ".text")"
+            [ -n "$ip" ] || exit 0
+
+            printf "%s" "$ip" | ${pkgs.wl-clipboard}/bin/wl-copy --trim-newline
+
+            rt="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+            flag="$rt/waybar-lan-copied"
+            date +%s%3N > "$flag"
+            pkill -RTMIN+8 waybar
+
+            ( sleep 0.2; rm -f "$flag"; pkill -RTMIN+8 waybar ) >/dev/null 2>&1 &
+          '
+        '';
+        format = "<span>󰈀 </span> {}";
+      };
+
+      "custom/vpn" = (mkCustomJson {
+        execIf = "${scripts.vpnUp}/bin/waybar-vpn-up";
+        exec = "${scripts.vpnIp}/bin/waybar-vpn-ip";
+        interval = 5;
+      }) // {
+        signal = 9;
+        on-click = ''
+          sh -c '
+            json="$(${scripts.vpnIp}/bin/waybar-vpn-ip 2>/dev/null || true)"
+            ip="$(printf "%s" "$json" | ${pkgs.jq}/bin/jq -r ".text")"
+            [ -n "$ip" ] || exit 0
+
+            printf "%s" "$ip" | ${pkgs.wl-clipboard}/bin/wl-copy --trim-newline
+
+            rt="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+            flag="$rt/waybar-vpn-copied"
+            date +%s%3N > "$flag"
+            pkill -RTMIN+9 waybar
+
+            ( sleep 0.2; rm -f "$flag"; pkill -RTMIN+9 waybar ) >/dev/null 2>&1 &
+          '
+        '';
+        format = "<span>󰖂 </span> {}"; 
+      };
+
+
+
 
         battery = {
-          format = "{capacity}%";
           interval = 10;
           tooltip = false;
+
+          format = "<span>{icon} </span> {capacity}%";
+
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+
+          # Ordre: low -> high
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
         };
 
+
         clock = {
-          format = "{:%d/%m %H:%M}";
           interval = 60;
           tooltip = false;
+          format = "<span>󰥔 </span> {:%d/%m/%Y %H:%M}";
         };
       };
     };

@@ -1,76 +1,164 @@
+
+/* ============================
+   GLOBAL
+============================ */
 * {
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-size: 14px;
   border: none;
-  border-radius: 12px;
   min-height: 0;
-  font-size: 12px;
 }
 
 window#waybar {
-  background: rgba(0,0,0,0);
+  background: transparent;
   color: @base05@;
-  border-radius: 0px;
 }
 
-/* Barre rectangulaire */
+/* ============================
+   BAR CONTAINER (RECTANGULAR)
+============================ */
 #waybar {
-  background: @base00@;
-  border: 1px solid @base02@;
+  background: alpha(@base00@, 0.90);
+  border-top: 2px solid alpha(@base02@, 0.9);
   border-radius: 0px;
   margin: 0px;
-  padding: 4px 8px;
+  padding: 6px 10px;
 }
 
-/* Modules (arrondis) */
+/* ============================
+   COMMON "PILL" BASE
+============================ */
+#workspaces,
 #custom-lan, #custom-vpn, #battery, #clock {
-  background: @base01@;
-  padding: 0 12px;
-  margin: 4px 5px;
-  border-radius: 12px;
-  border: 1px solid @base02@;
-  color: @base05@;
-}
-
-#custom-lan { border-left: 4px solid @base0D@; }
-#custom-vpn { border-left: 4px solid @base0B@; }
-#battery    { border-left: 4px solid @base0A@; }
-#clock      { border-left: 4px solid @base0E@; }
-
-#battery.charging { border-left-color: @base0B@; color: @base0B@; }
-#battery.warning  { border-left-color: @base0A@; color: @base0A@; }
-#battery.critical {
-  border-left-color: @base08@;
-  color: @base08@;
-  border-color: @base08@;
-}
-
-#workspaces {
-  background: @base01@;
-  border: 1px solid @base02@;
   border-radius: 14px;
-  margin: 4px 6px;
-  padding: 0 6px;
+  margin: 3px 6px;
+  padding: 0 12px;
+
+  background: alpha(@base01@, 0.94);
+  border: 1px solid alpha(@base02@, 0.85);
+
+  box-shadow: 0 10px 26px alpha(@base00@, 0.35);
+}
+
+/* ============================
+   CLICK-TO-COPY FEEDBACK
+   (Waybar adds .copied via script)
+============================ */
+#custom-lan, #custom-vpn {
+  transition: background 120ms ease-in-out, box-shadow 120ms ease-in-out, border-color 120ms ease-in-out, color 120ms ease-in-out;
+}
+
+/* Stronger flash: solid tinted background + glow */
+#custom-lan.copied {
+  background: alpha(@base0D@, 0.35);
+  border-color: alpha(@base0D@, 0.95);
+  box-shadow:
+    0 0 0 2px alpha(@base0D@, 0.35),
+    0 18px 40px alpha(@base00@, 0.55);
+  color: @base07@;
+}
+
+#custom-vpn.copied {
+  background: alpha(@base0B@, 0.35);
+  border-color: alpha(@base0B@, 0.95);
+  box-shadow:
+    0 0 0 2px alpha(@base0B@, 0.35),
+    0 18px 40px alpha(@base00@, 0.55);
+  color: @base07@;
+}
+
+/* Optional: make icons pop more during "copied" */
+#custom-lan.copied span, #custom-vpn.copied span {
+  text-shadow: 0 0 12px alpha(@base07@, 0.35);
+}
+
+/* ============================
+   WORKSPACES (COLORFUL)
+============================ */
+#workspaces {
+  background: alpha(@base01@, 0.92);
 }
 
 #workspaces button {
   background: transparent;
-  color: @base05@;
-  padding: 0 10px;
+  color: alpha(@base05@, 0.88);
+
   margin: 4px 3px;
-  border-radius: 10px;
+  padding: 0 10px;
+  border-radius: 12px;
+
+  border: 1px solid transparent;
+  transition: 120ms ease-in-out;
 }
 
 #workspaces button:hover {
-  background: @base02@;
+  background: alpha(@base02@, 0.85);
   color: @base07@;
 }
 
 #workspaces button.focused {
   background: @base0D@;
   color: @base00@;
+  border-color: alpha(@base07@, 0.16);
+  box-shadow: 0 10px 22px alpha(@base0D@, 0.30);
 }
 
 #workspaces button.urgent {
   background: @base08@;
   color: @base00@;
+  box-shadow: 0 10px 22px alpha(@base08@, 0.28);
+}
+
+/* ============================
+   MODULES (COLORFUL, NO GRADIENT)
+============================ */
+
+/* LAN: blue */
+#custom-lan {
+  color: @base07@;
+  border-left: 4px solid @base0D@;
+}
+
+/* VPN: green */
+#custom-vpn {
+  color: @base07@;
+  border-left: 4px solid @base0B@;
+}
+
+/* BATTERY: yellow */
+#battery {
+  color: @base07@;
+  border-left: 4px solid @base0A@;
+}
+
+/* Battery states: keep solid background, but tint more */
+#battery.charging {
+  border-left-color: @base0B@;
+  background: alpha(@base0B@, 0.22);
+}
+
+#battery.warning {
+  border-left-color: @base0A@;
+  background: alpha(@base0A@, 0.22);
+}
+
+#battery.critical {
+  border-left-color: @base08@;
+  border-color: alpha(@base08@, 0.85);
+  background: alpha(@base08@, 0.25);
+}
+
+/* CLOCK: purple */
+#clock {
+  color: @base07@;
+  border-left: 4px solid @base0E@;
+}
+
+/* Optional: subtle icon depth */
+#custom-lan span,
+#custom-vpn span,
+#battery span,
+#clock span {
+  text-shadow: 0 1px 0 alpha(@base00@, 0.45);
 }
 

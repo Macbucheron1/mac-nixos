@@ -21,7 +21,19 @@ ip4="$(
 )"
 
 if [ -n "${ip4:-}" ] && [ "${ip4:-null}" != "null" ]; then
-  printf '{"text":"%s"}' "$ip4"
+  rt="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+  flag="$rt/waybar-lan-copied"
+
+  cls=""
+  if [ -f "$flag" ]; then
+    now="$(date +%s%3N)"
+    ts="$(cat "$flag" 2>/dev/null || echo 0)"
+    if [ $((now - ts)) -lt 900 ]; then
+      cls="copied"
+    fi
+  fi
+
+  printf '{"text":"%s","class":"%s"}' "$ip4" "$cls"
   exit 0
 fi
 
