@@ -53,6 +53,6 @@
     ./mako
     ./virtmanager
     ./waybar
-  ./atuin
+    ./atuin
   ];
 }
