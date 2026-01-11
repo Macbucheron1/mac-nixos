@@ -10,13 +10,13 @@
   home.packages = with pkgs; [
     # Usefull cli
     file
-    tree
     nitch
     wl-clipboard
     libnotify
     brightnessctl
     ripgrep
     pciutils
+    eza
     
     # Photo capture & Video capture
     grim

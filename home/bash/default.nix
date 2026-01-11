@@ -44,14 +44,20 @@
       _c_user="$(_sx_fg "$_sx_user")"
       _c_path="$(_sx_fg "$_sx_path")"
 
-    export PS1="\n''${_c_icon} ''${_sx_reset} ''${_sx_bold}''${_c_user}\u ''${_c_path}\w''${_sx_reset} ''${_sx_bold}\$''${_sx_reset} "
+      export PS1="\n''${_c_icon} ''${_sx_reset} ''${_sx_bold}''${_c_user}\u ''${_c_path}\w''${_sx_reset} ''${_sx_bold}\$''${_sx_reset} "
     '';
 
     initExtra = ''
       nitch
     '';
 
-    shellAliases = { c = "clear"; };
+    shellAliases = { 
+      c = "clear"; 
+      l = "eza -lah --git --icons=always"; 
+      ll = "eza -lah --git --icons=always";
+      ls = "eza -G --icons";
+      tree = "eza -T --icons";
+    };
   };
 }
 
