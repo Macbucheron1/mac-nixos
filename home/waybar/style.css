@@ -1,0 +1,143 @@
+
+/* Reset styles and base font */
+* {
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  border-radius: 0;
+  border: none;
+  text-shadow: none;
+  transition: none;
+  box-shadow: none;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-size: 14px;
+}
+
+/* Top-level Waybar window uses no background so group backgrounds show through */
+window#waybar {
+  color: @base05@;
+  background: none;
+}
+
+/* Group containers adopt a dark background and padding */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 4pt;
+  background: @base00@;
+}
+
+/* Workspaces styling */
+#workspaces button {
+  /* neutral state */
+  color: @base07@;
+  background: @base00@;
+  border: 2pt solid @base07@;
+  margin-right: 3pt;
+  min-width: 18pt;
+  padding: 0 5pt;
+}
+
+/* Remove right margin on last workspace to align properly */
+#workspaces button:last-child {
+  margin-right: 0;
+}
+
+/* Hover state for workspaces */
+#workspaces button:hover {
+  color: @base0E@;
+  border-color: @base0E@;
+}
+
+/* Active/visible workspace highlighted in green */
+#workspaces button.focused,
+#workspaces button.active,
+#workspaces button.visible {
+  color: @base00@;
+  background: @base0B@;
+  border-color: @base0B@;
+}
+
+/* Urgent workspace highlighted in red */
+#workspaces button.urgent {
+  color: @base00@;
+  background: @base08@;
+  border-color: @base08@;
+}
+
+/* Base styling for modules */
+#custom-lan,
+#custom-vpn,
+#battery,
+#clock {
+  background: @base01@;
+  padding: 0 6pt;
+  margin-right: 6pt;
+  border: 2pt solid transparent;
+}
+
+/* LAN module: blue border and text */
+#custom-lan {
+  border-color: @base0D@;
+  color: @base0D@;
+}
+
+/* VPN module: green border and text */
+#custom-vpn {
+  border-color: @base0B@;
+  color: @base0B@;
+}
+
+/* Battery module: yellow border and text */
+#battery {
+  border-color: @base0A@;
+  color: @base0A@;
+}
+
+/* Clock module: purple border and text; remove right margin */
+#clock {
+  border-color: @base0E@;
+  color: @base0E@;
+  margin-right: 0;
+}
+
+/* Battery charge states override colours and lightly tint the background */
+#battery.charging {
+  border-color: @base0B@;
+  color: @base0B@;
+  background: alpha(@base0B@, 0.15);
+}
+
+#battery.warning {
+  border-color: @base0A@;
+  color: @base0A@;
+  background: alpha(@base0A@, 0.15);
+}
+
+#battery.critical {
+  border-color: @base08@;
+  color: @base08@;
+  background: alpha(@base08@, 0.15);
+}
+
+/* Click-to-copy feedback: tint the module and invert text to make action visible */
+#custom-lan.copied {
+  background: alpha(@base0D@, 0.35);
+  border-color: @base0D@;
+  color: @base07@;
+}
+
+#custom-vpn.copied {
+  background: alpha(@base0B@, 0.35);
+  border-color: @base0B@;
+  color: @base07@;
+}
+
+/* Subtle shadow under icons */
+#custom-lan span,
+#custom-vpn span,
+#battery span,
+#clock span {
+  text-shadow: 0 1px 0 alpha(@base00@, 0.45);
+}
+

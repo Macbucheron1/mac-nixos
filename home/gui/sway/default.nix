@@ -64,17 +64,8 @@ in
       };
       bars = [
         {
-          fonts = {
-            names = [ "DejaVu Sans Mono" ];
-            size = 14.0;
-          };
-
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-
+          command = "${pkgs.waybar}/bin/waybar";
           position = "bottom";
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          trayOutput = "primary";
         }
       ];
     };

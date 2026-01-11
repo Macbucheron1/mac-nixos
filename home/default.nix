@@ -52,5 +52,6 @@
     ./vesktop
     ./mako
     ./virtmanager
+    ./waybar
   ];
 }
