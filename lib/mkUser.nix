@@ -3,14 +3,15 @@
   home-manager,
   stylix,
   firefox-addons,
-  nvf
+  nvf,
+  overlays
 }: {
   username,
   system,
   homeManagerStateVersion,
   gui,
 }: let
-  pkgs = nixpkgs.legacyPackages.${system};
+  pkgs = import nixpkgs { inherit system overlays; };
 in
   home-manager.lib.homeManagerConfiguration {
     inherit pkgs;

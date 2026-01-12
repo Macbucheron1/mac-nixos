@@ -42,8 +42,14 @@
   }: let
     system = "x86_64-linux";
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs home-manager stylix firefox-addons nvf;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs home-manager stylix firefox-addons nvf;};
+    overlays = [
+        (final: prev: {
+          toto = prev.neofetch;
+        })
+    ];
+
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};
 
     username = "mac";
     homeManagerStateVersion = "26.05";
