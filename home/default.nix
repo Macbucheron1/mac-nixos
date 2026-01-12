@@ -1,4 +1,7 @@
 { pkgs, username, homeManagerStateVersion, ... }:
+let
+  myCustomPkgs = import ../pkgs { inherit pkgs; };
+in
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -7,7 +10,7 @@
 
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     # Usefull cli
     file
     nitch
@@ -24,7 +27,9 @@
     slurp
     obsidian
     toto
-  ];
+  ]) ++ (with myCustomPkgs; [
+    exegol
+  ]);
 
   stylix.targets.nvf.enable = false;
 
