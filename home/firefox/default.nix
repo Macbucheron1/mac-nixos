@@ -91,7 +91,7 @@
             bookmarks = [
               {
                 name = "ChatGPT";
-                url = "https://chatgpt.com/?model=gpt-5-instant";
+                url = "https://chatgpt.com";
               }
               {
                 name = "Github";

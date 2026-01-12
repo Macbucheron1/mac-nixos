@@ -12,4 +12,3 @@
 
 - mini.move in neovim
 - animation on copy for ip in waybar
-- waybar needsto take the max width

@@ -16,7 +16,7 @@
 /* Top-level Waybar window uses no background so group backgrounds show through */
 window#waybar {
   color: @base05@;
-  background: none;
+  background: @base00@;
 }
 
 /* Group containers adopt a dark background and padding */
