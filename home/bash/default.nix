@@ -45,6 +45,28 @@
       _c_path="$(_sx_fg "$_sx_path")"
 
       export PS1="\n''${_c_icon} ''${_sx_reset} ''${_sx_bold}''${_c_user}\u ''${_c_path}\w''${_sx_reset} ''${_sx_bold}\$''${_sx_reset} "
+
+    ''
+    + ''
+      # --- ns(): nix shell avec paramètres ---
+      ns() {
+        if [ $# -eq 0 ]; then
+          echo "Usage: ns <pkg> [pkg...] [-- <nix shell args, e.g. -c cmd ...>]" >&2
+          return 2
+        fi
+
+        local installables=()
+        while [ $# -gt 0 ] && [ "$1" != "--" ]; do
+          installables+=("nixpkgs#$1")
+          shift
+        done
+
+        if [ "''${1:-}" = "--" ]; then
+          shift
+        fi
+
+        nix shell "''${installables[@]}" "$@"
+      }
     '';
 
     initExtra = ''
