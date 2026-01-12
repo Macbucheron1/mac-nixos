@@ -3,7 +3,7 @@
   home-manager,
   stylix,
   firefox-addons,
-  nvf,
+  nvf
 }: {
   username,
   system,

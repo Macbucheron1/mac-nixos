@@ -47,7 +47,7 @@
   	  };
     };
   };
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "amdgpu" "nvidia"];
 
   powerManagement.enable = true;  # recommandé sur laptop
   services.upower.enable = true;  # batterie/AC state

@@ -23,6 +23,11 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nsearch = {
+      url = "github:niksingh710/nsearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -32,6 +37,7 @@
     stylix,
     firefox-addons,
     nvf,
+    nsearch,
     ...
   }: let
     system = "x86_64-linux";
