@@ -12,3 +12,4 @@
 
 - mini.move in neovim
 - animation on copy for ip in waybar
+- historic only when ctrl+r not when up

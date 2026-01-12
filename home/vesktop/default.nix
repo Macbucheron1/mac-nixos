@@ -1,10 +1,7 @@
 
 { config, ... }:
 let
-  # Couleurs Stylix au format "#RRGGBB"
   c = config.lib.stylix.colors.withHashtag;
-
-  # Police monospace Stylix (optionnel, mais cohérent avec system24)
   mono = config.stylix.fonts.monospace.name;
 in
 {
@@ -13,13 +10,16 @@ in
     enable = true;
 
     vencord = {
-      # Active le moteur de thème Vencord + sélectionne le thème
+      # Activate the theme
       settings = {
         useQuickCss = true;
         enabledThemes = [ "system24-stylix.theme.css" ];
+        plugins = {
+          ClientTheme.enabled = true;
+        };
       };
 
-      # Dépose un fichier dans le dossier "themes" de Vencord
+      # Create the theme file
       themes."system24-stylix.theme.css" = ''
         /**
          * @name system24 (Stylix)
@@ -27,12 +27,8 @@ in
          * @author refact0r + Nix/Stylix glue
          */
 
-        /* Charge le CSS upstream */
         @import url("https://refact0r.github.io/system24/build/system24.css");
 
-        /* ===== Options system24 =====
-           (reprend le principe “on/off” et quelques valeurs texte)
-        */
         body {
           --font: "${mono}";
           --code-font: "${mono}";
@@ -46,9 +42,6 @@ in
           --label-font-weight: 500;
         }
 
-        /* ===== Couleurs: UNIQUEMENT Stylix =====
-           Mapping base16 -> variables attendues par system24.
-        */
         :root {
           --colors: on;
 
@@ -107,7 +100,6 @@ in
           --border-hover: var(--accent-2);
           --button-border: color-mix(in srgb, var(--text-1), transparent 90%);
 
-          /* (optionnel) variables “-2” si certains bouts de CSS les utilisent */
           --red-2:    ${c.base08};
           --green-2:  ${c.base0B};
           --yellow-2: ${c.base0A};
