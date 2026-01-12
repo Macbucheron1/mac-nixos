@@ -5,7 +5,6 @@
 - sops nix
 - agenix
 - treesiter text object (demander a tom)
-- cachix pour nvf etc
 - workspace name & positon
 
 # Things i need to rice

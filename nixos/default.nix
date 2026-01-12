@@ -88,6 +88,7 @@
     ./docker
     ./virtualbox
     ./virtmanager
+    ./cachix
   ];
 
   system.stateVersion = "25.05";
