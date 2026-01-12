@@ -42,11 +42,7 @@
   }: let
     system = "x86_64-linux";
 
-    overlays = [
-        (final: prev: {
-          toto = prev.neofetch;
-        })
-    ];
+    overlays = import ./overlays { };
 
     mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};
     mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};

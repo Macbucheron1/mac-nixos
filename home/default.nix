@@ -23,6 +23,7 @@
     grim
     slurp
     obsidian
+    toto
   ];
 
   stylix.targets.nvf.enable = false;

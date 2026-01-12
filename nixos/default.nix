@@ -18,23 +18,18 @@
 
     pulse.enable = true;
 
-    # Auto-switch du sink à la connexion (via pipewire-pulse)
+    # vibe coded fix for airpods autoconnect 
     extraConfig.pipewire-pulse."10-switch-on-connect.conf" = {
       "pulse.cmd" = [
         { cmd = "load-module"; args = "module-switch-on-connect"; }
       ];
     };
-
-    # WirePlumber: règles Bluetooth
     wireplumber.extraConfig = {
-      # 1) Ne PAS auto-basculer en profil "headset" (HSP/HFP) dès qu'une app touche au micro
       "11-bluetooth-policy.conf" = {
         "wireplumber.settings" = {
           "bluetooth.autoswitch-to-headset-profile" = false;
         };
       };
-
-      # 2) Forcer A2DP comme profil initial + auto-connect A2DP pour tes AirPods (MAC: 34:0E:22:96:86:69)
       "12-airpods-a2dp.conf" = {
         "monitor.bluez.rules" = [
           {
@@ -43,13 +38,8 @@
             ];
             actions = {
               update-props = {
-                # profil initial quand le device se connecte
                 "device.profile" = "a2dp-sink";
-
-                # auto-connect prioritaire (tu peux garder uniquement a2dp_sink)
                 "bluez5.auto-connect" = [ "a2dp_sink" ];
-
-                # optionnel: hw volume sur A2DP
                 "bluez5.hw-volume" = [ "a2dp_sink" ];
               };
             };
@@ -58,8 +48,8 @@
       };
     };
   };
+  # ---------------------
 
-  # Realtime scheduling (recommandé pour PipeWire)
   security.rtkit.enable = true;
 
   # Bluetooth
@@ -68,7 +58,6 @@
     powerOnBoot = true;
   };
 
-  # Optionnel: unblock rfkill bluetooth au boot (tu l'avais déjà, je le laisse)
   systemd.services.rfkill-unblock-bluetooth = {
     description = "Unblock Bluetooth rfkill at boot";
     wantedBy = [ "multi-user.target" ];
