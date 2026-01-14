@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   # Change the cursor into a barre for insert mode / bloc in normal mode
   programs.readline = {
@@ -48,15 +48,15 @@
     '';
 
     initExtra = ''
-      nitch
+      ${pkgs.nitch}/bin/nitch
     '';
 
     shellAliases = { 
       c = "clear"; 
-      l = "eza -lah --git --icons=always"; 
-      ll = "eza -lah --git --icons=always";
-      ls = "eza -G --icons";
-      tree = "eza -T --icons";
+      l = "${pkgs.eza}/bin/eza -lah --git --icons=always"; 
+      ll = "${pkgs.eza}/bin/eza -lah --git --icons=always";
+      ls = "${pkgs.eza}/bin/eza -G --icons";
+      tree = "${pkgs.eza}/bin/eza -T --icons";
     };
   };
 }

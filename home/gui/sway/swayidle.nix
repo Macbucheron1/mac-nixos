@@ -19,13 +19,13 @@ let
 
       PIX="5%"
 
-      grim -t ppm "$src"
+      ${pkgs.grim} -t ppm "$src"
 
       convert "$src" \
         -filter point -resize "$PIX" -resize 1000% \
         "$pix"
 
-      exec swaylock --daemonize -i "$pix"
+      exec ${pkgs.swaylock}/bin/swaylock --daemonize -i "$pix"
     '';
   };
 

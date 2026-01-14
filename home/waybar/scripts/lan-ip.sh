@@ -2,15 +2,19 @@ set -euo pipefail
 export PATH="@PATH@"
 
 EXCLUDED='@EXCLUDED_JSON@'
+WHITELIST='["enp4s0","wlo1"]'
 
 ip4="$(
   ip -j -4 addr show scope global \
-  | jq -r --argjson ex "$EXCLUDED" '
-      .[]
-      | select(.ifname as $n | ($ex | index($n) | not))
-      | .addr_info[]?
-      | select(.family=="inet")
-      | .local
+  | jq -r --argjson ex "$EXCLUDED" --argjson wl "$WHITELIST" '
+      [ .[]
+        | select(.ifname as $n | ($ex | index($n) | not))
+        | select(.ifname as $n | ($wl | index($n)) != null)
+        | { ifname, addr: ( .addr_info[]? | select(.family=="inet") | .local ) }
+      ]
+      | sort_by(.ifname as $n | ($wl | index($n)))
+      | .[]
+      | .addr
       | select(
           test("^10\\.")
           or test("^192\\.168\\.")
@@ -38,3 +42,4 @@ if [ -n "${ip4:-}" ] && [ "${ip4:-null}" != "null" ]; then
 fi
 
 exit 1
+

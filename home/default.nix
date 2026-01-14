@@ -26,7 +26,6 @@ in
     grim
     slurp
     obsidian
-    toto
   ]) ++ (with myCustomPkgs; [
     exegol
   ]);

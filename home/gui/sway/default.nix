@@ -21,19 +21,19 @@ in
         "${modifier}+p" = "exec rofi -show drun"; 
 
         # Screenshot
-        "Print" = "exec grim -g \"$(slurp)\" - | wl-copy";
+        "Print" = "exec ${pkgs.grim} -g \"$(slurp)\" - | wl-copy";
 
         # Audio settings
-        "XF86AudioMute" = "exec bash ${volumeScript} mute";
-        "XF86AudioRaiseVolume" = "exec bash ${volumeScript} up";
-        "XF86AudioLowerVolume" = "exec bash ${volumeScript} down";
+        "XF86AudioMute" = "exec ${pkgs.bash}/bin/bash ${volumeScript} mute";
+        "XF86AudioRaiseVolume" = "exec ${pkgs.bash}/bin/bash ${volumeScript} up";
+        "XF86AudioLowerVolume" = "exec ${pkgs.bash}/bin/bash ${volumeScript} down";
 
         # Brightness settings
-        "XF86MonBrightnessDown" = "exec bash ${brightScript} down";
-        "XF86MonBrightnessUp" = "exec bash ${brightScript} up";
+        "XF86MonBrightnessDown" = "exec ${pkgs.bash}/bin/bash ${brightScript} down";
+        "XF86MonBrightnessUp" = "exec ${pkgs.bash}/bin/bash ${brightScript} up";
 
         # Mic Settings 
-        "XF86AudioMicMute" = "exec bash ${micScript}";
+        "XF86AudioMicMute" = "exec ${pkgs.bash}/bin/bash ${micScript}";
 
         # Lock
         "${modifier}+Shift+l" = "exec ${config.home.profileDirectory}/bin/lockscreen";
