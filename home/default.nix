@@ -23,7 +23,6 @@ in
     wget
     
     # Photo capture & Video capture
-    grim
     slurp
     obsidian
   ]) ++ (with myCustomPkgs; [

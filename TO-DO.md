@@ -13,4 +13,3 @@
 
 # Things i need to fix
 
-- fix ip in waybar to whitelist interface

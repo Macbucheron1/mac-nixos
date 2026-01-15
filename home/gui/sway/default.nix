@@ -21,7 +21,7 @@ in
         "${modifier}+p" = "exec rofi -show drun"; 
 
         # Screenshot
-        "Print" = "exec ${pkgs.grim} -g \"$(slurp)\" - | wl-copy";
+        "Print" = "exec ${pkgs.grim} -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
 
         # Audio settings
         "XF86AudioMute" = "exec ${pkgs.bash}/bin/bash ${volumeScript} mute";
