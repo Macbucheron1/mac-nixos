@@ -57,5 +57,6 @@ in
     ./virtmanager
     ./waybar
     ./fzf
+    ./avizo
   ];
 }

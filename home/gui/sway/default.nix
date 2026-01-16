@@ -1,9 +1,4 @@
 { pkgs, lib, config, ... }:
-let 
-  volumeScript = ./script/volume-notify.sh;
-  brightScript = ./script/brightness-notify.sh;
-  micScript = ./script/mic-toggle.sh;
-in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -18,22 +13,22 @@ in
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
         # Launcher
-        "${modifier}+p" = "exec rofi -show drun"; 
+        "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -show drun";
 
         # Screenshot
         "Print" = "exec ${pkgs.grim} -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
 
         # Audio settings
-        "XF86AudioMute" = "exec ${pkgs.bash}/bin/bash ${volumeScript} mute";
-        "XF86AudioRaiseVolume" = "exec ${pkgs.bash}/bin/bash ${volumeScript} up";
-        "XF86AudioLowerVolume" = "exec ${pkgs.bash}/bin/bash ${volumeScript} down";
+        "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
+        "XF86AudioRaiseVolume" = "exec ${pkgs.avizo}/bin/volumectl up";
+        "XF86AudioLowerVolume" = "exec ${pkgs.avizo}/bin/volumectl down";
 
         # Brightness settings
-        "XF86MonBrightnessDown" = "exec ${pkgs.bash}/bin/bash ${brightScript} down";
-        "XF86MonBrightnessUp" = "exec ${pkgs.bash}/bin/bash ${brightScript} up";
+        "XF86MonBrightnessDown" = "exec ${pkgs.avizo}/bin/lightctl down";
+        "XF86MonBrightnessUp" = "exec ${pkgs.avizo}/bin/lightctl up";
 
         # Mic Settings 
-        "XF86AudioMicMute" = "exec ${pkgs.bash}/bin/bash ${micScript}";
+        "XF86AudioMicMute" = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
 
         # Lock
         "${modifier}+Shift+l" = "exec ${config.home.profileDirectory}/bin/lockscreen";
@@ -70,7 +65,6 @@ in
       ];
     };
     extraConfig = ''
-      # No titlebar, keep a 1px border
       default_border pixel 1
       default_floating_border pixel 1
     '';
