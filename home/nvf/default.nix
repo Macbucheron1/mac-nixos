@@ -63,7 +63,23 @@ in
           desc = "Up";
         }
 
+        # H -> beginning of line
+        {
+          mode = [ "n" "x" ];
+          key = "H";
+          action = "^";
+          silent = true;
+          desc = "Begin of line";
+        }
 
+        # L -> end of line
+        {
+          mode = [ "n" "x" ];
+          key = "L";
+          action = "$";
+          silent = true;
+          desc = "End of line";
+        }
       ];
 
       theme = {

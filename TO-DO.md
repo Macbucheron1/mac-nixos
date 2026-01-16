@@ -6,10 +6,10 @@
 - agenix
 - treesiter text object (demander a tom)
 - workspace name & positon
-- binding 0 -> H & $ -> L
 
 # Things i need to rice
 
 
 # Things i need to fix
 
+- use the stylix color on firefox
