@@ -21,6 +21,7 @@ in
     pciutils
     eza
     wget
+    nur.repos.hexadecimalDinosaur.fzf-tab-completion
     
     # Photo capture & Video capture
     slurp

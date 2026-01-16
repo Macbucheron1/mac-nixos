@@ -2,6 +2,7 @@
   nixpkgs,
   home-manager,
   stylix,
+  nur,
   firefox-addons,
   nvf,
   overlays
@@ -30,9 +31,10 @@ in
       ../lib/theme.nix
 
       home-manager.nixosModules.home-manager
+      nur.modules.nixos.default
 
       ({...}: {
-        nixpkgs.overlays = overlays;
+        nixpkgs.overlays = overlays ++ [ nur.overlays.default ];
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 

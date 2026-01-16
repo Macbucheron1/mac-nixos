@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nsearch = {
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +42,7 @@
     stylix,
     firefox-addons,
     nvf,
+    nur,
     nsearch,
     ...
   }: let
@@ -44,8 +50,8 @@
 
     overlays = import ./overlays { };
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager stylix firefox-addons nvf;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
 
     username = "mac";
     homeManagerStateVersion = "26.05";
