@@ -48,7 +48,7 @@
   }: let
     system = "x86_64-linux";
 
-    overlays = import ./overlays { };
+    overlays = import ./overlays { inherit nsearch; };
 
     mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
     mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
