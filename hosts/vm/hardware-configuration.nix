@@ -14,12 +14,9 @@
     "sd_mod"
   ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-
-  swapDevices = [ ];
+  # IMPORTANT: avec disko, pas de fileSystems ici
+  # IMPORTANT: avec disko, pas de swapDevices ici
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
+

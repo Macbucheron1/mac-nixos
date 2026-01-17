@@ -5,6 +5,7 @@
   nur,
   firefox-addons,
   nvf,
+  disko,
   overlays
 }: {
   username,
@@ -12,6 +13,7 @@
   system,
   gui,
   homeManagerStateVersion,
+  useDisko ? false,
 }: let
   lib = nixpkgs.lib;
 in
@@ -53,5 +55,9 @@ in
           home.stateVersion = homeManagerStateVersion;
         };
       })
-    ];
+    ]
+    ++ (lib.optionals useDisko [
+      disko.nixosModules.disko
+      ../hosts/${hostname}/disko.nix
+    ]);
   }

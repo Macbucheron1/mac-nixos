@@ -33,6 +33,11 @@
       url = "github:niksingh710/nsearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -44,13 +49,14 @@
     nvf,
     nur,
     nsearch,
+    disko,
     ...
   }: let
     system = "x86_64-linux";
 
     overlays = import ./overlays { inherit nsearch; };
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf disko;};
     mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf;};
 
     username = "mac";
@@ -61,12 +67,21 @@
         inherit system username homeManagerStateVersion;
         hostname = "lenovo-legion";
         gui = "sway";
+        useDisko = false;
       };
 
       vm = mkHost {
         inherit system username homeManagerStateVersion;
         hostname = "vm";
         gui = "sway";
+        useDisko = false;
+      };
+
+      vm-installer = mkHost {
+        inherit system username homeManagerStateVersion;
+        hostname = "vm";
+        gui = "sway";
+        useDisko = true;
       };
     };
 
