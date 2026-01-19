@@ -3,8 +3,7 @@
   disko.devices = {
     disk.main = {
       type = "disk";
-
-      device = "/dev/disk/by-id/vda";
+      device = "/dev/disk/by-id/CHANGE_ME";
 
       content = {
         type = "gpt";
@@ -23,10 +22,10 @@
 
           swap = {
             name = "swap";
-            size = "8G"; 
+            size = "8G";
             content = {
               type = "swap";
-              randomEncryption = true; 
+              randomEncryption = true;
             };
           };
 
@@ -36,9 +35,7 @@
             content = {
               type = "luks";
               name = "cryptroot";
-              settings = {
-                allowDiscards = true;
-              };
+              settings.allowDiscards = true;
 
               content = {
                 type = "filesystem";

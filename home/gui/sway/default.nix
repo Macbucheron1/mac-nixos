@@ -16,7 +16,8 @@
         "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -show drun";
 
         # Screenshot
-        "Print" = "exec ${pkgs.grim} -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+        "Print" = "exec ${pkgs.grim}/bin/grim -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+
 
         # Audio settings
         "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";

@@ -61,6 +61,9 @@
 
     username = "mac";
     homeManagerStateVersion = "26.05";
+
+    pkgs = nixpkgs.legacyPackages.${system};
+    installDrv = import ./scripts/install.nix { inherit pkgs; };
   in {
     nixosConfigurations = {
       "lenovo-legion" = mkHost {
@@ -70,16 +73,9 @@
         useDisko = false;
       };
 
-      vm = mkHost {
+      standard-installer = mkHost {
         inherit system username homeManagerStateVersion;
-        hostname = "vm";
-        gui = "sway";
-        useDisko = false;
-      };
-
-      vm-installer = mkHost {
-        inherit system username homeManagerStateVersion;
-        hostname = "vm";
+        hostname = "standard";
         gui = "sway";
         useDisko = true;
       };
@@ -90,6 +86,11 @@
         inherit system username homeManagerStateVersion;
         gui = "sway";
       };
+    };
+
+    apps.${system}.install = {
+      type = "app";
+      program = "${installDrv}/bin/install";
     };
   };
 }
