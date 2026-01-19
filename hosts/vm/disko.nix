@@ -4,7 +4,7 @@
     disk.main = {
       type = "disk";
 
-      device = "/dev/disk/by-id/CHANGE_ME";
+      device = "/dev/disk/by-id/vda";
 
       content = {
         type = "gpt";

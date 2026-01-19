@@ -12,4 +12,4 @@
 
 # Things i need to fix
 
-- use the stylix color on firefox and tui theme
+- use systemd d instead of grub
