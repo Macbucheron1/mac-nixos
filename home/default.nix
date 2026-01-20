@@ -23,6 +23,7 @@ in
     wget
     nur.repos.hexadecimalDinosaur.fzf-tab-completion
     nsearch
+    presenterm
     
     # Photo capture & Video capture
     slurp
