@@ -55,7 +55,7 @@
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true;
+    powerOnBoot = false;
   };
 
   systemd.services.rfkill-unblock-bluetooth = {
@@ -87,8 +87,8 @@
 
   imports = [
     ./docker
-    # ./virtualbox
-    ./virtmanager
+    ./virtualbox
+    # ./virtmanager
     ./cachix
   ];
   

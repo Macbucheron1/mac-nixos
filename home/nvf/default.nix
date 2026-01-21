@@ -111,7 +111,6 @@ in
         };
         markdown = {
           enable = true;
-          extensions.render-markdown-nvim.enable = true;
         };
         python = {
           enable = true;
