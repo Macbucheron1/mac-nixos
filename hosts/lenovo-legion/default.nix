@@ -6,19 +6,16 @@
 
   boot = {
     loader = {
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        efiInstallAsRemovable = true;
-      };
+      systemd-boot.enable = true;
       efi = {
         efiSysMountPoint = "/boot";
-        canTouchEfiVariables = false;
+        canTouchEfiVariables = true;
       };
+      grub.enable = false;
     };
+
     kernelPackages = pkgs.linuxPackages_latest;
-    blacklistedKernelModules = ["nouveau"];
+    blacklistedKernelModules = [ "nouveau" ];
     kernelParams = [
       "modprobe.blacklist=nouveau"
       "nouveau.modeset=0"
