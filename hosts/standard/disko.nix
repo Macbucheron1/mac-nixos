@@ -3,7 +3,7 @@
   disko.devices = {
     disk.main = {
       type = "disk";
-      device = "/dev/disk/by-id/CHANGE_ME";
+      device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMDAN00011130A42D";
 
       content = {
         type = "gpt";

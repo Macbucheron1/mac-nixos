@@ -70,7 +70,7 @@
         inherit system username homeManagerStateVersion;
         hostname = "lenovo-legion";
         gui = "sway";
-        useDisko = false;
+        useDisko = true;
       };
 
       standard-installer = mkHost {
