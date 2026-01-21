@@ -27,9 +27,9 @@ in
     
     # Photo capture & Video capture
     slurp
-    obsidian
+    #obsidian
   ]) ++ (with myCustomPkgs; [
-    exegol
+    #exegol
   ]);
 
   stylix.targets.nvf.enable = false;
@@ -50,14 +50,14 @@ in
     ./bash
     ./foot
     ./git
-    ./vscode
-    ./firefox
+    #./vscode
+    #./firefox
     ./bat
     ./nh
     ./rofi
     ./vesktop
     ./mako
-    ./virtmanager
+    #./virtmanager
     ./waybar
     ./fzf
     ./avizo
