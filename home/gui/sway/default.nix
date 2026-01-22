@@ -1,4 +1,7 @@
 { pkgs, lib, config, ... }:
+let 
+  scripts = import ./scripts { inherit pkgs lib; };
+in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -14,10 +17,10 @@
       keybindings = lib.mkOptionDefault {
         # Launcher
         "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+        "${modifier}+e" = "exec ${scripts.ejectUsb}/bin/rofi-eject-external";
 
         # Screenshot
         "Print" = "exec ${pkgs.grim}/bin/grim -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
-
 
         # Audio settings
         "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
