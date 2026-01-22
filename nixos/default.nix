@@ -55,7 +55,7 @@
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    powerOnBoot = true;
   };
 
   systemd.services.rfkill-unblock-bluetooth = {
@@ -69,6 +69,8 @@
   };
 
   security.pam.services.swaylock = {};
+
+  services.udisks2.enable = true;
 
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -96,6 +98,7 @@
   boot.consoleLogLevel = 0;
   boot.kernelParams = [ "quiet" "udev.log_level=3" ];
   boot.plymouth.enable = true;
+  boot.initrd.systemd.enable = true;
 
   system.stateVersion = "25.05";
 }

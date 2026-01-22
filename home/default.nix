@@ -34,6 +34,11 @@ in
 
   stylix.targets.nvf.enable = false;
 
+  services.udiskie = {
+    enable = true;
+    automount = true;
+  };
+
   # Adds an entry to roff drun
   xdg.desktopEntries.nmtui = {
     name = "nmtui";
@@ -42,6 +47,19 @@ in
     terminal = false;
     categories = [ "System" "Network" ];
     exec = "${pkgs.foot}/bin/foot -e ${pkgs.networkmanager}/bin/nmtui";
+  };
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    desktop     = "$HOME/Desktop";
+    download    = "$HOME/Downloads";  
+    documents   = "$HOME/Documents";
+    music       = "$HOME/Music";
+    pictures    = "$HOME/Pictures";
+    videos      = "$HOME/Videos";
+    publicShare = "$HOME/Public";
+    templates   = "$HOME/Templates";
   };
 
   imports = [

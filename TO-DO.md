@@ -12,5 +12,4 @@
 
 # Things i need to fix
 
-- use systemd d instead of grub
 - maybe use fish instead of bash ?
