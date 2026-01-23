@@ -8,6 +8,7 @@
         "browser.startup.page" = 1;
         "browser.startup.homepage" = "https://www.google.com/";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
       
       extensions = {

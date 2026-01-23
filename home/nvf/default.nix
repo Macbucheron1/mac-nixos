@@ -159,6 +159,9 @@ in
       utility.oil-nvim = {                         # https://github.com/stevearc/oil.nvim
         enable = true;
         gitStatus.enable = true;
+        setupOpts = {
+          view_options.show_hidden = true;
+        };
       };
 
       telescope = {                                # https://github.com/nvim-telescope/telescope.nvim

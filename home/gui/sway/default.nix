@@ -16,8 +16,8 @@ in
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
         # Launcher
-        "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -show drun";
-        "${modifier}+e" = "exec ${scripts.ejectUsb}/bin/rofi-eject-external";
+        "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+        "${modifier}+Shift+e" = "exec ${scripts.ejectUsb}/bin/rofi-eject-external";
 
         # Screenshot
         "Print" = "exec ${pkgs.grim}/bin/grim -g \"$(slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
@@ -71,6 +71,10 @@ in
     extraConfig = ''
       default_border pixel 1
       default_floating_border pixel 1
+
+      set $laptop eDP-1
+      bindswitch --reload --locked lid:on output $laptop disable
+      bindswitch --reload --locked lid:off output $laptop enable
     '';
 
     systemd = {
