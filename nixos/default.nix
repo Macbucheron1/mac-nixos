@@ -89,7 +89,7 @@
 
   imports = [
     ./docker
-    #./virtualbox
+    ./virtualbox
     # ./virtmanager
     ./cachix
   ];

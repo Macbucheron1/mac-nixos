@@ -28,6 +28,7 @@ in
     # Photo capture & Video capture
     slurp
     obsidian
+    signal-desktop
   ]) ++ (with myCustomPkgs; [
     exegol
   ]);

@@ -1,11 +1,13 @@
 # Things i need to add
 
-- direnv
+- direnv https://github.com/NotAShelf/direnv.nvim?tab=readme-ov-file
 - keybind movement for visual mode
 - sops nix
 - agenix
 - treesiter text object (demander a tom)
 - workspace name & positon
+- nixcord https://github.com/FlameFlag/nixcord
+- nvf configuration as an output
 
 # Things i need to rice
 
