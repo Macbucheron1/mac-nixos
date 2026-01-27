@@ -23,7 +23,6 @@ in
     wget
     nur.repos.hexadecimalDinosaur.fzf-tab-completion
     nsearch
-    presenterm
     
     # Photo capture & Video capture
     slurp
@@ -52,11 +51,12 @@ in
     ./bat
     ./nh
     ./rofi
-    ./nixcord
     ./mako
+    ./nixcord
     ./virtmanager
     ./waybar
     ./fzf
+    ./batsignal
     ./avizo
     ./yazi
     ./xdg
