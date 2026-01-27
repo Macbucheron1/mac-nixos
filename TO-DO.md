@@ -8,6 +8,8 @@
 - workspace name & positon
 - nixcord https://github.com/FlameFlag/nixcord
 - nvf configuration as an output
+- batsignal (voir signal tom)
+- https://noctalia.dev/
 
 # Things i need to rice
 

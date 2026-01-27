@@ -4,6 +4,7 @@
   stylix,
   nur,
   firefox-addons,
+  nixcord,
   nvf,
   overlays
 }: {
@@ -29,5 +30,6 @@ in home-manager.lib.homeManagerConfiguration {
     ../home/default.nix
     ../home/gui/${gui}
     nvf.homeManagerModules.default
+    nixcord.homeModules.nixcord
   ];
 }

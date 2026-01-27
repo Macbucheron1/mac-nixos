@@ -52,7 +52,7 @@ in
     ./bat
     ./nh
     ./rofi
-    ./vesktop
+    ./nixcord
     ./mako
     ./virtmanager
     ./waybar

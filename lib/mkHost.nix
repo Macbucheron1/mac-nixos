@@ -5,6 +5,7 @@
   nur,
   firefox-addons,
   nvf,
+  nixcord,
   disko,
   overlays
 }: {
@@ -50,6 +51,7 @@ in
             ../home/gui/${gui}
 
             nvf.homeManagerModules.default
+            nixcord.homeModules.nixcord
           ];
 
           home.stateVersion = homeManagerStateVersion;
