@@ -94,9 +94,19 @@
       };
     };
 
-    apps.${system}.install = {
-      type = "app";
-      program = "${installDrv}/bin/install";
+    apps.${system} = {
+      install = {
+        type = "app";
+        program = "${installDrv}/bin/install";
+      };
     };
+
+    packages.${system} = {
+      nvim = (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [ ];
+      }).neovim;
+    };
+
   };
 }
