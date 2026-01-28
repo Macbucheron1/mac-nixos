@@ -104,7 +104,7 @@
     packages.${system} = {
       nvim = (nvf.lib.neovimConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ];
+        modules = [ ./home/nvf/nvf-module.nix ];
       }).neovim;
     };
 
