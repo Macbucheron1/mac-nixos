@@ -61,14 +61,15 @@
     system = "x86_64-linux";
 
     overlays = import ./overlays { inherit nsearch; };
+    pkgs = nixpkgs.legacyPackages.${system};
 
     mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko;};
     mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf;};
+    mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf; };
 
     username = "mac";
     homeManagerStateVersion = "26.05";
 
-    pkgs = nixpkgs.legacyPackages.${system};
     installDrv = import ./scripts/install.nix { inherit pkgs; };
   in {
     nixosConfigurations = {
@@ -101,12 +102,6 @@
       };
     };
 
-    packages.${system} = {
-      nvim = (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ./home/nvf/nvf-module.nix ];
-      }).neovim;
-    };
-
+    packages.${system}.nvim = mkNvim; 
   };
 }

@@ -6,12 +6,12 @@
 - agenix
 - treesiter text object (demander a tom)
 - workspace name & positon
-- nvf configuration as an output
 - https://noctalia.dev/
 
 # Things i need to rice
 
 - find a way to navigate between buffer in neovim (maybe using tab and maj+tab ?)
+- Add a good reamde
 
 # Things i need to fix
 
