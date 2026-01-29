@@ -49,6 +49,7 @@ in
     ./vscode
     ./firefox
     ./bat
+    ./btop
     ./nh
     ./rofi
     ./mako
