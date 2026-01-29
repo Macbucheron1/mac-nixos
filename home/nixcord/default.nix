@@ -7,6 +7,7 @@ in
   programs.nixcord = {
     enable = true;
     vesktop.enable = true;
+    discord.enable = false;
 
     quickCss = ''
       body {

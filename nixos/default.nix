@@ -93,6 +93,18 @@
     # ./virtmanager
     ./cachix
   ];
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    optimise = {
+      automatic = true;
+      dates = "weekly";
+    };
+  };
   
   boot.initrd.verbose = false;
   boot.consoleLogLevel = 0;
