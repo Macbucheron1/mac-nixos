@@ -10,11 +10,11 @@ in
       modifier = "Mod4";
       terminal = "foot";
       startup = [
-        {
-          always = true;
-          command = "swaymsg 'workspace 10; exec ${pkgs.foot}/bin/foot -a btop -e ${pkgs.btop}/bin/btop; workspace 1'";
-        }
+        { command = "exec ${pkgs.foot}/bin/foot -a btop -e ${pkgs.btop}/bin/btop"; }
       ];
+      assigns = {
+        "10" = [ { app_id = "^btop$"; } ];
+      };
       defaultWorkspace = "1";
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
