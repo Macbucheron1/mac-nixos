@@ -2,10 +2,7 @@
 
 - direnv https://github.com/NotAShelf/direnv.nvim?tab=readme-ov-file
 - keybind movement for visual mode
-- sops nix
-- agenix
 - treesiter text object (demander a tom)
-- workspace name & positon
 - https://noctalia.dev/
 
 # Things i need to rice

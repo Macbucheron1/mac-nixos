@@ -112,6 +112,9 @@ in
     python = {
       enable = true;
     };
+    go = {
+      enable = true;
+    };
   };
 
   lsp = {

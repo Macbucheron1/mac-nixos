@@ -79,7 +79,7 @@
   users.users.${username} = {
     isNormalUser = true;
     initialPassword = "changeme";
-    extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
   };
 
   environment.systemPackages = with pkgs; [

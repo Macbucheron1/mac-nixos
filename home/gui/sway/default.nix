@@ -12,7 +12,12 @@ in
       startup = [
         { command = "foot"; }
       ];
-      defaultWorkspace = "workspace number 1";
+      defaultWorkspace = "1";
+      # workspaceOutputAssign = [
+      #   { workspace = "1"; output = "HDMI-A-1"; }
+      #   { workspace = "2"; output = "DP-1"; }
+      #   { workspace = "3"; output = "eDP-1"; }
+      # ];
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
         # Launcher
@@ -72,7 +77,7 @@ in
       default_border pixel 1
       default_floating_border pixel 1
 
-      set $laptop eDP-1
+      set $laptop eDP-1 
       bindswitch --reload --locked lid:on output $laptop disable
       bindswitch --reload --locked lid:off output $laptop enable
     '';
@@ -86,5 +91,5 @@ in
   # https://wiki.nixos.org/wiki/Sway
   # It's recommended to enable a Secret Service provider, like GNOME Keyring
   services.gnome-keyring.enable = true;
-  imports = [ ./swaylock.nix ./swayidle.nix ];
+  imports = [ ./swaylock.nix ./swayidle.nix ./kanshi.nix ];
 }
