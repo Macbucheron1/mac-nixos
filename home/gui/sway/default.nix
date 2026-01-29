@@ -10,14 +10,12 @@ in
       modifier = "Mod4";
       terminal = "foot";
       startup = [
-        { command = "foot"; }
+        {
+          always = true;
+          command = "swaymsg 'workspace 10; exec ${pkgs.foot}/bin/foot -a btop -e ${pkgs.btop}/bin/btop; workspace 1'";
+        }
       ];
       defaultWorkspace = "1";
-      # workspaceOutputAssign = [
-      #   { workspace = "1"; output = "HDMI-A-1"; }
-      #   { workspace = "2"; output = "DP-1"; }
-      #   { workspace = "3"; output = "eDP-1"; }
-      # ];
       input."*".xkb_layout = "fr";
       keybindings = lib.mkOptionDefault {
         # Launcher
