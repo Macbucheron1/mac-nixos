@@ -25,7 +25,7 @@
       name = "btop++";
       comment = "Btop++";
       type = "Application";
-      terminal = true;
+      terminal = false;
       categories = [ "System" ];
       exec = "${pkgs.foot}/bin/foot -e ${pkgs.btop}/bin/btop";
       icon = "btop";
