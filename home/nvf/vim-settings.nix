@@ -77,6 +77,32 @@ in
       silent = true;
       desc = "End of line";
     }
+
+    # echap -> remove search highlight
+    {
+      mode = [ "n" ];
+      key = "<Esc>";
+      action = "<cmd>nohlsearch | lua pcall(function() if vim.snippet and vim.snippet.active and vim.snippet.active() then vim.snippet.stop() end end)<CR>";
+      silent = true;
+      desc = "Remove search highlight + stop active snippet";
+    }
+
+
+    {
+      mode = [ "n" ];
+      key = "<M-Tab>";
+      action = "<cmd>bp<CR>";
+      silent = true;
+      desc = "Go to previous buffer";
+    }
+
+    {
+      mode = [ "n" ];
+      key = "<Tab>";
+      action = "<cmd>bn<CR>";
+      silent = true;
+      desc = "Go to next buffer";
+    }
   ];
 
   theme = {

@@ -16,7 +16,10 @@ in
         "10" = [ { app_id = "^btop$"; } ];
       };
       defaultWorkspace = "1";
-      input."*".xkb_layout = "fr";
+      input."*" = {
+        xkb_layout = "fr";
+        xkb_options = "caps:escape";
+      };
       keybindings = lib.mkOptionDefault {
         # Launcher
         "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
