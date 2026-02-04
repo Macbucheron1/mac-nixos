@@ -32,19 +32,19 @@ let
       start_if_missing mainterm swaymsg 'workspace 1; exec ${pkgs.foot}/bin/foot -a mainterm'
       start_if_missing firefox  swaymsg 'workspace 2; exec ${pkgs.firefox}/bin/firefox'
 
-      # Now handle workspace 0 LAST (so it doesn't steal new windows)
-      swaymsg 'workspace 0, move workspace to output eDP-1, workspace 1'
+      # Now handle workspace 10 last (so it doesn't steal new windows)
+      swaymsg 'workspace 10, move workspace to output eDP-1, workspace 1'
 
     elif [ "$PROFILE" = "home" ]; then
       # Place workspaces on the right outputs
-      swaymsg 'workspace 1, move workspace to output HDMI-A-1, workspace 2, move workspace to output DP-1, workspace 3, move workspace to output eDP-1'
+      swaymsg 'workspace 1, move workspace to output HDMI-A-1, workspace 2, move workspace to output DP-1, workspace 10, move workspace to output eDP-1'
 
       # Start apps on the right workspaces (only if missing)
       start_if_missing firefox  swaymsg 'workspace 1; exec ${pkgs.firefox}/bin/firefox'
       start_if_missing mainterm swaymsg 'workspace 2; exec ${pkgs.foot}/bin/foot -a mainterm'
 
-      # Workspace 0 LAST
-      swaymsg 'workspace 0, move workspace to output eDP-1, workspace 1'
+      # Workspace 10 last
+      swaymsg 'workspace 10 move workspace to output eDP-1, workspace 1'
     fi
   '';
 in
@@ -65,9 +65,9 @@ in
         profile = {
           name = "home";
           outputs = [
-            { criteria = "HDMI-A-1"; status = "enable"; }
-            { criteria = "DP-1"; status = "enable"; }
-            { criteria = "eDP-1"; status = "enable"; }
+            { criteria = "HDMI-A-1"; status = "enable"; position = "0,0"; }
+            { criteria = "DP-1";     status = "enable"; position = "1920,0"; }
+            { criteria = "eDP-1";    status = "enable"; position = "3840,0"; }
           ];
           exec = "${applyProfile} home";
         };
