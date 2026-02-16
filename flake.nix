@@ -43,6 +43,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -56,6 +61,7 @@
     nsearch,
     nixcord,
     disko,
+    lanzaboote,
     ...
   }: let
     system = "x86_64-linux";
@@ -63,7 +69,7 @@
     overlays = import ./overlays { inherit nsearch; };
     pkgs = nixpkgs.legacyPackages.${system};
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote;};
     mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf;};
     mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf; };
 
@@ -78,6 +84,7 @@
         hostname = "lenovo-legion";
         gui = "sway";
         useDisko = true;
+        useLanzaboote = true;
       };
 
       standard-installer = mkHost {
@@ -85,6 +92,7 @@
         hostname = "standard";
         gui = "sway";
         useDisko = true;
+        useLanzaboote = false;
       };
     };
 

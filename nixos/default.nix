@@ -85,12 +85,13 @@
   environment.systemPackages = with pkgs; [
     home-manager
     bluetui
+    sbctl
   ];
 
   imports = [
     ./docker
-    ./virtualbox
-    # ./virtmanager
+    # ./virtualbox
+    ./virtmanager
     ./cachix
   ];
 

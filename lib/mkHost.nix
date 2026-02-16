@@ -7,6 +7,7 @@
   nvf,
   nixcord,
   disko,
+  lanzaboote,
   overlays
 }: {
   username,
@@ -15,6 +16,7 @@
   gui,
   homeManagerStateVersion,
   useDisko ? false,
+  useLanzaboote ? false,
 }: let
   lib = nixpkgs.lib;
 in
@@ -61,5 +63,8 @@ in
     ++ (lib.optionals useDisko [
       disko.nixosModules.disko
       ../hosts/${hostname}/disko.nix
+    ]) ++ (lib.optionals useLanzaboote [
+      lanzaboote.nixosModules.lanzaboote
+      ../nixos/lanzaboot/default.nix
     ]);
   }
