@@ -1,54 +1,67 @@
 {
   lib,
   buildPythonPackage,
-  fetchPypi,
-  anyio,
+  fetchFromGitHub,
+  uv-build,
   httpx,
   pydantic,
   pyjwt,
-  typing-extensions,
-  uv-build,
+  pytestCheckHook,
+  faker,
+  respx,
+  pytest-mock,
+  pytest-asyncio,
 }:
-
 buildPythonPackage rec {
   pname = "supabase-auth";
-  version = "2.27.0";
+  version = "2.27.2";
   pyproject = true;
 
-  src = fetchPypi {
-    pname = "supabase_auth";
-    inherit version;
-    hash = "sha256-sk4VoH9ldEfaok9h3T2m/7LzdOG8UfonJREw4MjjwBA=";
+  src = fetchFromGitHub {
+    owner = "supabase";
+    repo = "supabase-py";
+    tag = "v${version}";
+    hash = "sha256-TRATa+lDRm2MDuARXfBRWnWYUak8i1fW7rr5ujWN8TY=";
   };
+
+  sourceRoot = "${src.name}/src/auth";
 
   build-system = [ uv-build ];
 
   dependencies = [
-    anyio
     httpx
     pydantic
     pyjwt
-    typing-extensions
+  ]
+  ++ httpx.optional-dependencies.http2
+  ++ pyjwt.optional-dependencies.crypto;
+
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-warn 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3'
+  '';
+
+  nativeCheckInputs = [
+    pytestCheckHook
+    faker
+    respx
+    pytest-mock
+    pytest-asyncio
+  ];
+
+  disabledTestPaths = [
+    "tests/_sync/"
+    "tests/_async/"
   ];
 
   pythonImportsCheck = [ "supabase_auth" ];
 
-  # Upstream pins `uv_build>=0.8.3,<0.9.0`, but nixpkgs ships `uv-build` 0.9.x.
-  # Relax the upper bound to accept the 0.9 series, consistent with uv’s documentation examples:
-  # https://docs.astral.sh/uv/concepts/build-backend/#using-the-uv-build-backend
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3,<0.10.0'
-  '';
-
-  # Upstream tests require Docker-based Supabase Auth integration containers, which are unavailable in the Nix build sandbox.
-  doCheck = false;
-
   meta = {
     description = "Client library for Supabase Auth";
     homepage = "https://github.com/supabase/supabase-py/";
-    maintainers = [ ];
+    changelog = "https://github.com/supabase/supabase-py/blob/v${src.tag}/CHANGELOG.md";
     license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ macbucheron ];
   };
 }
 

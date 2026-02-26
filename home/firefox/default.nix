@@ -126,6 +126,14 @@
                     name = "Packages Search";
                     url = "https://search.nixos.org/packages";
                   }
+                  {
+                    name = "Nix Version";
+                    url = "https://lazamar.co.uk/nix-versions/";
+                  }
+                  {
+                    name = "Pull Request Tracker";
+                    url = "https://nixpkgs-tracker.ocfox.me/";
+                  }
                 ];
               }
               {
