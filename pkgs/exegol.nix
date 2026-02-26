@@ -3,8 +3,7 @@
   fetchFromGitHub,
   python3Packages,
   xorg,
-  supabaseAuth,
-  supabaseFunctions
+  supabase,
 }:
 python3Packages.buildPythonApplication rec {
   pname = "exegol";
@@ -43,8 +42,7 @@ python3Packages.buildPythonApplication rec {
     ]
     ++ pyjwt.optional-dependencies.crypto
     ++ [ xorg.xhost ]
-    ++ lib.optional (!stdenv.hostPlatform.isLinux) tzlocal
-    ++ [ supabaseAuth supabaseFunctions ];
+    ++ lib.optional (!stdenv.hostPlatform.isLinux) tzlocal;
 
   doCheck = true;
 

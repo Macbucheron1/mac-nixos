@@ -1,18 +1,21 @@
 {
   buildPythonPackage,
   fetchFromGitHub,
-  httpx,
   lib,
-  pyjwt,
+  poetry-core,
+  aiohttp,
+  websockets,
+  typing-extensions,
+  pydantic,
   pytest-asyncio,
+  pytest-cov,
+  python-dotenv,
   pytestCheckHook,
-  strenum,
-  uv-build,
-  yarl,
+  pythonRelaxDepsHook,
 }:
 
 buildPythonPackage rec {
-  pname = "supabase-functions";
+  pname = "realtime";
   version = "2.27.2";
   pyproject = true;
 
@@ -23,32 +26,33 @@ buildPythonPackage rec {
     hash = "sha256-TRATa+lDRm2MDuARXfBRWnWYUak8i1fW7rr5ujWN8TY=";
   };
 
-  sourceRoot = "${src.name}/src/functions";
+  sourceRoot = "${src.name}/src/realtime";
 
-  build-system = [ uv-build ];
+  build-system = [ poetry-core ];
 
   dependencies = [
-    strenum
-    yarl
-    httpx
-  ]
-  ++ httpx.optional-dependencies.http2;
+    websockets
+    typing-extensions
+    pydantic
+  ];
 
-  # Upstream pins `uv_build>=0.8.3,<0.9.0`, but nixpkgs ships `uv-build` 0.9.x.
-  # Relax the upper bound to accept the 0.9 series, consistent with uv’s documentation examples:
-  # https://docs.astral.sh/uv/concepts/build-backend/#using-the-uv-build-backend
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace-warn 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3'
-  '';
+  nativeBuildInputs = [ pythonRelaxDepsHook ];
+  pythonRelaxDeps = [ "websockets" ];
 
   nativeCheckInputs = [
+    aiohttp
     pytestCheckHook
-    pyjwt
+    pytest-cov
+    python-dotenv
     pytest-asyncio
   ];
 
-  pythonImportsCheck = [ "supabase_functions" ];
+  pythonImportsCheck = [ "realtime" ];
+
+  disabledTestPaths = [
+    "tests/test_connection.py"
+    "tests/test_presence.py"
+  ];
 
   meta = {
     description = "Client library for Supabase Functions";

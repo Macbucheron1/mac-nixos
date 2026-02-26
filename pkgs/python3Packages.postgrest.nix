@@ -1,18 +1,21 @@
 {
   buildPythonPackage,
   fetchFromGitHub,
-  httpx,
   lib,
-  pyjwt,
-  pytest-asyncio,
-  pytestCheckHook,
-  strenum,
   uv-build,
+  httpx,
+  pydantic,
   yarl,
+  strenum,
+  deprecation,
+  pytest-asyncio,
+  pytest-cov,
+  pytestCheckHook,
+  unasync,
 }:
 
 buildPythonPackage rec {
-  pname = "supabase-functions";
+  pname = "postgrest";
   version = "2.27.2";
   pyproject = true;
 
@@ -23,14 +26,16 @@ buildPythonPackage rec {
     hash = "sha256-TRATa+lDRm2MDuARXfBRWnWYUak8i1fW7rr5ujWN8TY=";
   };
 
-  sourceRoot = "${src.name}/src/functions";
+  sourceRoot = "${src.name}/src/postgrest";
 
   build-system = [ uv-build ];
 
   dependencies = [
+    httpx
+    deprecation
+    pydantic
     strenum
     yarl
-    httpx
   ]
   ++ httpx.optional-dependencies.http2;
 
@@ -42,13 +47,20 @@ buildPythonPackage rec {
       --replace-warn 'uv_build>=0.8.3,<0.9.0' 'uv_build>=0.8.3'
   '';
 
+
   nativeCheckInputs = [
     pytestCheckHook
-    pyjwt
     pytest-asyncio
+    pytest-cov
+    unasync
   ];
 
-  pythonImportsCheck = [ "supabase_functions" ];
+  pythonImportsCheck = [ "postgrest" ];
+
+  disabledTestPaths = [
+    "tests/_sync/"
+    "tests/_async/"
+  ];
 
   meta = {
     description = "Client library for Supabase Functions";

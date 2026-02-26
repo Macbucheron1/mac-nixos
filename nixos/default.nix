@@ -6,6 +6,9 @@
   networking =  {
     hostName = hostname;
     networkmanager.enable = true;
+    hosts = {
+      "10.10.128.1" = ["controleur.wifipass.org" "cdn-wifi.tech"];
+    };
   };
 
   # PipeWire + Pulse shim

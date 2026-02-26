@@ -23,7 +23,7 @@ in
     wget
     nur.repos.hexadecimalDinosaur.fzf-tab-completion
     nsearch
-    android-studio
+    nixpkgs-review
 
     # Photo capture & Video capture
     slurp
