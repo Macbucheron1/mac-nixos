@@ -141,6 +141,7 @@ in
     go = {
       enable = true;
     };
+    html.enable = true;
   };
 
   lsp = {

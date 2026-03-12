@@ -81,6 +81,7 @@ in
 
     initExtra = ''
       ${pkgs.nitch}/bin/nitch
+      eval "$(${pkgs.python3Packages.argcomplete}/bin/register-python-argcomplete --no-defaults exegol)"
     '';
 
     shellAliases = { 

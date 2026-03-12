@@ -9,6 +9,20 @@
     hosts = {
       "10.10.128.1" = ["controleur.wifipass.org" "cdn-wifi.tech"];
     };
+
+    wg-quick.interfaces.wg0 = {
+      autostart = false;
+      address = [ "10.254.3.2/24" ];
+      privateKeyFile = "/etc/wireguard/arnaud_lab.key";
+      peers = [
+        {
+          publicKey = "Vu/T8RTaZx38JBYPERdZd+LzJolJ3HUyPC4/8eqxLF8=";
+          allowedIPs = [ "10.0.0.205/24" ];
+          endpoint = "vpn.azertx.fr:51820";
+        }
+      ];
+    };
+
   };
 
   # PipeWire + Pulse shim
@@ -20,38 +34,7 @@
     alsa.support32Bit = true;
 
     pulse.enable = true;
-
-    # vibe coded fix for airpods autoconnect 
-    extraConfig.pipewire-pulse."10-switch-on-connect.conf" = {
-      "pulse.cmd" = [
-        { cmd = "load-module"; args = "module-switch-on-connect"; }
-      ];
-    };
-    wireplumber.extraConfig = {
-      "11-bluetooth-policy.conf" = {
-        "wireplumber.settings" = {
-          "bluetooth.autoswitch-to-headset-profile" = false;
-        };
-      };
-      "12-airpods-a2dp.conf" = {
-        "monitor.bluez.rules" = [
-          {
-            matches = [
-              { "device.name" = "bluez_card.34_0E_22_96_86_69"; }
-            ];
-            actions = {
-              update-props = {
-                "device.profile" = "a2dp-sink";
-                "bluez5.auto-connect" = [ "a2dp_sink" ];
-                "bluez5.hw-volume" = [ "a2dp_sink" ];
-              };
-            };
-          }
-        ];
-      };
-    };
   };
-  # ---------------------
 
   security.rtkit.enable = true;
 
@@ -94,7 +77,7 @@
   imports = [
     ./docker
     # ./virtualbox
-    ./virtmanager
+    # ./virtmanager
     ./cachix
   ];
 
