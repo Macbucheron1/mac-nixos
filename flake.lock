@@ -860,11 +860,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1773398606,
-        "narHash": "sha256-hUhzMgHZIUE8pFuwajLjsp9KTnkP8VT+0nMerCCQrl0=",
+        "lastModified": 1773400207,
+        "narHash": "sha256-SG/xlrtug8r+PPXJkLx9abad0AG1gIAz7dkHzEjXJxo=",
         "owner": "Macbucheron1",
         "repo": "vibepods-cli",
-        "rev": "da2077ca7cfd8449ebfc1a38e15fc758298437f6",
+        "rev": "1ad0856cf2d0d577f567ffd1b812aba9fb55b0ef",
         "type": "github"
       },
       "original": {

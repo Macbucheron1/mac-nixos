@@ -1,7 +1,7 @@
-{ pkgs, lib, vpnIfaces }:
+{ pkgs, lib, vpnIfaces, vibepodsPkg }:
 
 let
-  path = lib.makeBinPath [ pkgs.iproute2 pkgs.jq pkgs.coreutils ];
+  path = lib.makeBinPath [ pkgs.iproute2 pkgs.jq pkgs.coreutils pkgs.rofi vibepodsPkg ];
   vpnIfacesStr = builtins.concatStringsSep " " vpnIfaces;
   excludedJson = builtins.toJSON ([ "lo" ] ++ vpnIfaces);
 
@@ -18,4 +18,5 @@ in
   vpnIp = mk "waybar-vpn-ip" ./vpn-ip.sh;
   lanIp = mk "waybar-lan-ip" ./lan-ip.sh;
   airpods = mk "waybar-airpods" ./airpods.sh;
+  airpodsMode = mk "waybar-airpods-mode" ./airpods-mode.sh;
 }

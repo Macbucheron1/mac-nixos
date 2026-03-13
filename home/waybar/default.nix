@@ -11,7 +11,7 @@ let
     or vibepods.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   scripts = import ./scripts {
-    inherit pkgs lib vpnIfaces;
+    inherit pkgs lib vpnIfaces vibepodsPkg;
   };
 
   mkCustomJson = { exec, execIf ? null, interval ? 5 }:
@@ -139,7 +139,7 @@ in
         }) // {
           escape = false;
           tooltip = true;
-          on-click = "${pkgs.systemd}/bin/systemctl --user kill -s USR1 vibepods-daemon.service";
+          on-click = "${scripts.airpodsMode}/bin/waybar-airpods-mode";
         };
 
         battery = {

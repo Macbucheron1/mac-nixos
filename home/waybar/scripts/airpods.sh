@@ -21,7 +21,7 @@ jq -rc '
   def has_battery:
     (.left_battery != null) or (.right_battery != null) or (.headset_battery != null);
   def device_name: .name // "AirPods";
-  def base_tooltip: device_name + "\nClick to refresh";
+  def base_tooltip: device_name + "\nClick to choose mode";
   if .daemon_running != true or .connected != true or .protocol_connected != true or (has_battery | not) then
     {
       text: "",
