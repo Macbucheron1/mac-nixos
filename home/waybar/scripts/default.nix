@@ -17,5 +17,5 @@ in
   vpnUp = mk "waybar-vpn-up" ./vpn-up.sh;
   vpnIp = mk "waybar-vpn-ip" ./vpn-ip.sh;
   lanIp = mk "waybar-lan-ip" ./lan-ip.sh;
+  airpods = mk "waybar-airpods" ./airpods.sh;
 }
-

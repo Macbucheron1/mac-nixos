@@ -48,6 +48,10 @@
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vibepods = {
+      url = "github:Macbucheron1/vibepods-cli";
+    };
   };
 
   outputs = inputs @ {
@@ -62,6 +66,7 @@
     nixcord,
     disko,
     lanzaboote,
+    vibepods,
     ...
   }: let
     system = "x86_64-linux";
@@ -69,8 +74,8 @@
     overlays = import ./overlays { inherit nsearch; };
     pkgs = nixpkgs.legacyPackages.${system};
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods;};
     mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf; };
 
     username = "mac";

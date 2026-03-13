@@ -8,7 +8,8 @@
   nixcord,
   disko,
   lanzaboote,
-  overlays
+  vibepods,
+  overlays,
 }: {
   username,
   hostname,
@@ -44,7 +45,7 @@ in
         home-manager.useUserPackages = true;
 
         home-manager.extraSpecialArgs = {
-          inherit username gui homeManagerStateVersion firefox-addons;
+          inherit username gui homeManagerStateVersion firefox-addons vibepods;
         };
 
         home-manager.users.${username} = {

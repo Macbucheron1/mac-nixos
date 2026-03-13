@@ -54,14 +54,4 @@
     enable = true;
   };
   virtualisation.docker.daemon.settings.features.cdi = true;
-
-  # Fix for the wifi card going to deep sleep and never waking up
-  powerManagement.powerDownCommands = ''
-    ${pkgs.kmod}/bin/modprobe -r rtw89_8852ce || true
-  '';
-  powerManagement.resumeCommands = ''
-    ${pkgs.kmod}/bin/modprobe rtw89_8852ce || true
-    ${pkgs.util-linux}/bin/rfkill unblock wlan || true
-    systemctl restart NetworkManager.service || true
-  '';
 }

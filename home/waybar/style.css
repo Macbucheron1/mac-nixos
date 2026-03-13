@@ -68,6 +68,7 @@ window#waybar {
 /* Base styling for modules */
 #custom-lan,
 #custom-vpn,
+#custom-airpods,
 #battery,
 #clock {
   background: @base01@;
@@ -86,6 +87,17 @@ window#waybar {
 #custom-vpn {
   border-color: @base0B@;
   color: @base0B@;
+}
+
+/* AirPods module: bright foreground to keep it distinct from networking */
+#custom-airpods {
+  border-color: @base07@;
+  color: @base07@;
+}
+
+#custom-airpods.disconnected {
+  border-color: @base08@;
+  color: @base08@;
 }
 
 /* Battery module: yellow border and text */
@@ -136,8 +148,8 @@ window#waybar {
 /* Subtle shadow under icons */
 #custom-lan span,
 #custom-vpn span,
+#custom-airpods span,
 #battery span,
 #clock span {
   text-shadow: 0 1px 0 alpha(@base00@, 0.45);
 }
-
