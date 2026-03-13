@@ -137,6 +137,7 @@ in
           exec = "${scripts.airpods}/bin/waybar-airpods";
           interval = 5;
         }) // {
+          escape = false;
           tooltip = true;
           on-click = "${pkgs.systemd}/bin/systemctl --user kill -s USR1 vibepods-daemon.service";
         };

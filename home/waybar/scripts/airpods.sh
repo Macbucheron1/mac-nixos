@@ -12,6 +12,12 @@ fi
 
 jq -rc '
   def pct(v): if v == null then "?" else (v | tostring) end;
+  def styled_pct(v; in_ear):
+    if in_ear == false then
+      "<span foreground=\"#8a8a8a\">" + pct(v) + "</span>"
+    else
+      pct(v)
+    end;
   def has_battery:
     (.left_battery != null) or (.right_battery != null) or (.headset_battery != null);
   def device_name: .name // "AirPods";
@@ -33,7 +39,7 @@ jq -rc '
     }
   else
     {
-      text: ("󰋎 " + pct(.left_battery) + "/" + pct(.right_battery) + "%"),
+      text: ("󰋎 " + styled_pct(.left_battery; .left_in_ear) + "/" + styled_pct(.right_battery; .right_in_ear) + "%"),
       tooltip: (
         base_tooltip
         + "\nL: " + pct(.left_battery) + "%"
