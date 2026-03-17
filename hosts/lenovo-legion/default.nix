@@ -14,7 +14,6 @@
       grub.enable = false;
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [ "nouveau" ];
     kernelParams = [
       "modprobe.blacklist=nouveau"
