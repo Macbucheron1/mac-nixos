@@ -67,7 +67,7 @@ window#waybar {
 
 /* Base styling for modules */
 #custom-lan,
-#custom-vpn,
+.vpn,
 #custom-airpods,
 #battery,
 #clock {
@@ -84,7 +84,7 @@ window#waybar {
 }
 
 /* VPN module: green border and text */
-#custom-vpn {
+.vpn {
   border-color: @base0B@;
   color: @base0B@;
 }
@@ -139,7 +139,7 @@ window#waybar {
   color: @base07@;
 }
 
-#custom-vpn.copied {
+.vpn.copied {
   background: alpha(@base0B@, 0.35);
   border-color: @base0B@;
   color: @base07@;
@@ -147,7 +147,7 @@ window#waybar {
 
 /* Subtle shadow under icons */
 #custom-lan span,
-#custom-vpn span,
+.vpn span,
 #custom-airpods span,
 #battery span,
 #clock span {

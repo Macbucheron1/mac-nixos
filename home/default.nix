@@ -25,6 +25,7 @@ in
     nsearch
     nixpkgs-review
     exegol
+    wireshark
 
     # Photo capture & Video capture
     slurp

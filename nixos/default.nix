@@ -10,17 +10,31 @@
       "10.10.128.1" = ["controleur.wifipass.org" "cdn-wifi.tech"];
     };
 
-    wg-quick.interfaces.wg0 = {
-      autostart = false;
-      address = [ "10.254.3.2/24" ];
-      privateKeyFile = "/etc/wireguard/arnaud_lab.key";
-      peers = [
-        {
-          publicKey = "Vu/T8RTaZx38JBYPERdZd+LzJolJ3HUyPC4/8eqxLF8=";
-          allowedIPs = [ "10.0.0.205/24" ];
-          endpoint = "vpn.azertx.fr:51820";
-        }
-      ];
+    wg-quick.interfaces = {
+      wg0 = {
+        autostart = false;
+        address = [ "10.254.3.2/24" ];
+        privateKeyFile = "/etc/wireguard/arnaud_lab.key";
+        peers = [
+          {
+            publicKey = "Vu/T8RTaZx38JBYPERdZd+LzJolJ3HUyPC4/8eqxLF8=";
+            allowedIPs = [ "10.0.0.205/24" ];
+            endpoint = "vpn.azertx.fr:51820";
+          }
+        ];
+      };
+      wg1 = {
+        autostart = false;
+        address = [ "198.51.100.5/32" ];
+        privateKeyFile = "/etc/wireguard/arnaud_lab2.key";
+        peers = [
+          {
+            publicKey = "hEou+iDJVVNPDjC6TfyM8YRI4XTxbGSQRYHVVcRCmCg=";
+            allowedIPs = [ "198.51.100.1/32,10.1.0.0/16,10.8.0.0/16" ];
+            endpoint = "10.0.0.205:51820";
+          }
+        ];
+      };
     };
 
   };
@@ -65,14 +79,17 @@
   users.users.${username} = {
     isNormalUser = true;
     initialPassword = "changeme";
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wireshark""wheel" "networkmanager" "libvirtd" ];
   };
 
   environment.systemPackages = with pkgs; [
     home-manager
     bluetui
     sbctl
+    xhost
+    xauth
   ];
+  programs.wireshark.enable = true;
 
   imports = [
     ./docker

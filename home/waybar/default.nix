@@ -4,7 +4,7 @@ let
   colors = config.lib.stylix.colors.withHashtag;
 
   # VPN interfaces that will be detected
-  vpnIfaces = [ "wg0" "tun0" "tailscale0" ];
+  vpnIfaces = [ "wg1" "wg0" "tun0" "tailscale0" ];
 
   vibepodsPkg =
     vibepods.packages.${pkgs.stdenv.hostPlatform.system}.vibepods_cli
@@ -13,6 +13,42 @@ let
   scripts = import ./scripts {
     inherit pkgs lib vpnIfaces vibepodsPkg;
   };
+
+  vpnModuleNames = map (iface: "custom/vpn-${iface}") vpnIfaces;
+
+  mkVpnModule = iface:
+    let
+      ifaceArg = lib.escapeShellArg iface;
+    in
+    {
+      name = "custom/vpn-${iface}";
+      value = (mkCustomJson {
+        execIf = "${scripts.vpnUp}/bin/waybar-vpn-up ${ifaceArg}";
+        exec = "${scripts.vpnIp}/bin/waybar-vpn-ip ${ifaceArg}";
+        interval = 5;
+      }) // {
+        signal = 9;
+        on-click = ''
+          sh -c '
+            json="$(${scripts.vpnIp}/bin/waybar-vpn-ip ${ifaceArg} 2>/dev/null || true)"
+            ip="$(printf "%s" "$json" | ${pkgs.jq}/bin/jq -r ".text")"
+            [ -n "$ip" ] || exit 0
+
+            printf "%s" "$ip" | ${pkgs.wl-clipboard}/bin/wl-copy --trim-newline
+
+            rt="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+            flag="$rt/waybar-vpn-${iface}-copied"
+            date +%s%3N > "$flag"
+            pkill -RTMIN+9 waybar
+
+            ( sleep 0.2; rm -f "$flag"; pkill -RTMIN+9 waybar ) >/dev/null 2>&1 &
+          '
+        '';
+        format = "<span>󰖂 </span> {}";
+      };
+    };
+
+  vpnModules = builtins.listToAttrs (map mkVpnModule vpnIfaces);
 
   mkCustomJson = { exec, execIf ? null, interval ? 5 }:
     {
@@ -69,14 +105,14 @@ in
     systemd.enable = false;
 
     settings = {
-      mainBar = {
+      mainBar = ({
         layer = "top";
         position = "bottom";
         height = 28;
         spacing = 6;
 
         modules-left = [ "sway/workspaces" ];
-        modules-right = [ "custom/lan" "custom/vpn" "custom/airpods" "battery" "clock" ];
+        modules-right = [ "custom/lan" ] ++ vpnModuleNames ++ [ "custom/airpods" "battery" "clock" ];
 
         "sway/workspaces" = {
           format = "{index}";
@@ -108,31 +144,6 @@ in
           format = "<span>󰈀 </span> {}";
         };
 
-        "custom/vpn" = (mkCustomJson {
-          execIf = "${scripts.vpnUp}/bin/waybar-vpn-up";
-          exec = "${scripts.vpnIp}/bin/waybar-vpn-ip";
-          interval = 5;
-        }) // {
-          signal = 9;
-          on-click = ''
-            sh -c '
-              json="$(${scripts.vpnIp}/bin/waybar-vpn-ip 2>/dev/null || true)"
-              ip="$(printf "%s" "$json" | ${pkgs.jq}/bin/jq -r ".text")"
-              [ -n "$ip" ] || exit 0
-
-              printf "%s" "$ip" | ${pkgs.wl-clipboard}/bin/wl-copy --trim-newline
-
-              rt="''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
-              flag="$rt/waybar-vpn-copied"
-              date +%s%3N > "$flag"
-              pkill -RTMIN+9 waybar
-
-              ( sleep 0.2; rm -f "$flag"; pkill -RTMIN+9 waybar ) >/dev/null 2>&1 &
-            '
-          '';
-          format = "<span>󰖂 </span> {}";
-        };
-
         "custom/airpods" = (mkCustomJson {
           exec = "${scripts.airpods}/bin/waybar-airpods";
           interval = 5;
@@ -161,7 +172,7 @@ in
           tooltip = false;
           format = "<span>󰥔 </span> {:%d/%m/%Y %H:%M}";
         };
-      };
+      }) // vpnModules;
     };
 
     style = builtins.readFile styleFile;
