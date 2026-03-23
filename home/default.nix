@@ -24,7 +24,6 @@ in
     nur.repos.hexadecimalDinosaur.fzf-tab-completion
     nsearch
     nixpkgs-review
-    exegol
     wireshark
 
     # Photo capture & Video capture
@@ -32,7 +31,7 @@ in
     obsidian
     signal-desktop
   ]) ++ (with myCustomPkgs; [
-    # exegol
+    exegol
   ]);
 
   stylix.targets.nvf.enable = false;

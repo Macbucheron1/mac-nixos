@@ -10,7 +10,7 @@ in
       modifier = "Mod4";
       terminal = "foot";
       startup = [
-        { command = "${pkgs.xorg.xhost}/bin/xhost +si:localuser:root"; }
+        { command = "${pkgs.xhost}/bin/xhost +si:localuser:root"; }
         { command = "exec ${pkgs.foot}/bin/foot -a btop -e ${pkgs.btop}/bin/btop"; }
       ];
       assigns = {
