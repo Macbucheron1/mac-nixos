@@ -1,4 +1,4 @@
-{ pkgs, username, homeManagerStateVersion, ... }:
+{pkgs, username, homeManagerStateVersion, exegol-ressources, ... }:
 let
   myCustomPkgs = import ../pkgs { inherit pkgs; };
 in
@@ -35,6 +35,11 @@ in
   ]);
 
   stylix.targets.nvf.enable = false;
+
+  home.file.".exegol/my-resources" = {
+    source = exegol-ressources;
+    recursive = true;
+  };
 
   services.udiskie = {
     enable = true;

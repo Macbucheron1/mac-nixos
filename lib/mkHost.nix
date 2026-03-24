@@ -10,6 +10,7 @@
   lanzaboote,
   vibepods,
   overlays,
+  exegol-ressources,
 }: {
   username,
   hostname,
@@ -45,7 +46,7 @@ in
         home-manager.useUserPackages = true;
 
         home-manager.extraSpecialArgs = {
-          inherit username gui homeManagerStateVersion firefox-addons vibepods;
+          inherit username gui homeManagerStateVersion firefox-addons vibepods exegol-ressources;
         };
 
         home-manager.users.${username} = {

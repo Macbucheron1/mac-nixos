@@ -7,7 +7,8 @@
   nixcord,
   nvf,
   vibepods,
-  overlays
+  overlays,
+  exegol-ressources,
 }: {
   username,
   system,
@@ -22,7 +23,7 @@ in home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
 
   extraSpecialArgs = {
-    inherit username homeManagerStateVersion gui firefox-addons vibepods;
+    inherit username homeManagerStateVersion gui firefox-addons vibepods exegol-ressources;
   };
 
   modules = [
