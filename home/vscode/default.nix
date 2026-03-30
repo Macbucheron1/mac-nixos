@@ -1,12 +1,23 @@
 { config, lib, pkgs, ... }:
-
 let
+  myCustomPkgs = import ../../pkgs { inherit pkgs; };
+
   mcpCfg = {
     servers = {
       nixos = {
         type = "stdio";
         command = "nix";
         args = [ "run" "github:utensils/mcp-nixos" "--" ];
+      };
+
+      # Temporary
+      exegol = {
+        type = "stdio";
+        command = "${myCustomPkgs.exegol-mcp}/bin/exegol-mcp";
+        args = [ "-t" "stdio" ];
+      };      
+     
+      burp = {
       };
     };
   };
