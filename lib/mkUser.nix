@@ -9,6 +9,7 @@
   vibepods,
   overlays,
   exegol-ressources,
+  nix-index-database,
 }: {
   username,
   system,

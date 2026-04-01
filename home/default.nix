@@ -25,6 +25,7 @@ in
     nsearch
     nixpkgs-review
     wireshark
+    ghidra
 
     # Photo capture & Video capture
     slurp
@@ -69,5 +70,6 @@ in
     ./yazi
     ./direnv
     ./xdg
+    ./comma
   ];
 }

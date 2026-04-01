@@ -53,6 +53,11 @@
       url = "github:Macbucheron1/vibepods-cli";
     };
 
+    nix-index-database = {
+        url = "github:nix-community/nix-index-database";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     exegol-ressources = {
       url = "github:Macbucheron1/exegol-ressources";
       flake = false;
@@ -73,6 +78,7 @@
     lanzaboote,
     vibepods,
     exegol-ressources,
+    nix-index-database,
     ...
   }: let
     system = "x86_64-linux";
@@ -80,8 +86,8 @@
     overlays = import ./overlays { inherit nsearch; };
     pkgs = nixpkgs.legacyPackages.${system};
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources nix-index-database;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources nix-index-database;};
     mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf; };
 
     username = "mac";

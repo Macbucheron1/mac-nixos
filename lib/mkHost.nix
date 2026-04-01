@@ -11,6 +11,7 @@
   vibepods,
   overlays,
   exegol-ressources,
+  nix-index-database,
 }: {
   username,
   hostname,
@@ -35,6 +36,7 @@ in
       ../nixos/gui/${gui}
 
       stylix.nixosModules.stylix
+      nix-index-database.nixosModules.default
       ../lib/theme.nix
 
       home-manager.nixosModules.home-manager
@@ -56,6 +58,7 @@ in
 
             nvf.homeManagerModules.default
             nixcord.homeModules.nixcord
+            nix-index-database.homeModules.default
           ];
 
           home.stateVersion = homeManagerStateVersion;

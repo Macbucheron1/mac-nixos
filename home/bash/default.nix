@@ -77,6 +77,8 @@ in
 
       source ${fzfTab}/bash/fzf-bash-completion.sh
       bind -x '"\e\t": fzf_bash_completion'
+
+      export COMMA_PICKER=${pkgs.fzf}/bin/fzf
     '';
 
     initExtra = ''
@@ -90,6 +92,7 @@ in
       ll = "${pkgs.eza}/bin/eza -lah --git --icons=always";
       ls = "${pkgs.eza}/bin/eza -G --icons";
       tree = "${pkgs.eza}/bin/eza -T --icons";
+      ghidra = "_JAVA_AWT_WM_NONREPARENTING=1 ${pkgs.ghidra}/bin/ghidra";
     };
   };
 }
