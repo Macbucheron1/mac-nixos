@@ -6,10 +6,7 @@
   networking =  {
     hostName = hostname;
     networkmanager.enable = true;
-    hosts = {
-      "10.10.128.1" = ["controleur.wifipass.org" "cdn-wifi.tech"];
-    };
-
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
     wg-quick.interfaces = {
       wg0 = {
         autostart = false;
@@ -38,6 +35,7 @@
     };
 
   };
+
 
   # PipeWire + Pulse shim
   services.pipewire = {

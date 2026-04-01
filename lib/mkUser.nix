@@ -34,5 +34,6 @@ in home-manager.lib.homeManagerConfiguration {
     ../home/gui/${gui}
     nvf.homeManagerModules.default
     nixcord.homeModules.nixcord
+    nix-index-database.homeModules.default 
   ];
 }

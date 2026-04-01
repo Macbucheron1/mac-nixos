@@ -1,6 +1,27 @@
 { pkgs, lib, config, ... }:
 let 
   scripts = import ./scripts { inherit pkgs lib; };
+
+  smartClipboard = pkgs.writeShellScriptBin "smart-clipboard" ''
+    set -euo pipefail
+
+    tree="$(${pkgs.sway}/bin/swaymsg -t get_tree)"
+
+    app_id="$(printf '%s\n' "$tree" \
+      | ${pkgs.jq}/bin/jq -r '.. | select(.focused? == true) | .app_id // empty' \
+      | head -n1)"
+
+    if [ "$app_id" = "foot" ]; then
+      exec ${pkgs.wtype}/bin/wtype -M ctrl -k y -m ctrl
+    fi
+
+    selection="$(${pkgs.foot}/bin/foot -e sh -c '${pkgs.cliphist}/bin/cliphist list | ${pkgs.fzf}/bin/fzf')"
+    [ -n "$selection" ] || exit 0
+
+    printf '%s' "$selection" \
+      | ${pkgs.cliphist}/bin/cliphist decode \
+      | ${pkgs.wl-clipboard}/bin/wl-copy
+  '';
 in
 {
   wayland.windowManager.sway = {
@@ -43,6 +64,9 @@ in
 
         # Lock
         "${modifier}+Shift+l" = "exec ${config.home.profileDirectory}/bin/lockscreen";
+
+        # clipboard
+        "${modifier}+v" = "exec ${lib.getExe smartClipboard}";
 
         # Workspace
         "${modifier}+ampersand"  = "workspace number 1";

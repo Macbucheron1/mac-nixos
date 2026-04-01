@@ -71,5 +71,6 @@ in
     ./direnv
     ./xdg
     ./comma
+    ./cliphist
   ];
 }
