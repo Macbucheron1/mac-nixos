@@ -7,15 +7,23 @@ let
 
     tree="$(${pkgs.sway}/bin/swaymsg -t get_tree)"
 
-    app_id="$(printf '%s\n' "$tree" \
-      | ${pkgs.jq}/bin/jq -r '.. | select(.focused? == true) | .app_id // empty' \
+    pid="$(printf '%s\n' "$tree" \
+      | ${pkgs.jq}/bin/jq -r '.. | select(.focused? == true) | .pid // empty' \
       | head -n1)"
 
-    if [ "$app_id" = "foot" ]; then
+    has_zellij="no"
+
+    if [ -n "$pid" ]; then
+      if ${pkgs.psmisc}/bin/pstree -p "$pid" | ${pkgs.gnugrep}/bin/grep -q 'zellij('; then
+        has_zellij="yes"
+      fi
+    fi
+
+    if [ "$has_zellij" = "yes" ]; then
       exec ${pkgs.wtype}/bin/wtype -M ctrl -k y -m ctrl
     fi
 
-    selection="$(${pkgs.foot}/bin/foot -e sh -c '${pkgs.cliphist}/bin/cliphist list | ${pkgs.fzf}/bin/fzf')"
+    selection="$(${pkgs.cliphist}/bin/cliphist list | ${pkgs.rofi}/bin/rofi -dmenu)"
     [ -n "$selection" ] || exit 0
 
     printf '%s' "$selection" \
