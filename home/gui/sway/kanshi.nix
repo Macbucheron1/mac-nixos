@@ -16,10 +16,21 @@ let
         | ${pkgs.jq}/bin/jq -e --arg id "$1" '..|objects|select(.app_id?==$id)' >/dev/null
     }
 
+    has_terminal() {
+      swaymsg -t get_tree \
+        | ${pkgs.jq}/bin/jq -e '..|objects|select(.app_id?=="foot" or .app_id?=="mainterm")' >/dev/null
+    }
+
     start_if_missing() {
       local appid="$1"
       shift
       if ! has_app "$appid"; then
+        "$@"
+      fi
+    }
+
+    start_terminal_if_missing() {
+      if ! has_terminal; then
         "$@"
       fi
     }
@@ -29,7 +40,7 @@ let
       swaymsg 'workspace 1, move workspace to output eDP-1, workspace 2, move workspace to output eDP-1, workspace 3, move workspace to output eDP-1'
 
       # Start apps on the right workspaces (only if missing)
-      start_if_missing mainterm swaymsg 'workspace 1; exec ${pkgs.foot}/bin/foot -a mainterm'
+      start_terminal_if_missing swaymsg 'workspace 1; exec ${pkgs.foot}/bin/foot -a mainterm'
       start_if_missing firefox  swaymsg 'workspace 2; exec ${pkgs.firefox}/bin/firefox'
 
       # Now handle workspace 10 last (so it doesn't steal new windows)
@@ -41,7 +52,7 @@ let
 
       # Start apps on the right workspaces (only if missing)
       start_if_missing firefox  swaymsg 'workspace 1; exec ${pkgs.firefox}/bin/firefox'
-      start_if_missing mainterm swaymsg 'workspace 2; exec ${pkgs.foot}/bin/foot -a mainterm'
+      start_terminal_if_missing swaymsg 'workspace 2; exec ${pkgs.foot}/bin/foot -a mainterm'
 
       # Workspace 10 last
       swaymsg 'workspace 10 move workspace to output eDP-1, workspace 1'
@@ -75,4 +86,3 @@ in
     ];
   };
 }
-
