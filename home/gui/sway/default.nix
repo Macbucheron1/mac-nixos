@@ -1,45 +1,6 @@
 { pkgs, lib, config, ... }:
 let 
   scripts = import ./scripts { inherit pkgs lib; };
-
-  smartClipboard = pkgs.writeShellScriptBin "smart-clipboard" ''
-    set -euo pipefail
-
-    tree="$(${pkgs.sway}/bin/swaymsg -t get_tree)"
-
-    pid="$(printf '%s\n' "$tree" \
-      | ${pkgs.jq}/bin/jq -r '.. | select(.focused? == true) | .pid // empty' \
-      | head -n1)"
-
-    has_zellij="no"
-
-    if [ -n "$pid" ]; then
-      if ${pkgs.psmisc}/bin/pstree -p "$pid" | ${pkgs.gnugrep}/bin/grep -q 'zellij('; then
-        has_zellij="yes"
-      fi
-    fi
-
-    if [ "$has_zellij" = "yes" ]; then
-      exec ${pkgs.wtype}/bin/wtype -M ctrl -k y -m ctrl
-    fi
-
-    tmpfile="$(${pkgs.coreutils}/bin/mktemp)"
-    trap '${pkgs.coreutils}/bin/rm -f "$tmpfile"' EXIT
-
-    ${pkgs.foot}/bin/foot -e ${pkgs.bash}/bin/bash -c '
-      ${pkgs.cliphist}/bin/cliphist list \
-        | ${pkgs.fzf}/bin/fzf --layout=reverse --border > "$1"
-    ' _ "$tmpfile"
-
-
-
-    selection="$(${pkgs.coreutils}/bin/cat "$tmpfile" || true)"
-    [ -n "$selection" ] || exit 0
-
-    printf '%s' "$selection" \
-      | ${pkgs.cliphist}/bin/cliphist decode \
-      | ${pkgs.wl-clipboard}/bin/wl-copy
-  '';
 in
 {
   wayland.windowManager.sway = {
@@ -84,7 +45,7 @@ in
         "${modifier}+Shift+l" = "exec ${config.home.profileDirectory}/bin/lockscreen";
 
         # clipboard
-        "${modifier}+v" = "exec ${lib.getExe smartClipboard}";
+        "${modifier}+v" = "exec ${scripts.smartClipboard}/bin/smart-clipboard";
 
         # Workspace
         "${modifier}+ampersand"  = "workspace number 1";
@@ -124,6 +85,10 @@ in
       set $laptop eDP-1 
       bindswitch --reload --locked lid:on output $laptop disable
       bindswitch --reload --locked lid:off output $laptop enable
+
+      for_window [app_id="^clipboard-picker$"] floating enable
+      for_window [app_id="^clipboard-picker$"] resize set width 900 px height 600 px
+      for_window [app_id="^clipboard-picker$"] move position center
     '';
 
     systemd = {

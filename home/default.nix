@@ -25,7 +25,7 @@ in
     nsearch
     nixpkgs-review
     wireshark
-    ghidra
+    codex
 
     # Photo capture & Video capture
     slurp
@@ -54,7 +54,7 @@ in
     ./bash
     ./foot
     ./git
-    ./vscode
+    # ./vscode
     ./firefox
     ./bat
     ./btop
