@@ -23,7 +23,17 @@ let
       exec ${pkgs.wtype}/bin/wtype -M ctrl -k y -m ctrl
     fi
 
-    selection="$(${pkgs.cliphist}/bin/cliphist list | ${pkgs.rofi}/bin/rofi -dmenu)"
+    tmpfile="$(${pkgs.coreutils}/bin/mktemp)"
+    trap '${pkgs.coreutils}/bin/rm -f "$tmpfile"' EXIT
+
+    ${pkgs.foot}/bin/foot -e ${pkgs.bash}/bin/bash -c '
+      ${pkgs.cliphist}/bin/cliphist list \
+        | ${pkgs.fzf}/bin/fzf --layout=reverse --border > "$1"
+    ' _ "$tmpfile"
+
+
+
+    selection="$(${pkgs.coreutils}/bin/cat "$tmpfile" || true)"
     [ -n "$selection" ] || exit 0
 
     printf '%s' "$selection" \

@@ -10,7 +10,8 @@
     };
 
     stylix = {
-      url = "github:nix-community/stylix";
+      # TODO: use url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/pull/2235/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
