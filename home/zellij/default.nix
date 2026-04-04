@@ -10,7 +10,7 @@
       keybinds {
         normal {
           bind "Ctrl y" {
-            Run "${pkgs.bash}/bin/bash" "-c" "${pkgs.cliphist}/bin/cliphist list | ${pkgs.fzf}/bin/fzf | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy" {
+            Run "${pkgs.bash}/bin/bash" "-c" "${pkgs.cliphist}/bin/cliphist list | ${pkgs.fzf}/bin/fzf --reverse | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy" {
               floating true
               close_on_exit true
             }

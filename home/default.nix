@@ -25,7 +25,6 @@ in
     nsearch
     nixpkgs-review
     wireshark
-    codex
 
     # Photo capture & Video capture
     slurp
@@ -33,6 +32,7 @@ in
     signal-desktop
   ]) ++ (with myCustomPkgs; [
     exegol
+    wiremcp
   ]);
 
   stylix.targets.nvf.enable = false;
@@ -72,5 +72,6 @@ in
     ./xdg
     ./comma
     ./cliphist
+    ./codex
   ];
 }
