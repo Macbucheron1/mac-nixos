@@ -12,6 +12,7 @@
   overlays,
   exegol-ressources,
   nix-index-database,
+  codex-nvim,
 }: {
   username,
   hostname,
@@ -48,7 +49,7 @@ in
         home-manager.useUserPackages = true;
 
         home-manager.extraSpecialArgs = {
-          inherit username gui homeManagerStateVersion firefox-addons vibepods exegol-ressources;
+          inherit username gui homeManagerStateVersion firefox-addons vibepods exegol-ressources codex-nvim;
         };
 
         home-manager.users.${username} = {

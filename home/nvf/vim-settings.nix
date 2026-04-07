@@ -1,7 +1,8 @@
-{ osConfig ? null, config ? null}:
+{ osConfig ? null, config ? null, pkgs ? null, codex-nvim ? null }:
 let
   hasOsConfig = osConfig != null;
   hasConfig = config != null;
+  hasPkgs = pkgs != null;
 
   user = if hasConfig
          then config.home.username
@@ -23,6 +24,16 @@ let
   # Standalone home manager expr
   hmOptionsFromHomeCfgExpr =
     "${flakePrefix}homeConfigurations.\"${user}@${host}\".options";
+
+  codexNvimPlugin =
+    if hasPkgs && codex-nvim != null then
+      pkgs.vimUtils.buildVimPlugin {
+        pname = "codex.nvim";
+        version = "unstable";
+        src = codex-nvim;
+      }
+    else
+      null;
 in
 {
   keymaps = [
@@ -203,9 +214,61 @@ in
   binds.whichKey = {                           # https://github.com/folke/which-key.nvim
     enable = true;
     register = {
+      "<leader>c" = "+Codex";
+      "<leader>cc" = "Toggle Codex";
       "<leader>f" = "+Telescope";
       "<leader>ff" = "Find file";
       "<leader>fg" = "Live grep";
     };
   };
+
+  augroups = [
+    {
+      name = "CodexTerminal";
+      clear = true;
+    }
+  ];
+
+  autocmds = [
+    {
+      event = [ "TermOpen" "BufEnter" "WinEnter" ];
+      group = "CodexTerminal";
+      desc = "Always enter insert mode in Codex terminal";
+      command = "if &filetype == 'codex' && &buftype == 'terminal' | startinsert | endif";
+    }
+  ];
 }
+// (if codexNvimPlugin == null then {} else {
+  extraPlugins = {
+    codex-nvim = {
+      package = codexNvimPlugin;
+    };
+  };
+
+  lazy.plugins = {
+    "codex.nvim" = {
+      enabled = true;
+      package = codexNvimPlugin;
+      cmd = [ "Codex" "CodexToggle" ];
+      keys = [
+        {
+          key = "<leader>cc";
+          mode = [ "n" "t" ];
+          action = "<cmd>CodexToggle<CR>";
+          desc = "Toggle Codex";
+        }
+      ];
+      setupModule = "codex";
+      setupOpts = {
+        autoinstall = false;
+        border = "rounded";
+        width = 0.8;
+        height = 0.8;
+        keymaps = {
+          toggle = null;
+          quit = "<C-S-q>";
+        };
+      };
+    };
+  };
+})

@@ -10,6 +10,7 @@
   overlays,
   exegol-ressources,
   nix-index-database,
+  codex-nvim,
 }: {
   username,
   system,
@@ -24,7 +25,7 @@ in home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
 
   extraSpecialArgs = {
-    inherit username homeManagerStateVersion gui firefox-addons vibepods exegol-ressources;
+    inherit username homeManagerStateVersion gui firefox-addons vibepods exegol-ressources codex-nvim;
   };
 
   modules = [

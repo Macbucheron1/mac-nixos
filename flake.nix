@@ -10,8 +10,8 @@
     };
 
     stylix = {
-      # TODO: use url = "github:nix-community/stylix";
-      url = "github:nix-community/stylix/pull/2235/head";
+      url = "github:nix-community/stylix";
+      # url = "github:nix-community/stylix/pull/2235/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -54,6 +54,11 @@
       url = "github:Macbucheron1/vibepods-cli";
     };
 
+    codex-nvim = {
+      url = "github:johnseth97/codex.nvim";
+      flake = false;
+    };
+
     nix-index-database = {
         url = "github:nix-community/nix-index-database";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +67,11 @@
     exegol-ressources = {
       url = "github:Macbucheron1/exegol-ressources";
       flake = false;
+    };
+
+    burpsuite-nix = {
+        url = "github:Red-Flake/burpsuite-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -80,6 +90,8 @@
     vibepods,
     exegol-ressources,
     nix-index-database,
+    codex-nvim,
+    burpsuite-nix,
     ...
   }: let
     system = "x86_64-linux";
@@ -87,9 +99,9 @@
     overlays = import ./overlays { inherit nsearch; };
     pkgs = nixpkgs.legacyPackages.${system};
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources nix-index-database;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources nix-index-database;};
-    mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf; };
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources nix-index-database codex-nvim;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources nix-index-database codex-nvim;};
+    mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf codex-nvim; };
 
     username = "mac";
     homeManagerStateVersion = "26.05";

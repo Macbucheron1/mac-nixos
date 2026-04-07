@@ -1,6 +1,12 @@
-{ pkgs, nvf, ... }:
+{ pkgs, nvf, codex-nvim, ... }:
 (nvf.lib.neovimConfiguration {
   inherit pkgs;
-  modules = [ ./../home/nvf/nvf-module.nix ];
+  modules = [
+    {
+      _module.args = {
+        inherit codex-nvim;
+      };
+    }
+    ./../home/nvf/nvf-module.nix
+  ];
 }).neovim
-
