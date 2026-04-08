@@ -73,5 +73,6 @@ in
     ./comma
     ./cliphist
     ./codex
+    ./burpsuite
   ];
 }

@@ -11,7 +11,6 @@
 
     stylix = {
       url = "github:nix-community/stylix";
-      # url = "github:nix-community/stylix/pull/2235/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -99,8 +98,8 @@
     overlays = import ./overlays { inherit nsearch; };
     pkgs = nixpkgs.legacyPackages.${system};
 
-    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources nix-index-database codex-nvim;};
-    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources nix-index-database codex-nvim;};
+    mkHost = import ./lib/mkHost.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nvf nixcord disko lanzaboote vibepods exegol-ressources nix-index-database codex-nvim burpsuite-nix;};
+    mkUser = import ./lib/mkUser.nix {inherit nixpkgs overlays home-manager nur stylix firefox-addons nixcord nvf vibepods exegol-ressources nix-index-database codex-nvim burpsuite-nix;};
     mkNvim = import ./lib/mkNvim.nix { inherit pkgs nvf codex-nvim; };
 
     username = "mac";

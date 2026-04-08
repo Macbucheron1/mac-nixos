@@ -13,6 +13,7 @@
   exegol-ressources,
   nix-index-database,
   codex-nvim,
+  burpsuite-nix,
 }: {
   username,
   hostname,
@@ -60,6 +61,7 @@ in
             nvf.homeManagerModules.default
             nixcord.homeModules.nixcord
             nix-index-database.homeModules.default
+            burpsuite-nix.homeManagerModules.default
           ];
 
           home.stateVersion = homeManagerStateVersion;

@@ -4,4 +4,3 @@ rec {
   exegol-mcp = pkgs.callPackage ./exegol-mcp.nix { };
   wiremcp = pkgs.callPackage ./wiremcp.nix { };
 }
-

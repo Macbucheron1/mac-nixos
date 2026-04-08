@@ -239,12 +239,6 @@ in
   ];
 }
 // (if codexNvimPlugin == null then {} else {
-  extraPlugins = {
-    codex-nvim = {
-      package = codexNvimPlugin;
-    };
-  };
-
   lazy.plugins = {
     "codex.nvim" = {
       enabled = true;

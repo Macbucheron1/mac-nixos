@@ -28,6 +28,12 @@ in
         type = "stdio";
         command = "${myCustomPkgs.wiremcp}/bin/wiremcp";
       };
+
+      burp = {
+        type = "stdio";
+        command = "${pkgs.mcp-proxy}/bin/mcp-proxy";
+        args = [ "http://127.0.0.1:9876" ];
+      };
     };
   };
 }

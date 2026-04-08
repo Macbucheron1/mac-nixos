@@ -11,6 +11,7 @@
   exegol-ressources,
   nix-index-database,
   codex-nvim,
+  burpsuite-nix,
 }: {
   username,
   system,
@@ -36,5 +37,6 @@ in home-manager.lib.homeManagerConfiguration {
     nvf.homeManagerModules.default
     nixcord.homeModules.nixcord
     nix-index-database.homeModules.default 
+    burpsuite-nix.homeManagerModules.default
   ];
 }
