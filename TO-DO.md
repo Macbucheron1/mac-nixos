@@ -1,12 +1,13 @@
 # Things i need to add
 
 - keybind movement for visual mode
-- treesiter text object (demander a tom)
+- Ghidra mcp
 
 # Things i need to rice
 
 - Add a good reamde
+- Codex skills
 
 # Things i need to fix
 
-- maybe use fish instead of bash ?
+- Github mcp
