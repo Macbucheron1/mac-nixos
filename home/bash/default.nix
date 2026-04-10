@@ -19,8 +19,6 @@ in
     enable = true;
     enableCompletion = true;
 
-
-
     bashrcExtra = ''
       set -o vi
 

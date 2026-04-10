@@ -7,6 +7,7 @@
     hostName = hostname;
     networkmanager.enable = true;
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
+
     wg-quick.interfaces = {
       wg0 = {
         autostart = false;
@@ -34,7 +35,10 @@
       };
     };
 
+    nftables.enable = true;
+    firewall.interfaces."nixploit-net".allowedUDPPorts = [ 67 ];
   };
+
 
 
   # PipeWire + Pulse shim
@@ -80,6 +84,15 @@
     extraGroups = [ "wireshark""wheel" "networkmanager" "libvirtd" ];
   };
 
+  users.users.root = {
+    subUidRanges = [
+      { startUid = 1000; count = 1; }
+    ];
+    subGidRanges = [
+      { startGid = 1000; count = 1; }
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     home-manager
     bluetui
@@ -94,6 +107,7 @@
     ./virtualbox
     # ./virtmanager
     ./cachix
+    ./incus
   ];
 
   nix = {
