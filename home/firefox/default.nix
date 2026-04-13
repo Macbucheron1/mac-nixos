@@ -107,15 +107,6 @@
                 url = "https://outlook.office365.com/mail/";
               }
               {
-                name = "CentraleSupélec";
-                bookmarks = [
-                  {
-                    name = "Edunao";
-                    url = "https://centralesupelec.edunao.com/";
-                  }
-                ];
-              }
-              {
                 name = "Nix";
                 bookmarks = [
                   {
@@ -156,10 +147,6 @@
               {
                 name = "Social";
                 bookmarks = [
-                  {
-                    name = "Teams";
-                    url = "https://teams.microsoft.com/v2/";
-                  }
                   {
                     name = "Telegram";
                     url  = "https://web.telegram.org/a/";
