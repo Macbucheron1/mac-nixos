@@ -36,7 +36,10 @@
     };
 
     nftables.enable = true;
-    firewall.interfaces."nixploit-net".allowedUDPPorts = [ 67 ];
+    firewall.interfaces."nixploit-net" = {
+      allowedUDPPorts = [ 53 67 ];
+      allowedTCPPorts = [ 53 ];
+    };
   };
 
 

@@ -2,7 +2,6 @@
 {
   programs.zellij = {
     enable = true;
-    attachExistingSession = true;
     settings.theme = "default";
     settings = {
       show_startup_tips = false;
