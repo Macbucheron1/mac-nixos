@@ -5,7 +5,6 @@
     settings.theme = "default";
     settings = {
       show_startup_tips = false;
-      session_name = "default";
     };
 
     extraConfig = ''

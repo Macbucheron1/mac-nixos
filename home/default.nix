@@ -6,7 +6,6 @@ in
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = homeManagerStateVersion;
-  nixpkgs.config.allowUnfree = true;
 
   programs.home-manager.enable = true;
 
@@ -31,7 +30,7 @@ in
     obsidian
     signal-desktop
   ]) ++ (with myCustomPkgs; [
-    exegol
+    # exegol
     wiremcp
   ]);
 
@@ -50,7 +49,8 @@ in
   
   imports = [
     ./zellij
-    ./nvf
+    # ./nvf
+    ./neovim
     ./bash
     ./foot
     ./git

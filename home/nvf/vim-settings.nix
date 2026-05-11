@@ -153,7 +153,7 @@ in
       enable = true;
     };
     html.enable = true;
-    ts.enable = true;
+    typescript.enable = true;
   };
 
   lsp = {

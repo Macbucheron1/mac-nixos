@@ -31,8 +31,9 @@ in home-manager.lib.homeManagerConfiguration {
 
   modules = [
     stylix.homeModules.stylix
+    ../home/homeManager.nix
     ../lib/theme.nix
-    ../home/default.nix
+    ../home
     ../home/gui/${gui}
     nvf.homeManagerModules.default
     nixcord.homeModules.nixcord

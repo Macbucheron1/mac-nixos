@@ -7,12 +7,12 @@ in
     enable = true;
 
     settings.mcp_servers = {
-      exegol = {
-        type = "stdio";
-        command = "${myCustomPkgs.exegol-mcp}/bin/exegol-mcp";
-        args = [ "-t" "stdio" ];
-      };
-
+      # exegol = {
+      #   type = "stdio";
+      #   command = "${myCustomPkgs.exegol-mcp}/bin/exegol-mcp";
+      #   args = [ "-t" "stdio" ];
+      # };
+      #
       github = {
         type = "http";
         url = "https://api.githubcopilot.com/mcp/";

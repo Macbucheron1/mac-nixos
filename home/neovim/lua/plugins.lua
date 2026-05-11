@@ -1,0 +1,8 @@
+require("plug.mason")
+require("plug.mason-lspconfig")
+require("plug.lspconfig")
+require("plug.oil")
+require("plug.leap")
+require("plug.blink")
+require("plug.bufferline")
+require("plug.treesitter")
