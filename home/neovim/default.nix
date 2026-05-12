@@ -13,6 +13,10 @@
       go
       gcc
       tree-sitter
+      gnumake
+      cmake
+      ripgrep
+      fd
     ];
   };
 }
