@@ -1,6 +1,50 @@
-vim.pack.add{
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-}
+vim.lsp.config("*", {
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
+
+vim.lsp.config("nixd", {
+	cmd = { "nixd" },
+	filetypes = { "nix" },
+	root_markers = { "flake.nix", "default.nix", ".git" },
+	settings = {
+		nixd = {
+			nixpkgs = {
+				expr = "import <nixpkgs> { }",
+			},
+      nixos = {
+        expr = "(builtins.getFlake (builtins.toString /home/mac/Documents/mac-nixos)).nixosConfigurations.lenovo-legion.options"
+      },
+      home_manager = {
+        expr = "(builtins.getFlake (builtins.toString /home/mac/Documents/mac-nixos)).nixosConfigurations.lenovo-legion.options.home-manager.users.type.getSubOptions []"
+      },
+			formatting = {
+				command = { "nixfmt" },
+			},
+		},
+	},
+})
+
+vim.lsp.config("gopls", {
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_markers = { "go.work", "go.mod", ".git" },
+})
+
+vim.lsp.config("basedpyright", {
+	cmd = { "basedpyright-langserver", "--stdio" },
+	filetypes = { "python" },
+	root_markers = {
+		"pyproject.toml",
+		"setup.py",
+		"setup.cfg",
+		"requirements.txt",
+		"Pipfile",
+		"pyrightconfig.json",
+		".git",
+	},
+})
+
+vim.lsp.enable({ "nixd", "gopls", "basedpyright" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -62,4 +106,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-

@@ -18,6 +18,8 @@
       ripgrep
       fd
       python3
+      nixd
+      nixfmt
     ];
   };
 }
