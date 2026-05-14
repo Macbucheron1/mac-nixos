@@ -11,3 +11,6 @@ vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up",
 
 vim.keymap.set("v", "<", "<gv") -- Désindente en visuel puis garde la sélection.
 vim.keymap.set("v", ">", ">gv") -- Indente en visuel puis garde la sélection.
+
+vim.keymap.set("n", "<M-Tab>", "<cmd>bp<CR>")
+vim.keymap.set("n", "<Tab>", "<cmd>bn<CR>")
