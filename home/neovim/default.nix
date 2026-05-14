@@ -17,6 +17,7 @@
       cmake
       ripgrep
       fd
+      python3
     ];
   };
 }
